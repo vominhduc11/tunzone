@@ -1,17 +1,7 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
-interface Review {
-    name: string;
-    rating: number;
-    comment: string;
-    avatar?: string;
-    date: string; // ISO date string
-    media?: string[]; // customer-uploaded image URLs
-}
 
 interface ProductTabsProps {
     description: string;
@@ -19,22 +9,6 @@ interface ProductTabsProps {
     boxItems: string[];
     faqs: { q: string; a: string }[];
     videoUrl?: string;
-    reviews: Review[];
-}
-
-// Utility to compute "time ago"
-function timeAgo(dateString: string) {
-    const now = new Date();
-    const then = new Date(dateString);
-    const diff = now.getTime() - then.getTime();
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    if (days > 0) return `${days} ngày trước`;
-    if (hours > 0) return `${hours} giờ trước`;
-    if (minutes > 0) return `${minutes} phút trước`;
-    return 'Vừa xong';
 }
 
 export default function ProductTabs({
@@ -42,21 +16,9 @@ export default function ProductTabs({
     specs,
     boxItems,
     faqs,
-    videoUrl,
-    reviews
+    videoUrl
 }: ProductTabsProps) {
-    const tabLabels = [
-        'Thông số kỹ thuật',
-        'Video',
-        'Mô tả',
-        'What’s in the Box',
-        'FAQs',
-        'Đánh giá'
-    ];
-
-    const avgRating = (
-        reviews.reduce((sum, r) => sum + r.rating, 0) / (reviews.length || 1)
-    ).toFixed(1);
+    const tabLabels = ['Thông số kỹ thuật', 'Video', 'Mô tả', 'What’s in the Box', 'FAQs'];
 
     return (
         <div className="mt-12 bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -160,103 +122,6 @@ export default function ProductTabs({
                                 <p className="text-gray-400">{a}</p>
                             </div>
                         ))}
-                    </div>
-                </TabPanel>
-
-                {/* TabPanel: Reviews */}
-                <TabPanel
-                    className="opacity-0 transition-opacity duration-500 ease-in-out"
-                    selectedClassName="opacity-100"
-                >
-                    <div className="p-6 space-y-8">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                            <div>
-                                <h3 className="text-2xl font-semibold text-white mb-2">
-                                    {avgRating} / 5 sao
-                                </h3>
-                                <p className="text-gray-400 text-sm">
-                                    Dựa trên {reviews.length} đánh giá
-                                </p>
-                            </div>
-                            <div className="mt-4 md:mt-0 w-full md:w-1/2">
-                                {[5, 4, 3, 2, 1].map((star) => {
-                                    const count = reviews.filter((r) => r.rating === star).length;
-                                    const pct = reviews.length ? (count / reviews.length) * 100 : 0;
-                                    return (
-                                        <div key={star} className="flex items-center mb-2">
-                                            <span className="w-6 text-sm text-gray-400">
-                                                {star}★
-                                            </span>
-                                            <div className="flex-1 h-2 bg-gray-700 mx-3 rounded overflow-hidden">
-                                                <div
-                                                    className="h-full bg-yellow-400 rounded transition-all duration-200"
-                                                    style={{ width: `${pct}%` }}
-                                                />
-                                            </div>
-                                            <span className="w-8 text-right text-sm text-gray-300">
-                                                {count}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <div className="space-y-6">
-                            {reviews.map((r, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-start bg-gray-900 p-4 rounded-lg hover:bg-gray-800 transition-colors duration-200"
-                                >
-                                    {r.avatar && (
-                                        <div className="w-12 h-12 rounded-full overflow-hidden mr-4 flex-shrink-0">
-                                            <Image
-                                                src={r.avatar}
-                                                alt={`${r.name} avatar`}
-                                                width={48}
-                                                height={48}
-                                                className="object-cover"
-                                            />
-                                        </div>
-                                    )}
-                                    <div className="flex-1">
-                                        <div className="flex items-center mb-1 space-x-2">
-                                            <span className="font-medium text-white">{r.name}</span>
-                                            <span className="text-yellow-400">
-                                                {'★'.repeat(r.rating) + '☆'.repeat(5 - r.rating)}
-                                            </span>
-                                            <span className="text-gray-500 text-sm italic">
-                                                {timeAgo(r.date)}
-                                            </span>
-                                        </div>
-                                        <p className="text-gray-300 mb-4">{r.comment}</p>
-                                        {/* Image gallery */}
-                                        {r.media && (
-                                            <div className="grid grid-cols-12 gap-2">
-                                                {r.media.map((src, idx) => (
-                                                    <div
-                                                        key={idx}
-                                                        className="h-24 relative rounded-lg overflow-hidden"
-                                                    >
-                                                        <Image
-                                                            src={src}
-                                                            alt={`user media ${idx + 1}`}
-                                                            width={100}
-                                                            height={100}
-                                                            className="object-cover"
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="text-center">
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition transform hover:scale-105">
-                                Viết đánh giá của bạn
-                            </button>
-                        </div>
                     </div>
                 </TabPanel>
             </Tabs>

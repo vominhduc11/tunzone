@@ -39,7 +39,7 @@ const additionalSites = [
 export default function Footer() {
     return (
         <footer className="bg-gray-900 text-gray-300">
-            <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+            <div className="container mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
                 {/* Company Column */}
                 <div>
                     <h3 className="text-white font-semibold uppercase mb-4">Entreprise</h3>

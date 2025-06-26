@@ -2,16 +2,7 @@ import React from 'react';
 import ProductGallery from '@/app/productDetail/_components/ProductGallery';
 import { FiStar } from 'react-icons/fi';
 import ProductTabs from '@/app/productDetail/_components/ProductTabsProps';
-import image from '@/assets/images/tai-nghe-cardo-BOLD-2-removebg-preview.png';
-
-interface Review {
-    name: string;
-    rating: number;
-    comment: string;
-    avatar?: string;
-    date: string;
-    media?: string[];
-}
+import NoticeSection from '../_components/NoticeSection';
 
 interface Product {
     slug: string;
@@ -26,7 +17,6 @@ interface Product {
     boxItems: string[];
     faqs: { q: string; a: string }[];
     videoUrl?: string;
-    reviews: Review[];
 }
 
 const products: Product[] = [
@@ -76,25 +66,7 @@ const products: Product[] = [
                 a: 'Đạt chuẩn IP67, chịu được mưa và rửa nhẹ.'
             }
         ],
-        videoUrl: 'https://www.youtube.com/embed/VIDEO_ID_G7PLUS',
-        reviews: [
-            {
-                name: 'Nguyễn Văn A',
-                rating: 5,
-                comment: 'Sản phẩm rất chất lượng...',
-                date: '2025-06-20T10:30:00Z',
-                avatar: '/avatars/a.jpg',
-                media: [image.src, image.src]
-            },
-            {
-                name: 'Trần Thị B',
-                rating: 4,
-                comment: 'Thiết kế đẹp...',
-                date: '2025-06-18T14:45:00Z',
-                avatar: '/avatars/b.jpg',
-                media: [image.src]
-            }
-        ]
+        videoUrl: 'https://www.youtube.com/embed/VIDEO_ID_G7PLUS'
     }
 ];
 
@@ -163,9 +135,9 @@ export default async function ProductDetailPage({
                     boxItems={product.boxItems}
                     faqs={product.faqs}
                     videoUrl={product.videoUrl}
-                    reviews={product.reviews}
                 />
             </div>
+            <NoticeSection />
         </div>
     );
 }
