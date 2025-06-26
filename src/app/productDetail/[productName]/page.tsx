@@ -5,28 +5,28 @@ import ProductTabs from '@/app/productDetail/_components/ProductTabsProps';
 import image from '@/assets/images/tai-nghe-cardo-BOLD-2-removebg-preview.png';
 
 interface Review {
-  name: string;
-  rating: number;
-  comment: string;
-  avatar?: string;
-  date: string;
-  media?: string[];
+    name: string;
+    rating: number;
+    comment: string;
+    avatar?: string;
+    date: string;
+    media?: string[];
 }
 
 interface Product {
-  slug: string;
-  name: string;
-  price: number;
-  images: string[];
-  features: string[];
-  description: string;
-  rating: number;
-  reviewsCount: number;
-  specs: Record<string, string>;
-  boxItems: string[];
-  faqs: { q: string; a: string }[];
-  videoUrl?: string;
-  reviews: Review[];
+    slug: string;
+    name: string;
+    price: number;
+    images: string[];
+    features: string[];
+    description: string;
+    rating: number;
+    reviewsCount: number;
+    specs: Record<string, string>;
+    boxItems: string[];
+    faqs: { q: string; a: string }[];
+    videoUrl?: string;
+    reviews: Review[];
 }
 
 const products: Product[] = [
@@ -57,7 +57,7 @@ const products: Product[] = [
             'Talk Time': '17 giờ',
             'Standby Time': '380 giờ',
             'Water Resistance': 'IP67',
-            'Weight': '55g'
+            Weight: '55g'
         },
         boxItems: [
             'Thiết bị Cardo G7 Plus',
@@ -98,8 +98,12 @@ const products: Product[] = [
     }
 ];
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ productName: string }>}) {
-    const {productName} = await params;
+export default async function ProductDetailPage({
+    params
+}: {
+    params: Promise<{ productName: string }>;
+}) {
+    const { productName } = await params;
     const product = products.find((p) => p.slug === productName);
 
     if (!product) {
@@ -129,7 +133,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 }`}
                             />
                         ))}
-                        <span className="ml-2 text-gray-400">({product.reviewsCount} đánh giá)</span>
+                        <span className="ml-2 text-gray-400">
+                            ({product.reviewsCount} đánh giá)
+                        </span>
                     </div>
                     <p className="text-3xl font-semibold mb-6">${product.price.toFixed(2)}</p>
                     <ul className="mb-6 space-y-2">
