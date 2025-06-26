@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductGallery from '@/app/productDetail/[productName]/_components/ProductGallery';
+import ProductGallery from '@/app/productDetail/_components/ProductGallery';
 import { FiShoppingCart, FiStar } from 'react-icons/fi';
 
 interface Product {
@@ -11,6 +11,10 @@ interface Product {
     description: string;
     rating: number;
     reviewsCount: number;
+}
+
+interface PageProps {
+    params: Promise<{ productName: string }>;
 }
 
 const products: Product[] = [
@@ -137,8 +141,8 @@ const products: Product[] = [
     }
 ];
 
-export default async function ProductDetailPage({ params }: { params: { productName: string } }) {
-    const { productName } = params;
+export default async function ProductDetailPage({ params }: PageProps) {
+    const { productName } = await params;
     const product = products.find((p) => p.slug === productName);
 
     if (!product) {
