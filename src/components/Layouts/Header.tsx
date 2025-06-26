@@ -8,9 +8,9 @@ import Link from 'next/link';
 const navItems = [
     { name: 'Home', href: '#' },
     { name: 'Products', href: '#' },
-    { name: 'Partner with us', href: '#' },
-    { name: 'News', href: '#' },
-    { name: 'Video', href: '#' },
+    { name: 'Blogs', href: '#' },
+    { name: 'Dealer system', href: '#' },
+    { name: 'Dealer', href: '#' },
     { name: 'About Us', href: '#' },
     { name: 'Contact Us', href: '#' }
 ];

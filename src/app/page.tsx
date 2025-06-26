@@ -1,7 +1,7 @@
 'use client';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+
+import { StaticImageData } from 'next/image';
+
 import ChooseCardoSection from './_components/ChooseCardoSection';
 import RevolutionTechSection from './_components/RevolutionTechSection';
 import HeroSections from './_components/HeroSections';
@@ -13,7 +13,10 @@ import WeRecommendSection from './_components/WeRecommendSection';
 import BannerSwiper from './_components/BannerSwiper';
 
 import image from '@/assets/images/tai-nghe-cardo-BOLD-2-removebg-preview.png';
-import { StaticImageData } from 'next/image';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface Product {
     id: string;
