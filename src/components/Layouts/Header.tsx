@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
 import logo from '@/assets/images/logo.png'; // Adjust the path to your logo image
+import Link from 'next/link';
 
 const navItems = [
     { name: 'Home', href: '#' },
@@ -19,13 +20,13 @@ export default function Header() {
         <header className="bg-gray-900">
             <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
                 {/* Logo */}
-                <a href="#" className="flex-shrink-0">
+                <Link href="/" className="flex-shrink-0">
                     <Image
                         src={logo} // Replace with your logo path
                         alt="SCS ETC Logo"
                         className="h-28 w-auto"
                     />
-                </a>
+                </Link>
 
                 {/* Nav */}
                 <nav className="hidden md:flex space-x-8">
