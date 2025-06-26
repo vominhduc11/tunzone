@@ -98,8 +98,8 @@ const products: Product[] = [
     }
 ];
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ productName: string }>}) {
-    const {productName} = await params;
+export default async function ProductDetailPage({ params }: { params: { productName: string } }) {
+    const productName = params.productName;
     const product = products.find((p) => p.slug === productName);
 
     if (!product) {
