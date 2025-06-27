@@ -2,6 +2,7 @@
     "posts": [{ "id": 1, "title": "Hello", "content": "World" }],
     "products": [
         {
+            "id": 1,
             "slug": "g7plus",
             "name": "Cardo G7 Plus Bluetooth Headset",
             "avatar": "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
@@ -49,7 +50,319 @@
                 }
             ],
             "videoUrl": "https://www.youtube.com/embed/VIDEO_ID_G7PLUS"
+        },
+        {
+            "id": 2,
+            "slug": "packtalk-edge",
+            "name": "Cardo Packtalk Edge Bluetooth Headset",
+            "avatar": "https://cardosystems.com/cdn/shop/files/EdgeSingle_Sleeve_02.png",
+            "price": 399.95,
+            "images": [
+                "https://cardosystems.com/cdn/shop/files/EdgeSingle_Sleeve_02.png",
+                "https://cardosystems.com/cdn/shop/files/EdgeSingle_Sleeve_02.png",
+                "https://cardosystems.com/cdn/shop/files/EdgeSingle_Sleeve_02.png"
+            ],
+            "features": [
+                "Dynamic Mesh 2.0 – 15 riders / 1.6 km",
+                "Air-Mount nam châm siêu nhanh",
+                "Loa JBL 40 mm, 3 profile âm thanh",
+                "Sạc nhanh: 20′ = 2 h đàm thoại",
+                "Chuẩn chống nước IP67 & OTA update"
+            ],
+            "rating": 4.8,
+            "reviewsCount": 369,
+            "description": "Packtalk Edge là bộ đàm flagship của Cardo, tối ưu cho tour đông người với chất âm JBL và khả năng chống nước cực cao.",
+            "specs": {
+                "Bluetooth Version": "5.2",
+                "Max Intercom Distance": "1.6 km",
+                "Talk Time": "13 giờ",
+                "Water Resistance": "IP67",
+                "Weight": "47g"
+            },
+            "boxItems": [
+                "Packtalk Edge unit",
+                "40 mm JBL speakers",
+                "Hybrid & boom mic",
+                "Air-Mount clamp",
+                "Miếng dán & velcro",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "Có kết nối được với hãng khác không?",
+                    "a": "Có, dùng Bluetooth universal pairing để ghép với Sena, Lexin…"
+                },
+                {
+                    "q": "Có vừa sạc vừa dùng được không?",
+                    "a": "Có – hỗ trợ 'charge while riding' qua cổng USB-C."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/PacktalkEdgeDemo"
+        },
+        {
+            "id": 3,
+            "slug": "sena-50s",
+            "name": "Sena 50S Mesh Intercom with Harman Kardon Audio",
+            "avatar": "https://images.sena.com/50s/50s_box.png",
+            "price": 399.0,
+            "images": [
+                "https://images.sena.com/50s/50s_front.png",
+                "https://images.sena.com/50s/50s_side.png",
+                "https://images.sena.com/50s/50s_pack.png"
+            ],
+            "features": [
+                "Mesh Intercom 3.0 – 24 riders / 2 km",
+                "SOUND by Harman Kardon – loa & mic cao cấp",
+                "Voice command 8 ngôn ngữ",
+                "Wi-Fi adapter tự update FW khi sạc",
+                "Quick-charge 20′ = 2 h nói chuyện"
+            ],
+            "rating": 4.6,
+            "reviewsCount": 520,
+            "description": "Sena 50S đem lại trải nghiệm Mesh mượt mà, âm thanh Harman Kardon và khả năng điều khiển rảnh tay toàn diện.",
+            "specs": {
+                "Bluetooth Version": "5.0",
+                "Max Intercom Distance": "2 km",
+                "Talk Time": "12 giờ",
+                "Water Resistance": "Weather-resistant",
+                "Weight": "64g"
+            },
+            "boxItems": [
+                "Module 50S",
+                "Loa 40 mm Harman Kardon",
+                "Boom mic & wired mic",
+                "Clamp kit",
+                "Wi-Fi adapter",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "Mesh & Bluetooth khác nhau thế nào?",
+                    "a": "Mesh cho phép kết nối nhóm lớn, tự phục hồi, còn Bluetooth giới hạn 4 người."
+                },
+                {
+                    "q": "Có hỗ trợ Siri / Google Assistant?",
+                    "a": "Có, kích hoạt bằng lệnh voice 'Hey Siri' hoặc 'Hey Google'."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/Sena50SOverview"
+        },
+        {
+            "id": 4,
+            "slug": "lexin-b4fm",
+            "name": "Lexin B4FM 10-Rider Bluetooth Intercom",
+            "avatar": "https://m.media-amazon.com/images/I/71mQQbU8lxL._AC_SL1500_.jpg",
+            "price": 84.99,
+            "images": [
+                "https://m.media-amazon.com/images/I/71mQQbU8lxL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71mQQbU8lxL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71mQQbU8lxL._AC_SL1500_.jpg"
+            ],
+            "features": [
+                "Group talk 10 riders / 2 km",
+                "Pin 15 h, standby 7 ngày",
+                "Chống nước IP67",
+                "FM Radio & music sharing",
+                "DSP/CVC khử ồn"
+            ],
+            "rating": 4.4,
+            "reviewsCount": 950,
+            "description": "Lexin B4FM nổi bật ở mức giá rẻ nhưng giữ được tầm xa ấn tượng và pin lâu – rất hợp chạy tour 2-4 người.",
+            "specs": {
+                "Bluetooth Version": "5.0",
+                "Max Intercom Distance": "2 km",
+                "Talk Time": "15 giờ",
+                "Water Resistance": "IP67",
+                "Weight": "50g"
+            },
+            "boxItems": [
+                "Thiết bị B4FM",
+                "Mic boom & mic dán",
+                "Velcro & keo dán",
+                "Cáp sạc micro-USB",
+                "HDSD"
+            ],
+            "faqs": [
+                {
+                    "q": "B4FM có ghép được với Cardo/Sena?",
+                    "a": "Có – dùng chế độ universal Bluetooth pairing."
+                },
+                {
+                    "q": "Thời lượng pin thực tế?",
+                    "a": "Khoảng 12–15 h chạy nhạc/intercom liên tục."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/LexinB4FMReview"
+        },
+        {
+            "id": 5,
+            "slug": "freedconn-tmaxpro",
+            "name": "FreedConn T-Max Pro 6-Rider Intercom",
+            "avatar": "https://beaniehelmets.com/cdn/shop/files/2pcs-FreedConn-T-Max-Intercom-Bluetooth-Headset-1200m-Beanie-Helmets-for-Bikers.jpg",
+            "price": 130.0,
+            "images": [
+                "https://beaniehelmets.com/cdn/shop/files/2pcs-FreedConn-T-Max-Intercom-Bluetooth-Headset-1200m-Beanie-Helmets-for-Bikers.jpg"
+            ],
+            "features": [
+                "6 riders / 1,2 km",
+                "Bluetooth 5.0+EDR, dual-core",
+                "Pin 15 h, sạc USB-C",
+                "FM Radio, chia sẻ nhạc",
+                "Chống nước IP65"
+            ],
+            "rating": 4.3,
+            "reviewsCount": 430,
+            "description": "T-Max Pro cân bằng giữa giá và tính năng, phù hợp nhóm nhỏ cần pin bền và thao tác đơn giản.",
+            "specs": {
+                "Bluetooth Version": "5.0+EDR",
+                "Max Intercom Distance": "1.2 km",
+                "Talk Time": "15 giờ",
+                "Water Resistance": "IP65",
+                "Weight": "52g"
+            },
+            "boxItems": [
+                "T-Max Pro unit",
+                "Mic 2-in-1 & loa",
+                "Kẹp/Velcro gắn mũ",
+                "Cáp USB-C",
+                "Tuốc nơ vít",
+                "HDSD"
+            ],
+            "faqs": [
+                {
+                    "q": "Có kết nối Siri/Google không?",
+                    "a": "Hỗ trợ lệnh thoại qua Bluetooth HFP."
+                },
+                {
+                    "q": "Thời gian sạc đầy?",
+                    "a": "Khoảng 2,5 giờ qua cổng USB-C."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/FreedConnTmaxProDemo"
+        },
+        {
+            "id": 6,
+            "slug": "spirit-hd",
+            "name": "Cardo Spirit HD Entry-Level Intercom",
+            "avatar": "https://cardosystems.com/cdn/shop/files/SpiritHD_Single.png",
+            "price": 164.95,
+            "images": ["https://cardosystems.com/cdn/shop/files/SpiritHD_Single.png"],
+            "features": [
+                "2 riders / 600 m",
+                "Loa HD 40 mm, 3 profile âm",
+                "Pin 13 h, sạc nhanh 20′",
+                "FM Radio + OTA update",
+                "Chống nước IP65"
+            ],
+            "rating": 4.5,
+            "reviewsCount": 130,
+            "description": "Spirit HD nhắm tới người mới: giá mềm nhưng vẫn có loa HD, pin dài và update không dây.",
+            "specs": {
+                "Bluetooth Version": "5.2",
+                "Max Intercom Distance": "600 m",
+                "Talk Time": "13 giờ",
+                "Water Resistance": "IP65",
+                "Weight": "45g"
+            },
+            "boxItems": [
+                "Spirit HD unit",
+                "Loa HD 40 mm",
+                "Hybrid/boom mic",
+                "Clamp & keo dán",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "Spirit có Mesh không?",
+                    "a": "Không – sử dụng Bluetooth intercom truyền thống."
+                },
+                {
+                    "q": "Có sạc khi đang chạy được chứ?",
+                    "a": "Có, cắm power-bank qua USB-C."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/CardoSpiritHD"
         }
     ],
-    "users": [{ "id": 1, "name": "Alice" }]
+    "users": [{ "id": 1, "name": "Alice" }],
+    "blogs": [
+        {
+            "id": 1,
+            "title": "5 Xu Hướng Mới Trong Kết Nối Biker Năm 2025",
+            "excerpt": "Khám phá các công nghệ và giải pháp mới nhất giúp việc liên lạc giữa các biker ngày càng an toàn và hiệu quả hơn.",
+            "image": "https://www.ejeas.com/wp-content/uploads/2023/06/motorcycle-01-2048x1363.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Hướng Dẫn Chọn Thiết Bị Giải Pháp Thông Minh",
+            "excerpt": "Tìm hiểu cách lựa chọn thiết bị phù hợp với phong cách lái và nhu cầu cá nhân của bạn.",
+            "image": "https://www.ejeas.com/wp-content/uploads/2023/06/motorcycle-01-2048x1363.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Câu Chuyện Thành Công Của Đại Lý Tiêu Biểu",
+            "excerpt": "Lắng nghe chia sẻ từ các đại lý hàng đầu về cách họ phát triển doanh thu cùng chương trình hợp tác.",
+            "image": "https://www.ejeas.com/wp-content/uploads/2023/06/motorcycle-01-2048x1363.jpg"
+        }
+    ],
+    "partners": [
+        { "id": 1, "name": "Partner A", "logo": "/images/logo-doi-tac-23-removebg-preview.png" },
+        { "id": 2, "name": "Partner B", "logo": "/images/logo-doi-tac-23-removebg-preview.png" },
+        { "id": 3, "name": "Partner C", "logo": "/images/logo-doi-tac-23-removebg-preview.png" },
+        { "id": 4, "name": "Partner D", "logo": "/images/logo-doi-tac-23-removebg-preview.png" }
+    ],
+    "reviews": [
+        {
+            "id": 1,
+            "user": { "id": 1, "name": "Alice", "avatar": "/images/avatar-alice.png" },
+            "title": "Sản phẩm tuyệt vời!",
+            "rating": 5,
+            "text": "Tôi rất hài lòng với Cardo G7 Plus, âm thanh rõ ràng và pin lâu.",
+            "time": "2023-10-01T12:00:00Z",
+            "images": [
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183"
+            ],
+            "verified": true
+        },
+        {
+            "id": 2,
+            "user": { "id": 2, "name": "Bob", "avatar": "/images/avatar-bob.png" },
+            "title": "Rất đáng tiền",
+            "rating": 4,
+            "text": "Packtalk Edge có tính năng Mesh rất tiện lợi cho nhóm đông.",
+            "time": "2023-10-02T14:30:00Z",
+            "images": [
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183"
+            ],
+            "verified": false
+        },
+        {
+            "id": 3,
+            "user": { "id": 3, "name": "Charlie", "avatar": "/images/avatar-charlie.png" },
+            "title": "Chất lượng âm thanh xuất sắc",
+            "rating": 5,
+            "text": "Sena 50S mang lại trải nghiệm âm thanh tuyệt vời, rất hài lòng.",
+            "time": "2023-10-03T09:15:00Z",
+            "images": [
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183",
+                "https://bizweb.dktcdn.net/100/401/197/products/c27df9e5-9984-4764-a879-3db9378739a0.jpg?v=1717037202183"
+            ],
+            "verified": true
+        },
+        {
+            "id": 4,
+            "user": { "id": 4, "name": "David", "avatar": "/images/avatar-david.png" },
+            "title": "Pin lâu, dễ sử dụng",
+            "rating": 4,
+            "text": "Lexin B4FM pin trâu, phù hợp với nhu cầu đi tour của tôi.",
+            "time": "2023-10-04T16:45:00Z",
+            "images": ["/images/review-image-1.jpg", "/images/review-image-2.jpg"],
+            "verified": false
+        }
+    ]
 }

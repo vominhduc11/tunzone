@@ -1,35 +1,10 @@
-'use client'
-
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import axios from 'axios';
-import { Product } from '@/types/product';
 
-export default function WeRecommendSection() {
-    const [products, setProducts] = useState<Product[]>([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`http://localhost:4000/products`);
-                const filtered = res.data.map((product: Product) => ({
-                    id: product.id,
-                    slug: product.slug,
-                    name: product.name,
-                    avatar: product.avatar
-                }));
-                setProducts(filtered);
-            } catch (err: unknown) {
-                if (err instanceof Error) {
-                    console.log(err.message);
-                } else {
-                    console.log(err);
-                }
-            }
-        };
+import { getRecommentProduct } from '@/services/productService';
 
-        fetchData();
-    }, []);
+export default async function WeRecommendSection() {
+    const products = await getRecommentProduct();
 
     return (
         <section className="bg-gray-700 py-16">
@@ -39,7 +14,7 @@ export default function WeRecommendSection() {
                     {products.map((product, idx) => (
                         <Link
                             key={idx}
-                            href={`/productDetail/${product.slug}`}
+                            href={`/productDetail/${product.id}`}
                             className="bg-gray-800 rounded-2xl p-4 flex flex-col items-center transform transition-transform duration-300 hover:shadow-lg hover:-translate-y-2"
                         >
                             <h3 className="text-xl font-semibold text-white underline mb-4 transition-colors duration-300 hover:text-blue-400">

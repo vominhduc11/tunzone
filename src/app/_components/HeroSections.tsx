@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiHeadphones, FiBattery, FiCloudRain } from 'react-icons/fi';
 
 export default function HeroSections() {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiUsers, FiTrendingUp, FiPackage } from 'react-icons/fi';
 
 export default function DealerPartnershipSection() {

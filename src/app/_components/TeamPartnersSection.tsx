@@ -1,15 +1,10 @@
-import React from 'react';
 import Image from 'next/image';
-import image from '@/assets/images/logo-doi-tac-23-removebg-preview.png';
 
-const partners = [
-    { id: 1, name: 'Partner A', logo: image },
-    { id: 2, name: 'Partner B', logo: image },
-    { id: 3, name: 'Partner C', logo: image },
-    { id: 4, name: 'Partner D', logo: image }
-];
+import { getMostTrustedPartners } from '@/services/parnerService';
 
-export default function TeamPartnersSection() {
+export default async function TeamPartnersSection() {
+    const partners = await getMostTrustedPartners();
+
     return (
         <section className="bg-gray-900 text-white py-16">
             <div className="container mx-auto px-4">

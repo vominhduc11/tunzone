@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import React from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
+
 import image1 from '@/assets/images/ChatGPT Image 08_34_15 26 thg 6, 2025.png';
 import image2 from '@/assets/images/ChatGPT Image 08_55_01 26 thg 6, 2025.png';
 

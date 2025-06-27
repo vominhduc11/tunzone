@@ -1,55 +1,17 @@
 'use client';
-import React, { useState, useRef, useLayoutEffect } from 'react';
+
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import axios from 'axios';
+import Link from 'next/link';
 import Image from 'next/image';
 import { FiStar, FiUploadCloud } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation, Pagination } from 'swiper/modules';
-import Link from 'next/link';
 
-const mockReviews = [
-    {
-        id: 1,
-        user: 'Shelby D.',
-        title: 'Practical Pro',
-        rating: 5,
-        text: 'Works great, love the voice commands.',
-        time: '2 days ago'
-    },
-    {
-        id: 2,
-        user: 'Anthony P.',
-        title: 'Great',
-        rating: 4,
-        text: 'Amazing performance but initial setup was tricky.',
-        time: '7 weeks ago'
-    },
-    {
-        id: 3,
-        user: 'Brad',
-        title: 'Top-of-the-line',
-        rating: 5,
-        text: 'The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity.The best intercom device I’ve used so far. Solid build and clarity..The best intercom device I’ve used so far. Solid build and clarity',
-        time: '2 weeks ago'
-    },
-    {
-        id: 4,
-        user: 'Alex H.',
-        title: 'Works Well',
-        rating: 4,
-        text: 'Solid for the price, does what it promises.',
-        time: '1 month ago'
-    },
-    {
-        id: 5,
-        user: 'Emma W.',
-        title: 'Game Changer',
-        rating: 5,
-        text: 'This product changed how we communicate at home.',
-        time: '3 weeks ago'
-    }
-];
+import { Review } from '@/types/review';
 
 export default function NoticeSection() {
     const [newRating, setNewRating] = useState(0);
@@ -59,6 +21,35 @@ export default function NoticeSection() {
     const [images, setImages] = useState<string[]>([]);
     const reviewFormRef = useRef<HTMLDivElement>(null);
     const [maxHeight, setMaxHeight] = useState('0px');
+
+    const [reviews, setReviews] = useState<Review[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/reviews`, {
+                    params: { _limit: 10 }
+                });
+                const filtered = res.data.map((review: Review) => ({
+                    id: review.id,
+                    user: review.user,
+                    title: review.title,
+                    rating: review.rating,
+                    text: review.text,
+                    time: review.time
+                }));
+                setReviews(filtered);
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    console.log(err.message);
+                } else {
+                    console.log(err);
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
 
     // Hiệu ứng mở/đóng form mượt mà
     useLayoutEffect(() => {
@@ -85,8 +76,8 @@ export default function NoticeSection() {
     };
 
     // Chỉ hiện Swiper nếu số review > 4
-    const showCarousel = mockReviews.length > 4;
-    const visibleReviews = showCarousel ? mockReviews : mockReviews.slice(0, 4);
+    const showCarousel = reviews.length > 4;
+    const visibleReviews = showCarousel ? reviews : reviews.slice(0, 4);
 
     return (
         <section className="min-h-screen bg-gray-900 text-gray-100 py-12">
@@ -110,11 +101,13 @@ export default function NoticeSection() {
                             }}
                             style={{ padding: '0 0 40px 0' }}
                         >
-                            {mockReviews.map((r) => (
+                            {reviews.map((r) => (
                                 <SwiperSlide key={r.id}>
                                     <div className="bg-gray-800 w-full max-w-lg mx-auto min-h-[340px] p-8 rounded-2xl shadow hover:shadow-2xl transition-all duration-200 border border-transparent hover:border-blue-500 flex flex-col">
                                         <div className="flex items-center justify-between mb-4">
-                                            <span className="font-medium text-lg">{r.user}</span>
+                                            <span className="font-medium text-lg">
+                                                {r.user.name}
+                                            </span>
                                             <span className="text-xs text-gray-400">{r.time}</span>
                                         </div>
                                         <div className="flex items-center mb-2">
@@ -143,14 +136,14 @@ export default function NoticeSection() {
                         <div
                             className={`w-full flex gap-6 justify-center${visibleReviews.length === 4 ? '' : ' flex-wrap'}`}
                         >
-                            {visibleReviews.map((r) => (
+                            {reviews.map((r) => (
                                 <div
                                     key={r.id}
                                     className="bg-gray-800 flex-1 min-h-[340px] p-8 rounded-2xl shadow hover:shadow-2xl transition-all duration-200 border border-transparent hover:border-blue-500 flex flex-col"
                                     style={{ minWidth: 0 }}
                                 >
                                     <div className="flex items-center justify-between mb-4">
-                                        <span className="font-medium text-lg">{r.user}</span>
+                                        <span className="font-medium text-lg">{r.user.name}</span>
                                         <span className="text-xs text-gray-400">{r.time}</span>
                                     </div>
                                     <div className="flex items-center mb-2">
@@ -192,8 +185,8 @@ export default function NoticeSection() {
                     </div>
                     <div className="flex-1 max-w-lg px-4">
                         {[5, 4, 3, 2, 1].map((star) => {
-                            const count = mockReviews.filter((r) => r.rating === star).length;
-                            const pct = mockReviews.length ? (count / mockReviews.length) * 100 : 0;
+                            const count = reviews.filter((r) => r.rating === star).length;
+                            const pct = reviews.length ? (count / reviews.length) * 100 : 0;
                             return (
                                 <div key={star} className="flex items-center mb-2">
                                     <span className="w-6 text-sm text-gray-400">{star}★</span>

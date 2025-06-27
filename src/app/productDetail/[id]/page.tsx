@@ -1,39 +1,24 @@
 'use client';
 
-import React, { use, useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import ProductGallery from '@/app/productDetail/_components/ProductGallery';
-import { FiStar } from 'react-icons/fi';
 import ProductTabs from '@/app/productDetail/_components/ProductTabsProps';
-import NoticeSection from '../_components/NoticeSection';
-import axios from 'axios';
-import { Product } from '@/types/product';
+import NoticeSection from '@/app/productDetail/_components/NoticeSection';
+import { FiStar } from 'react-icons/fi';
 
-export default function ProductDetailPage({
-    params: paramsPromise
-}: {
-    params: Promise<{ productName: string }>;
-}) {
-    const params = use(paramsPromise);
+import { Product } from '@/types/product';
+import { getProductById } from '@/services/productService';
+
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const [product, setProduct] = useState<Product | null>(null);
+    const { id } = use(params);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(
-                    `http://localhost:4000/products?slug=${params.productName}`
-                );
-                setProduct(res.data[0]); // axios trả kết quả ở res.data
-            } catch (err: unknown) {
-                if (err instanceof Error) {
-                    console.log(err.message);
-                } else {
-                    console.log(err);
-                }
-            }
-        };
-
-        fetchData();
-    }, [params.productName]);
+        (async function fetchData() {
+            const data = await getProductById(id);
+            setProduct(data);
+        })();
+    }, []); // nhớ thêm id vào dependency array nếu dùng
 
     if (!product) {
         return (
