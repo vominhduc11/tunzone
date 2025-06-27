@@ -55,7 +55,7 @@ export default function NoticeSection() {
     const [newRating, setNewRating] = useState(0);
     const [newTitle, setNewTitle] = useState('');
     const [newComment, setNewComment] = useState('');
-    const [showReviewForm, setShowReviewForm] = useState(true);
+    const [showReviewForm, setShowReviewForm] = useState(false);
     const [images, setImages] = useState<string[]>([]);
     const reviewFormRef = useRef<HTMLDivElement>(null);
     const [maxHeight, setMaxHeight] = useState('0px');

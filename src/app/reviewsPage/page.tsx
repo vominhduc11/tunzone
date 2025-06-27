@@ -85,19 +85,19 @@ const mockReviews: Review[] = [
 ];
 
 const review = {
-  user: "Shelby D.",
-  verified: true,
-  rating: 5,
-  time: "2 days ago",
-  title: "Practical Pro",
-  text: "Works great, love the voice commands. The device is incredibly intuitive and the build quality is outstanding. I've been using it for months now and it never disappoints.",
-  images: [
-    "https://images.pexels.com/photos/1181472/pexels-photo-1181472.jpeg",
-    "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg",
-    "https://images.pexels.com/photos/163125/pexels-photo-163125.jpeg",
-    "https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg",
-    "https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg"
-  ]
+    user: 'Shelby D.',
+    verified: true,
+    rating: 5,
+    time: '2 days ago',
+    title: 'Practical Pro',
+    text: "Works great, love the voice commands. The device is incredibly intuitive and the build quality is outstanding. I've been using it for months now and it never disappoints.",
+    images: [
+        'https://images.pexels.com/photos/1181472/pexels-photo-1181472.jpeg',
+        'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+        'https://images.pexels.com/photos/163125/pexels-photo-163125.jpeg',
+        'https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg',
+        'https://images.pexels.com/photos/256502/pexels-photo-256502.jpeg'
+    ]
 };
 
 export default function ReviewsPage() {
@@ -182,7 +182,9 @@ export default function ReviewsPage() {
                         </div>
 
                         <h3 className="text-lg font-semibold mb-2">{review.title}</h3>
-                        <p className="text-base text-gray-300 mb-6 leading-relaxed">{review.text}</p>
+                        <p className="text-base text-gray-300 mb-6 leading-relaxed">
+                            {review.text}
+                        </p>
 
                         {review.images.length > 0 && (
                             <div>

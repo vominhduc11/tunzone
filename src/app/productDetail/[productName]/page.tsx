@@ -1,82 +1,39 @@
-import React from 'react';
+'use client';
+
+import React, { use, useEffect, useState } from 'react';
 import ProductGallery from '@/app/productDetail/_components/ProductGallery';
 import { FiStar } from 'react-icons/fi';
 import ProductTabs from '@/app/productDetail/_components/ProductTabsProps';
 import NoticeSection from '../_components/NoticeSection';
+import axios from 'axios';
+import { Product } from '@/types/product';
 
-interface Product {
-    slug: string;
-    name: string;
-    price: number;
-    images: string[];
-    features: string[];
-    description: string;
-    rating: number;
-    reviewsCount: number;
-    specs: Record<string, string>;
-    boxItems: string[];
-    faqs: { q: string; a: string }[];
-    videoUrl?: string;
-}
-
-const products: Product[] = [
-    {
-        slug: 'g7plus',
-        name: 'Cardo G7 Plus Bluetooth Headset',
-        price: 249.99,
-        images: [
-            'https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg',
-            'https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg',
-            'https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg',
-            'https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg',
-            'https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg'
-        ],
-        features: [
-            'Bluetooth 5.2 Tiên Tiến',
-            'Âm thanh stereo chất lượng cao',
-            'Pin lên đến 17 giờ đàm thoại',
-            'Chống thấm nước IP67',
-            'Kết nối nhóm 15 người'
-        ],
-        rating: 4.7,
-        reviewsCount: 200,
-        description: 'Cardo G7 Plus là tai nghe cao cấp…',
-        specs: {
-            'Bluetooth Version': '5.2',
-            'Max Intercom Distance': '1.6 km',
-            'Talk Time': '17 giờ',
-            'Standby Time': '380 giờ',
-            'Water Resistance': 'IP67',
-            Weight: '55g'
-        },
-        boxItems: [
-            'Thiết bị Cardo G7 Plus',
-            'Cáp sạc USB-C',
-            'Bộ micro chống ồn Windbreaker',
-            'Đế gắn trên mũ',
-            'Hướng dẫn sử dụng'
-        ],
-        faqs: [
-            {
-                q: 'Làm sao để kết nối với điện thoại?',
-                a: 'Nhấn giữ nút nguồn 5 giây, chờ đèn nhấp nháy xanh rồi tìm trên Bluetooth điện thoại.'
-            },
-            {
-                q: 'Thiết bị có chống nước không?',
-                a: 'Đạt chuẩn IP67, chịu được mưa và rửa nhẹ.'
-            }
-        ],
-        videoUrl: 'https://www.youtube.com/embed/VIDEO_ID_G7PLUS'
-    }
-];
-
-export default async function ProductDetailPage({
-    params
+export default function ProductDetailPage({
+    params: paramsPromise
 }: {
     params: Promise<{ productName: string }>;
 }) {
-    const { productName } = await params;
-    const product = products.find((p) => p.slug === productName);
+    const params = use(paramsPromise);
+    const [product, setProduct] = useState<Product | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(
+                    `http://localhost:4000/products?slug=${params.productName}`
+                );
+                setProduct(res.data[0]); // axios trả kết quả ở res.data
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    console.log(err.message);
+                } else {
+                    console.log(err);
+                }
+            }
+        };
+
+        fetchData();
+    }, [params.productName]);
 
     if (!product) {
         return (
@@ -85,8 +42,6 @@ export default async function ProductDetailPage({
             </div>
         );
     }
-
-    const shopeeLink = `https://shopee.vn/search?keyword=${product.slug}`;
 
     return (
         <div className="bg-gray-900 text-white py-16">
@@ -119,7 +74,7 @@ export default async function ProductDetailPage({
                         ))}
                     </ul>
                     <a
-                        href={shopeeLink}
+                        href={`https://shopee.vn/search?keyword=${product.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-full shadow-lg hover:scale-105 transition"
@@ -141,3 +96,5 @@ export default async function ProductDetailPage({
         </div>
     );
 }
+
+// ... existing code...

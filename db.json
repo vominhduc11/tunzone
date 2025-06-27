@@ -1,0 +1,55 @@
+{
+    "posts": [{ "id": 1, "title": "Hello", "content": "World" }],
+    "products": [
+        {
+            "slug": "g7plus",
+            "name": "Cardo G7 Plus Bluetooth Headset",
+            "avatar": "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
+            "price": 249.99,
+            "images": [
+                "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
+                "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
+                "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
+                "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg",
+                "https://dophuot.store/wp-content/uploads/2022/07/tai-nghe-cardo-BOLD-2.jpg"
+            ],
+            "features": [
+                "Bluetooth 5.2 Tiên Tiến",
+                "Âm thanh stereo chất lượng cao",
+                "Pin lên đến 17 giờ đàm thoại",
+                "Chống thấm nước IP67",
+                "Kết nối nhóm 15 người"
+            ],
+            "rating": 4.7,
+            "reviewsCount": 200,
+            "description": "Cardo G7 Plus là tai nghe cao cấp…",
+            "specs": {
+                "Bluetooth Version": "5.2",
+                "Max Intercom Distance": "1.6 km",
+                "Talk Time": "17 giờ",
+                "Standby Time": "380 giờ",
+                "Water Resistance": "IP67",
+                "Weight": "55g"
+            },
+            "boxItems": [
+                "Thiết bị Cardo G7 Plus",
+                "Cáp sạc USB-C",
+                "Bộ micro chống ồn Windbreaker",
+                "Đế gắn trên mũ",
+                "Hướng dẫn sử dụng"
+            ],
+            "faqs": [
+                {
+                    "q": "Làm sao để kết nối với điện thoại?",
+                    "a": "Nhấn giữ nút nguồn 5 giây, chờ đèn nhấp nháy xanh rồi tìm trên Bluetooth điện thoại."
+                },
+                {
+                    "q": "Thiết bị có chống nước không?",
+                    "a": "Đạt chuẩn IP67, chịu được mưa và rửa nhẹ."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/VIDEO_ID_G7PLUS"
+        }
+    ],
+    "users": [{ "id": 1, "name": "Alice" }]
+}

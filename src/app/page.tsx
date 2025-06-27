@@ -1,6 +1,4 @@
-'use client';
-
-import { StaticImageData } from 'next/image';
+'use client'
 
 import ChooseCardoSection from './_components/ChooseCardoSection';
 import RevolutionTechSection from './_components/RevolutionTechSection';
@@ -12,25 +10,9 @@ import TeamPartnersSection from './_components/TeamPartnersSection';
 import WeRecommendSection from './_components/WeRecommendSection';
 import BannerSwiper from './_components/BannerSwiper';
 
-import image from '@/assets/images/tai-nghe-cardo-BOLD-2-removebg-preview.png';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-interface Product {
-    id: string;
-    title: string;
-    imageSrc: StaticImageData;
-    link: string;
-}
-const products: Product[] = [
-    { id: 't2', title: 'T2', imageSrc: image, link: '/productDetail/t2' },
-    { id: 'g7plus', title: 'G7+', imageSrc: image, link: '/productDetail/g7plus' },
-    { id: 's9xm', title: 'S9XM', imageSrc: image, link: '/productDetail/s9xm' },
-    { id: 's9x', title: 'S9X', imageSrc: image, link: '/productDetail/s9x' },
-    { id: 's7evo', title: 'S7EVO', imageSrc: image, link: '/productDetail/s7evo' }
-];
 
 function Home() {
     const banners = [
@@ -41,7 +23,7 @@ function Home() {
         <div>
             <BannerSwiper banners={banners} />
 
-            <WeRecommendSection products={products} />
+            <WeRecommendSection />
 
             <HeroSections />
 
