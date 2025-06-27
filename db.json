@@ -241,47 +241,157 @@
             "videoUrl": "https://www.youtube.com/embed/FreedConnTmaxProDemo"
         },
         {
-            "id": 6,
-            "slug": "spirit-hd",
-            "name": "Cardo Spirit HD Entry-Level Intercom",
-            "avatar": "https://cardosystems.com/cdn/shop/files/SpiritHD_Single.png",
-            "price": 164.95,
-            "images": ["https://cardosystems.com/cdn/shop/files/SpiritHD_Single.png"],
+            "id": 7,
+            "slug": "packtalk-bold",
+            "name": "Cardo Packtalk Bold Intercom",
+            "avatar": "https://cardosystems.com/cdn/shop/files/PacktalkBold_Single.png",
+            "price": 249.99,
+            "images": [
+                "https://cardosystems.com/cdn/shop/files/PacktalkBold_Single.png",
+                "https://cardosystems.com/cdn/shop/files/PacktalkBold_Back.png"
+            ],
             "features": [
-                "2 riders / 600 m",
-                "Loa HD 40 mm, 3 profile âm",
+                "Mesh Intercom® với Dynamic Mesh®",
                 "Pin 13 h, sạc nhanh 20′",
                 "FM Radio + OTA update",
-                "Chống nước IP65"
+                "Chống nước IP67"
             ],
-            "rating": 4.5,
-            "reviewsCount": 130,
-            "description": "Spirit HD nhắm tới người mới: giá mềm nhưng vẫn có loa HD, pin dài và update không dây.",
+            "rating": 4.8,
+            "reviewsCount": 220,
+            "description": "Packtalk Bold với công nghệ Dynamic Mesh® cho phép kết nối liền mạch nhiều tay đua.",
             "specs": {
                 "Bluetooth Version": "5.2",
-                "Max Intercom Distance": "600 m",
+                "Mesh Range": "1.6 km",
                 "Talk Time": "13 giờ",
-                "Water Resistance": "IP65",
-                "Weight": "45g"
+                "Water Resistance": "IP67",
+                "Weight": "56g"
             },
             "boxItems": [
-                "Spirit HD unit",
+                "Packtalk Bold unit",
                 "Loa HD 40 mm",
                 "Hybrid/boom mic",
-                "Clamp & keo dán",
+                "Mount & keo dán",
                 "Cáp USB-C"
             ],
             "faqs": [
                 {
-                    "q": "Spirit có Mesh không?",
-                    "a": "Không – sử dụng Bluetooth intercom truyền thống."
-                },
-                {
-                    "q": "Có sạc khi đang chạy được chứ?",
-                    "a": "Có, cắm power-bank qua USB-C."
+                    "q": "Có thể ghép nối với thiết bị không phải Cardo không?",
+                    "a": "Có, hỗ trợ Bluetooth Intercom tiêu chuẩn."
                 }
             ],
-            "videoUrl": "https://www.youtube.com/embed/CardoSpiritHD"
+            "videoUrl": "https://www.youtube.com/embed/CardoPacktalkBold"
+        },
+        {
+            "id": 8,
+            "slug": "g9-quantum",
+            "name": "Cardo G9 Quantum Bluetooth Headset",
+            "avatar": "https://cardosystems.com/cdn/shop/files/G9Quantum_Single.png",
+            "price": 299.99,
+            "images": ["https://cardosystems.com/cdn/shop/files/G9Quantum_Single.png"],
+            "features": [
+                "Bluetooth 5.3",
+                "Âm thanh stereo chất lượng cao",
+                "Pin 18 h, sạc nhanh 15′",
+                "Chống ồn chủ động ANC"
+            ],
+            "rating": 4.7,
+            "reviewsCount": 180,
+            "description": "G9 Quantum với ANC và pin trâu, mang đến trải nghiệm đàm thoại và giải trí đỉnh cao.",
+            "specs": {
+                "Bluetooth Version": "5.3",
+                "Talk Time": "18 giờ",
+                "ANC": "Yes",
+                "Water Resistance": "IP65",
+                "Weight": "48g"
+            },
+            "boxItems": [
+                "G9 Quantum unit",
+                "Loa stereo 40 mm",
+                "Hybrid/boom mic",
+                "Mount kit",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "ANC có tự động bật khi khởi động không?",
+                    "a": "Có, bạn có thể tắt/bật trong app Cardo Connect."
+                }
+            ],
+            "videoUrl": "https://www.youtube.com/embed/CardoG9Quantum"
+        },
+        {
+            "id": 9,
+            "slug": "freecom-2x",
+            "name": "Cardo Freecom 2X Bluetooth Headset",
+            "avatar": "https://cardosystems.com/cdn/shop/files/Freecom2X_Single.png",
+            "price": 199.99,
+            "images": ["https://cardosystems.com/cdn/shop/files/Freecom2X_Single.png"],
+            "features": [
+                "2 riders / 1.2 km",
+                "Bluetooth 5.0",
+                "Pin 12 h, sạc nhanh 10′",
+                "Chống nước IP67"
+            ],
+            "rating": 4.4,
+            "reviewsCount": 95,
+            "description": "Freecom 2X tối ưu cho 2 người dùng, khoảng cách kết nối lên đến 1.2 km.",
+            "specs": {
+                "Bluetooth Version": "5.0",
+                "Intercom Range": "1.2 km",
+                "Talk Time": "12 giờ",
+                "Water Resistance": "IP67",
+                "Weight": "54g"
+            },
+            "boxItems": [
+                "Freecom 2X unit x2",
+                "Loa stereo 40 mm",
+                "Hybrid mic x2",
+                "Mount kit x2",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "Có thể mở rộng lên 4 riders không?",
+                    "a": "Không, máy chỉ hỗ trợ 2 riders."
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "slug": "freecom-4-plus",
+            "name": "Cardo Freecom 4 Plus Bluetooth Headset",
+            "avatar": "https://cardosystems.com/cdn/shop/files/Freecom4Plus_Single.png",
+            "price": 224.99,
+            "images": ["https://cardosystems.com/cdn/shop/files/Freecom4Plus_Single.png"],
+            "features": [
+                "4 riders / 1.6 km",
+                "Bluetooth 5.2",
+                "Pin 13 h, sạc nhanh 15′",
+                "Chống nước IP67"
+            ],
+            "rating": 4.6,
+            "reviewsCount": 140,
+            "description": "Freecom 4 Plus cho phép liên lạc nhóm 4 người, dễ dàng điều khiển qua nút đệm lớn.",
+            "specs": {
+                "Bluetooth Version": "5.2",
+                "Intercom Range": "1.6 km",
+                "Talk Time": "13 giờ",
+                "Water Resistance": "IP67",
+                "Weight": "55g"
+            },
+            "boxItems": [
+                "Freecom 4 Plus unit x4",
+                "Loa stereo 40 mm",
+                "Hybrid mic x4",
+                "Mount kit x4",
+                "Cáp USB-C"
+            ],
+            "faqs": [
+                {
+                    "q": "Có thể kết nối đồng thời 2 điện thoại không?",
+                    "a": "Có, hỗ trợ Multipoint."
+                }
+            ]
         }
     ],
     "users": [{ "id": 1, "name": "Alice" }],

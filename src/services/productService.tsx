@@ -20,3 +20,8 @@ export async function getProductById(id: string): Promise<Product> {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?id=${id}`);
     return res.data[0];
 }
+
+export async function getAllProducts(): Promise<Product[]> {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+    return res.data;
+}

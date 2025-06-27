@@ -6,13 +6,13 @@ import logo from '@/assets/images/logo.png'; // Adjust the path to your logo ima
 import Link from 'next/link';
 
 const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Products', href: '#' },
-    { name: 'Blogs', href: '#' },
+    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/products' },
+    { name: 'Blogs', href: '/blogs' },
     { name: 'Dealer system', href: '#' },
     { name: 'Dealer', href: '#' },
-    { name: 'About Us', href: '#' },
-    { name: 'Contact Us', href: '#' }
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact Us', href: '/contact' }
 ];
 
 export default function Header() {
@@ -31,13 +31,13 @@ export default function Header() {
                 {/* Nav */}
                 <nav className="hidden md:flex space-x-8">
                     {navItems.map((item) => (
-                        <a
+                        <Link
                             key={item.name}
                             href={item.href}
                             className="text-white font-medium hover:opacity-75 transition"
                         >
                             {item.name}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
 
