@@ -6,6 +6,7 @@ export async function getRecommentProduct(): Promise<Product[]> {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
         params: { _limit: 5 }
     });
+    
     const filtered = res.data.map((product: Product) => ({
         id: product.id,
         name: product.name,
