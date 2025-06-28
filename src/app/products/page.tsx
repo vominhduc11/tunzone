@@ -126,39 +126,45 @@ const ProductsPage: React.FC = () => {
                                     min={MIN}
                                     max={MAX}
                                     onChange={(vals) => setPriceRange([vals[0], vals[1]])}
-                                    renderTrack={({ props, children }) => (
-                                        <div
-                                            {...props}
-                                            style={{
-                                                ...props.style,
-                                                height: '8px',
-                                                width: '100%',
-                                                background: `linear-gradient(to right, #4b5563 0%, #3b82f6 ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%, #2563eb ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%, #2563eb ${((priceRange[1] - MIN) / (MAX - MIN)) * 100}%, #4b5563 100%)`,
-                                                borderRadius: '6px',
-                                                marginTop: '12px'
-                                            }}
-                                        >
-                                            {children}
-                                        </div>
-                                    )}
-                                    renderThumb={({ props, index }) => (
-                                        <div
-                                            {...props}
-                                            style={{
-                                                ...props.style,
-                                                height: '24px',
-                                                width: '24px',
-                                                borderRadius: '50%',
-                                                backgroundColor:
-                                                    index === 0 ? '#3b82f6' : '#2563eb',
-                                                border: '3px solid white',
-                                                boxShadow: '0 2px 6px #00000033',
-                                                marginTop: '-8px',
-                                                cursor: 'pointer',
-                                                zIndex: 2
-                                            }}
-                                        />
-                                    )}
+                                    renderTrack={({ props, children }) => {
+                                        return (
+                                            <div
+                                                {...props}
+                                                style={{
+                                                    ...props.style,
+                                                    height: '8px',
+                                                    width: '100%',
+                                                    background: `linear-gradient(to right, #4b5563 0%, #3b82f6 ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%, #2563eb ${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%, #2563eb ${((priceRange[1] - MIN) / (MAX - MIN)) * 100}%, #4b5563 100%)`,
+                                                    borderRadius: '6px',
+                                                    marginTop: '12px'
+                                                }}
+                                            >
+                                                {children}
+                                            </div>
+                                        );
+                                    }}
+                                    renderThumb={({ props, index }) => {
+                                        const { key, ...restProps } = props; // destructure key out
+                                        return (
+                                            <div
+                                                key={key}
+                                                {...restProps}
+                                                style={{
+                                                    ...restProps.style,
+                                                    height: '24px',
+                                                    width: '24px',
+                                                    borderRadius: '50%',
+                                                    backgroundColor:
+                                                        index === 0 ? '#3b82f6' : '#2563eb',
+                                                    border: '3px solid white',
+                                                    boxShadow: '0 2px 6px #00000033',
+                                                    marginTop: '-8px',
+                                                    cursor: 'pointer',
+                                                    zIndex: 2
+                                                }}
+                                            />
+                                        );
+                                    }}
                                 />
                                 <div className="flex justify-between text-xs text-gray-400 mt-2">
                                     <span>${priceRange[0].toFixed(2)}</span>
