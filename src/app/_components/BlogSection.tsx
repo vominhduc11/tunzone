@@ -5,7 +5,7 @@ import { blogs as bl } from '@/data/api/blogs'
 import Link from 'next/link';
 
 export default async function BlogSection() {
-    const blogs = bl.slice(0, 4);
+    const blogs = bl.slice(0, 3);
 
     return (
         <section className="bg-gray-900 py-16">
