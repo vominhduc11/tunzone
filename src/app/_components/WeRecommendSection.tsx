@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { products as pro } from '@/data/api/products';
 
-import { getRecommentProduct } from '@/services/productService';
-
-export default async function WeRecommendSection() {
-    const products = await getRecommentProduct();
+export default function WeRecommendSection() {
+    const products = pro.slice(0, 4);
 
     return (
         <section className="bg-gray-700 py-16">

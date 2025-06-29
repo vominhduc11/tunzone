@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FiUsers, FiTrendingUp, FiPackage } from 'react-icons/fi';
 
 export default function DealerPartnershipSection() {
@@ -19,9 +20,12 @@ export default function DealerPartnershipSection() {
                     Chương trình đại lý hấp dẫn, hỗ trợ marketing và hậu mãi toàn cầu. Nhận ưu đãi
                     chiết khấu cao, đào tạo chuyên sâu và tài liệu bán hàng đầy đủ.
                 </p>
-                <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold py-3 px-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                <Link
+                    href="/dealerRegistration"
+                    className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-semibold py-3 px-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                >
                     Đăng Ký Ngay
-                </button>
+                </Link>
 
                 <div className="mt-8 flex flex-col sm:flex-row sm:space-x-8 space-y-4 sm:space-y-0 text-gray-300">
                     <div className="flex items-center space-x-2 hover:text-white transition-colors duration-300">

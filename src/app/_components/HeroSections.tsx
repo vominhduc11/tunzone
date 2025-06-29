@@ -1,4 +1,7 @@
+import Link from 'next/link';
 import { FiHeadphones, FiBattery, FiCloudRain } from 'react-icons/fi';
+import image1 from '@/assets/images/feature2.png';
+import image2 from '@/assets/images/feature3.png';
 
 export default function HeroSections() {
     return (
@@ -7,8 +10,7 @@ export default function HeroSections() {
             <section
                 className="relative bg-fixed bg-center bg-cover h-screen flex items-center justify-center text-white"
                 style={{
-                    backgroundImage:
-                        "url('https://www.scsetc.com/wp-content/uploads/2025/04/oemodm.jpg')"
+                    backgroundImage: `url('${image1.src}')`
                 }}
             >
                 <div className="absolute inset-0 bg-black opacity-60" />
@@ -18,12 +20,12 @@ export default function HeroSections() {
                         Hệ thống mạng lưới độc quyền, đảm bảo kết nối xuyên suốt, an toàn và tiện
                         nghi cho mọi chuyến đi.
                     </p>
-                    <a
+                    <Link
                         href="/features"
                         className="inline-block bg-blue-500 text-white font-semibold py-3 px-8 rounded-lg shadow-md transform transition duration-300 hover:bg-blue-600 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
                         Khám Phá Ngay
-                    </a>
+                    </Link>
                     <p className="text-sm text-gray-300">Bảo hành 2 năm | Hỗ trợ 24/7</p>
                 </div>
             </section>
@@ -32,8 +34,7 @@ export default function HeroSections() {
             <section
                 className="relative bg-fixed bg-center bg-cover h-screen flex items-center justify-center text-white"
                 style={{
-                    backgroundImage:
-                        "url('https://www.scsetc.com/wp-content/uploads/2025/04/daili.jpg')"
+                    backgroundImage: `url('${image2.src}')`
                 }}
             >
                 <div className="absolute inset-0 bg-black opacity-60" />
@@ -43,12 +44,12 @@ export default function HeroSections() {
                         Từ thành phố đến địa hình đồi núi, một thiết bị – vô số tính năng: âm thanh
                         chất lượng, pin lâu dài, kháng nước IP67.
                     </p>
-                    <a
-                        href="/use-cases"
+                    <Link
+                        href="/journey"
                         className="inline-block bg-green-500 text-white font-semibold py-3 px-8 rounded-lg shadow-md transform transition duration-300 hover:bg-green-600 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-400"
                     >
                         Bắt Đầu Hành Trình
-                    </a>
+                    </Link>
                     <div className="mt-6 flex flex-wrap justify-center gap-8 text-gray-200">
                         <div className="flex items-center space-x-2">
                             <FiHeadphones className="w-5 h-5 transition-transform duration-300 hover:scale-110" />

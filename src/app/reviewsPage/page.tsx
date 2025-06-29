@@ -1,34 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FiStar } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 
 import SharedModal from '@/components/shared/SharedModal';
-
+import { reviews } from '@/data/api/reviews';
 import { Review } from '@/types/review';
-
-import { getDetailReview, getReviews } from '@/services/reviewService';
 
 export default function ReviewsPage() {
     const router = useRouter();
-    const [reviews, setReviews] = useState<Review[]>([]);
+    const [open, setOpen] = useState<boolean>(false);
     const [review, setReview] = useState<Review | null>(null);
-    const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        (async function fetchData() {
-            const data = await getReviews();
-            setReviews(data);
-        })();
-    }, []);
+    function handleViewDetailReview(id: number) {
+        const data = reviews.find((r) => r.id === id);
 
-    async function handleViewDetailReview(id: number) {
-        const data = await getDetailReview(id);
-        console.log(data);
-        setReview(data);
+        setReview(data ?? null);
 
         setOpen(true);
     }
@@ -51,7 +41,7 @@ export default function ReviewsPage() {
                                 className="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col"
                             >
                                 <div className="flex items-center justify-between mb-4">
-                                    <span className="font-medium text-lg">{r.user.name}</span>
+                                    <span className="font-medium text-lg">{r.username}</span>
                                     <span className="text-xs text-gray-400">{r.time}</span>
                                 </div>
                                 <div className="flex items-center mb-2">
@@ -89,7 +79,7 @@ export default function ReviewsPage() {
                             <h2 className="text-xl font-bold mb-4">Chi tiết đánh giá</h2>
 
                             <div className="mb-2 text-lg font-semibold flex items-center gap-2">
-                                {review.user.name}
+                                {review.username}
                                 {review.verified && (
                                     <span className="bg-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
                                         <BiCheckCircle className="w-3 h-3" />
@@ -115,7 +105,7 @@ export default function ReviewsPage() {
                                 {review.text}
                             </p>
 
-                            {review.images.length > 0 && (
+                            {review.images && review.images.length > 0 && (
                                 <div>
                                     <h4 className="font-medium mb-3">
                                         Hình ảnh từ khách hàng ({review.images.length})

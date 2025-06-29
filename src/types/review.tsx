@@ -1,12 +1,11 @@
-import { User } from './user';
-
 export type Review = {
     id: number;
-    user: User;
-    title: string;
+    username: string;
     rating: number;
+    title: string;
     text: string;
     time: string;
-    images: string[];
+    images?: string[];
     verified: boolean;
+    productId: number;
 };

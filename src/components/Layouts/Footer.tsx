@@ -1,5 +1,6 @@
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { SiTiktok } from 'react-icons/si';
+import Link from 'next/link';
 
 const companyLinks = [
     'À Propos de Cardo',
@@ -7,7 +8,8 @@ const companyLinks = [
     'Durabilité',
     "Se joindre à l'équipe",
     'Presse',
-    'Média'
+    'Média',
+    { label: 'Điều khoản & Chính sách', href: '/policy' }
 ];
 
 const infoLinks = [
@@ -44,13 +46,24 @@ export default function Footer() {
                 <div>
                     <h3 className="text-white font-semibold uppercase mb-4">Entreprise</h3>
                     <ul className="space-y-2">
-                        {companyLinks.map((link) => (
-                            <li key={link}>
-                                <a href="#" className="hover:underline">
-                                    {link}
-                                </a>
-                            </li>
-                        ))}
+                        {companyLinks.map((link) =>
+                            typeof link === 'string' ? (
+                                <li key={link}>
+                                    <a href="#" className="hover:underline">
+                                        {link}
+                                    </a>
+                                </li>
+                            ) : (
+                                <li key={link.label}>
+                                    <Link
+                                        href={link.href}
+                                        className="hover:underline text-cyan-400"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            )
+                        )}
                     </ul>
                 </div>
 
@@ -65,6 +78,15 @@ export default function Footer() {
                                 </a>
                             </li>
                         ))}
+                        {/* Warranty Checking Link */}
+                        <li>
+                            <Link
+                                href="/warrantyChecking"
+                                className="hover:underline text-cyan-400"
+                            >
+                                Tra cứu bảo hành
+                            </Link>
+                        </li>
                     </ul>
                 </div>
 

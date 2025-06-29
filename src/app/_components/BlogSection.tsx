@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { FiArrowRight } from 'react-icons/fi';
 
-import { getLatestBlogs } from '@/services/postService';
+import { blogs as bl } from '@/data/api/blogs'
+import Link from 'next/link';
 
 export default async function BlogSection() {
-    const blogs = await getLatestBlogs();
+    const blogs = bl.slice(0, 4);
 
     return (
         <section className="bg-gray-900 py-16">
@@ -32,13 +33,13 @@ export default async function BlogSection() {
                                     {blog.title}
                                 </h3>
                                 <p className="text-gray-400 mb-4">{blog.excerpt}</p>
-                                <a
-                                    // href={`${process.env.NEXT_PUBLIC_API_URL}/blogs/${blog.id}`}
+                                <Link
+                                    href="/blog/1"
                                     className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors duration-300"
                                 >
                                     Đọc Thêm
                                     <FiArrowRight className="ml-2 w-5 h-5" />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     ))}

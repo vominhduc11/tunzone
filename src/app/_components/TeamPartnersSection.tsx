@@ -1,9 +1,8 @@
+import { partners as par } from '@/data/api/parners';
 import Image from 'next/image';
 
-import { getMostTrustedPartners } from '@/services/parnerService';
-
 export default async function TeamPartnersSection() {
-    const partners = await getMostTrustedPartners();
+    const partners = par.slice(0, 4);
 
     return (
         <section className="bg-gray-900 text-white py-16">

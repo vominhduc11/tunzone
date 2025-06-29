@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactModal from 'react-modal';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // Set app element for accessibility; in Next.js app router, '#__next' may not exist, fallback to 'body'
 if (typeof window !== 'undefined') {
@@ -25,6 +26,7 @@ export default function SharedModal({
         <ReactModal
             isOpen={isOpen}
             onRequestClose={onClose}
+            closeTimeoutMS={200}
             contentLabel={contentLabel}
             shouldCloseOnOverlayClick
             shouldCloseOnEsc
@@ -48,7 +50,18 @@ export default function SharedModal({
                 }
             }}
         >
-            {children}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        {children}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </ReactModal>
     );
 }
