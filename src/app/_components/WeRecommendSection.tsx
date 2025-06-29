@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { products as pro } from '@/data/api/products';
 
 export default function WeRecommendSection() {
-    const products = pro.slice(0, 4);
+    const products = pro.slice(0, 5);
 
     return (
         <section className="bg-gray-700 py-16">
