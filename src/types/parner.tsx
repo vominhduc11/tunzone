@@ -1,5 +1,5 @@
 export interface Parner {
     id: number;
     name: string;
-    logo: string
+    logo: string;
 }

@@ -1,8 +1,6 @@
-import { StaticImageData } from 'next/image';
-
 export interface Product {
     id: number;
-    avatar: StaticImageData | string;
+    avatar: string;
     images?: string[];
     name: string;
     rating: number;

@@ -7,5 +7,5 @@ export interface Blog {
     category: string;
     image: string;
     views?: number;
-    content?: string[]
+    content?: string[];
 }

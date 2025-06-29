@@ -10,16 +10,17 @@ import 'swiper/css/pagination';
 
 interface GalleryProps {
     images: string[];
+    avatar: string;
     mainImageIndex?: number;
 }
 
-export default function ProductGallery({ images, mainImageIndex = 0 }: GalleryProps) {
+export default function ProductGallery({ images, avatar, mainImageIndex = 0 }: GalleryProps) {
     return (
         <div className="space-y-6">
             {/* Main Image */}
             <div className="relative w-full h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                    src={images[mainImageIndex]}
+                    src={avatar}
                     alt={`Product image ${mainImageIndex + 1}`}
                     fill
                     className="object-cover"

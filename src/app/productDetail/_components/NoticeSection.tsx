@@ -56,7 +56,12 @@ export default function NoticeSection({ id }: { id: string }) {
 
                 {/* Review cards/carousel */}
                 <div className="mb-8">
-                    {showCarousel ? (
+                    {/* BỔ SUNG: Hiển thị UI khi không có review */}
+                    {visibleReviews.length === 0 ? (
+                        <div className="text-center text-gray-400 py-16">
+                            <p>Chưa có bài đánh giá nào. Hãy cho tôi biết đánh giá của bạn</p>
+                        </div>
+                    ) : showCarousel ? (
                         <Swiper
                             modules={[Navigation, Pagination]}
                             navigation

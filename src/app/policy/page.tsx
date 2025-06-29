@@ -7,7 +7,8 @@ export default function PolicyPage() {
     const updatesIntro = `Chúng tôi có thể cập nhật hoặc thay đổi điều khoản này vào bất kỳ thời điểm nào. Khi có sửa đổi, chúng tôi sẽ thông báo qua email hoặc thông báo trên trang web. Việc bạn tiếp tục sử dụng dịch vụ sau khi có thông báo sửa đổi đồng nghĩa bạn đã chấp nhận các điều khoản mới.`;
 
     return (
-        <div className="min-h-screen bg-[#181f2a] text-[#b0d0f9] font-sans py-12 px-4">
+        // BỔ SUNG: class scroll-smooth để cuộn mượt khi bấm mục lục
+        <div className="scroll-smooth min-h-screen bg-[#181f2a] text-[#b0d0f9] font-sans py-12 px-4">
             <div className="max-w-4xl mx-auto space-y-12">
                 {/* Page Title */}
                 <header>
@@ -27,7 +28,13 @@ export default function PolicyPage() {
                         ].map(({ idx, id, label }) => (
                             <li key={id}>
                                 <Link
+                                    // BỔ SUNG: thêm onClick để scrollIntoView (fallback JS)
                                     href={`#${id}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        const el = document.getElementById(id);
+                                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                    }}
                                     className="flex items-center gap-2 hover:text-cyan-300 transition-colors"
                                 >
                                     <span className="font-medium text-cyan-300">{idx}.</span>

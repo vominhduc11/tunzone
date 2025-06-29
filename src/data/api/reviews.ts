@@ -19,7 +19,7 @@ export const reviews: Review[] = [
         text: 'Mình dùng khi đi phượt, nghe gọi rõ ràng. Giá ổn.',
         time: '2 ngày trước',
         verified: true,
-        productId: 6
+        productId: 1
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ export const reviews: Review[] = [
         text: 'Đã mua thêm cho bạn bè, ai cũng thích. Đáng đồng tiền.',
         time: '3 ngày trước',
         verified: true,
-        productId: 5
+        productId: 1
     },
     {
         id: 4,

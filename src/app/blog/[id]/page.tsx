@@ -18,8 +18,6 @@ import SharedModal from '@/components/shared/SharedModal';
 import { motion } from 'framer-motion';
 import { blogs } from '@/data/api/blogs';
 
-
-
 export default function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
     const [isShareOpen, setShareOpen] = useState(false);

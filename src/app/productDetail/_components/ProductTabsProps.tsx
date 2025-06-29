@@ -19,7 +19,7 @@ export default function ProductTabs({
     faqs,
     videoUrl
 }: ProductTabsProps) {
-    const tabLabels = ['Thông số kỹ thuật', 'Video', 'Mô tả', 'What’s in the Box', 'FAQs'];
+    const tabLabels = ['Thông số kỹ thuật', 'Video', 'Mô tả', 'Trong hộp', 'Câu hỏi thường gặp'];
 
     return (
         <div className="mt-12 bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -66,11 +66,11 @@ export default function ProductTabs({
                     <div className="p-6">
                         {videoUrl && (
                             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
-                                <iframe
+                                <video
                                     src={videoUrl}
                                     title="Product video"
-                                    allowFullScreen
                                     className="w-full h-full"
+                                    controls
                                 />
                             </div>
                         )}

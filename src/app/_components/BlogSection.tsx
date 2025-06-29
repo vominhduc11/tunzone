@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FiArrowRight } from 'react-icons/fi';
 
-import { blogs as bl } from '@/data/api/blogs'
+import { blogs as bl } from '@/data/api/blogs';
 import Link from 'next/link';
 
 export default async function BlogSection() {

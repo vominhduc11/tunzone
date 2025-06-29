@@ -1,22 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import ReactPaginate from 'react-paginate';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 import { products } from '@/data/api/products';
+import { Transition } from '@headlessui/react';
 
 const ProductsPage: React.FC = () => {
     const [search, setSearch] = useState('');
     const [sortOption, setSortOption] = useState<'az' | 'za' | 'priceAsc' | 'priceDesc'>('az');
     const [currentPage, setCurrentPage] = useState(1);
+    const [compareList, setCompareList] = useState<number[]>([]);
     const itemsPerPage = 6;
 
-    // Lọc theo từ khóa tìm kiếm
-    const filtered = products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
+    // Toggle so sánh, chỉ cho phép tối đa 5 sản phẩm
+    const toggleCompare = (id: number) => {
+        setCompareList((prev) => {
+            const included = prev.includes(id);
+            if (included) {
+                // Bỏ so sánh
+                return prev.filter((item) => item !== id);
+            }
+            // Nếu chưa bao gồm và đã đủ 5, không thêm
+            if (prev.length >= 5) {
+                return prev;
+            }
+            // Thêm vào danh sách
+            return [...prev, id];
+        });
+    };
 
-    // Sắp xếp
+    const filtered = products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
     const sorted = [...filtered].sort((a, b) => {
         switch (sortOption) {
             case 'az':
@@ -27,51 +45,20 @@ const ProductsPage: React.FC = () => {
                 return (a.price ?? 0) - (b.price ?? 0);
             case 'priceDesc':
                 return (b.price ?? 0) - (a.price ?? 0);
-            default:
-                return 0;
         }
     });
 
-    // Phân trang
     const pageCount = Math.ceil(sorted.length / itemsPerPage);
-    const offset = (currentPage - 1) * itemsPerPage;
-    const displayed = sorted.slice(offset, offset + itemsPerPage);
+    const displayed = sorted.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const handlePageClick = ({ selected }: { selected: number }) => setCurrentPage(selected + 1);
 
-    return (
-        <div className="min-h-screen bg-gray-900 text-white py-12 px-4">
-            <style jsx>{`
-                .product-card {
-                    transition:
-                        transform 0.22s cubic-bezier(0.33, 1.02, 0.42, 0.99),
-                        box-shadow 0.22s;
-                    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.14);
-                }
-                .product-card:hover {
-                    transform: translateY(-8px) scale(1.025) rotateZ(-1deg);
-                    box-shadow:
-                        0 8px 32px 0 rgba(0, 123, 255, 0.2),
-                        0 2px 12px 0 rgba(0, 0, 0, 0.16);
-                    border-color: #3b82f6;
-                    background: linear-gradient(90deg, #1e293b 60%, #1d4ed8 100%);
-                }
-                .product-card:hover .product-image {
-                    filter: brightness(1.13) saturate(1.1) drop-shadow(0 8px 24px #2563eb44);
-                }
-                .product-card .see-detail {
-                    transition: background 0.2s;
-                }
-                .product-card:hover .see-detail {
-                    background: linear-gradient(90deg, #2563eb, #3b82f6);
-                }
-                .product-card .feature-list {
-                    transition: color 0.2s;
-                }
-                .product-card:hover .feature-list {
-                    color: #dbeafe;
-                }
-            `}</style>
+    const comparedProducts = compareList
+        .map((id) => products.find((p) => p.id === id))
+        .filter(Boolean) as typeof products;
 
+    return (
+        <div className="min-h-screen pb-32 bg-gray-900 text-white py-12 px-4">
+            {/* Product Filters and List */}
             <div className="max-w-7xl mx-auto">
                 <div className="flex gap-8 items-start">
                     <aside className="w-72 bg-gray-800 p-6 rounded-lg">
@@ -89,13 +76,13 @@ const ProductsPage: React.FC = () => {
                         <div className="mb-6">
                             <label className="block text-sm font-medium mb-2">Sắp xếp theo</label>
                             <select
+                                className="w-full bg-gray-700 p-2 rounded"
                                 value={sortOption}
                                 onChange={(e) =>
                                     setSortOption(
                                         e.target.value as 'az' | 'za' | 'priceAsc' | 'priceDesc'
                                     )
                                 }
-                                className="w-full bg-gray-700 p-2 rounded"
                             >
                                 <option value="az">Tên A-Z</option>
                                 <option value="za">Tên Z-A</option>
@@ -104,80 +91,115 @@ const ProductsPage: React.FC = () => {
                             </select>
                         </div>
                     </aside>
-
                     <div className="flex-1">
-                        <div className="flex items-center justify-between mb-4">
-                            <p className="text-sm">
-                                Hiển thị <span className="font-semibold">{displayed.length}</span>{' '}
-                                trên <span className="font-semibold">{sorted.length}</span> sản phẩm
-                            </p>
-                        </div>
+                        <p className="text-sm mb-4">
+                            Hiển thị <span className="font-semibold">{displayed.length}</span> trên{' '}
+                            <span className="font-semibold">{sorted.length}</span> sản phẩm
+                        </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {displayed.map((p) => (
-                                <div
-                                    key={p.id}
-                                    className="product-card flex flex-col h-full bg-gray-800 p-4 rounded-lg border border-gray-800"
-                                >
-                                    <Image
-                                        src={p.images?.[0] ?? '/placeholder.png'}
-                                        alt={p.name}
-                                        width={400}
-                                        height={192}
-                                        className="product-image h-48 w-full object-cover rounded mb-4"
-                                        priority
-                                    />
-                                    <h3 className="font-semibold text-lg mb-2">{p.name}</h3>
-                                    <div className="flex items-center mb-2">
-                                        <div className="flex">
-                                            {Array.from({ length: 5 }).map((_, i) => (
-                                                <svg
-                                                    key={i}
-                                                    viewBox="0 0 20 20"
-                                                    className={`w-4 h-4 fill-current ${i < Math.round(p.rating) ? 'text-yellow-400' : 'text-gray-600'}`}
-                                                >
-                                                    <path d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.562-.954L10 0l2.95 5.956 6.562.954-4.756 4.635L15.878 18z" />
-                                                </svg>
-                                            ))}
-                                        </div>
-                                        <span className="text-sm text-gray-400 ml-2">
-                                            ({p.reviewsCount})
-                                        </span>
-                                    </div>
-                                    <ul className="feature-list text-sm text-gray-300 mb-4 space-y-1 flex-1">
-                                        {p.features.map((f, idx) => (
-                                            <li key={idx}>• {f}</li>
-                                        ))}
-                                    </ul>
-                                    <Link
-                                        href={`/productDetail/${p.id}`}
-                                        className="see-detail mt-auto block text-center bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 py-2 rounded text-white"
+                            {displayed.map((p) => {
+                                const isCompared = compareList.includes(p.id);
+                                const canCompareMore = isCompared || compareList.length < 5;
+                                return (
+                                    <div
+                                        key={p.id}
+                                        className="product-card flex flex-col h-full bg-gray-800 p-4 rounded-lg border border-gray-800 transition-transform hover:scale-[1.02]"
                                     >
-                                        Xem chi tiết
-                                    </Link>
-                                </div>
-                            ))}
+                                        <Image
+                                            src={p.images?.[0] ?? '/placeholder.png'}
+                                            alt={p.name}
+                                            width={400}
+                                            height={192}
+                                            className="h-48 w-full object-cover rounded mb-4"
+                                        />
+                                        <h3 className="font-semibold text-lg mb-2">{p.name}</h3>
+                                        <ul className="flex-1 text-sm text-gray-300 mb-4 space-y-1">
+                                            {p.features.map((f, i) => (
+                                                <li key={i}>• {f}</li>
+                                            ))}
+                                        </ul>
+                                        <div className="flex space-x-3 mt-auto">
+                                            <Link
+                                                href={`/productDetail/${p.id}`}
+                                                className="flex-1 bg-blue-600 py-2 rounded text-center hover:bg-blue-700 transition"
+                                            >
+                                                Xem chi tiết
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    canCompareMore && toggleCompare(p.id)
+                                                }
+                                                disabled={!canCompareMore}
+                                                className={`flex-1 text-center py-2 rounded transition ${isCompared ? 'bg-green-600 hover:bg-green-500' : canCompareMore ? 'bg-gray-600 hover:bg-gray-500' : 'bg-gray-700 cursor-not-allowed'}`}
+                                            >
+                                                {isCompared ? 'Bỏ so sánh' : 'So sánh'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
-
-                        {sorted.length >= itemsPerPage + 1 && (
+                        {pageCount > 1 && (
                             <ReactPaginate
-                                previousLabel="‹ Prev"
-                                nextLabel="Next ›"
-                                breakLabel="..."
+                                previousLabel="‹"
+                                nextLabel="›"
                                 pageCount={pageCount}
-                                marginPagesDisplayed={1}
-                                pageRangeDisplayed={2}
                                 onPageChange={handlePageClick}
                                 containerClassName="flex justify-center space-x-2 mt-8"
-                                pageLinkClassName="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded"
-                                activeLinkClassName="bg-gradient-to-r from-blue-500 to-blue-700 text-white"
-                                previousLinkClassName="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded"
-                                nextLinkClassName="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded"
-                                forcePage={currentPage - 1}
+                                pageLinkClassName="px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 transition"
+                                activeLinkClassName="bg-blue-600 text-white"
                             />
                         )}
                     </div>
                 </div>
             </div>
+
+            {/* BOTTOM BAR for Comparison */}
+            <Transition
+                as={Fragment}
+                show={compareList.length > 0}
+                enter="transition ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+            >
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 bg-opacity-90 backdrop-blur-md shadow-2xl rounded-xl p-3 max-w-3xl w-[calc(100%-2rem)]">
+                    <div className="flex items-center space-x-4">
+                        <span className="text-sm text-gray-300">
+                            Đã chọn {compareList.length}/5
+                        </span>
+                        <Swiper spaceBetween={12} slidesPerView={'auto'} className="flex-1">
+                            {comparedProducts.map((p) => (
+                                <SwiperSlide key={p.id} style={{ width: '72px' }}>
+                                    <div className="relative w-16 h-16">
+                                        <Image
+                                            src={p.images?.[0] ?? '/placeholder.png'}
+                                            alt={p.name}
+                                            fill
+                                            className="object-cover rounded-lg border-2 border-gray-600"
+                                        />
+                                        <button
+                                            onClick={() => toggleCompare(p.id)}
+                                            className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-400 text-white w-5 h-5 flex items-center justify-center rounded-full"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <Link
+                            href={`/compare?compare=${compareList.join(',')}`}
+                            className="ml-2 bg-cyan-500 hover:bg-cyan-400 text-gray-900 py-2 px-5 rounded-full font-medium shadow-lg transition"
+                        >
+                            Xem so sánh
+                        </Link>
+                    </div>
+                </div>
+            </Transition>
         </div>
     );
 };

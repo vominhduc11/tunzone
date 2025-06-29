@@ -4,8 +4,12 @@ export const products: Product[] = [
     {
         id: 1,
         name: 'Cardo G7 Plus Bluetooth Headset',
-        avatar: '/images/cardog7plus.jpg',
-        images: ['/images/prod1.jpg', '/images/prod2.jpg', '/images/prod3.jpg'],
+        avatar: '/images/products/cardog7plus.png',
+        images: [
+            '/images/products/packtalkbold.png',
+            '/images/products/packtalkbold.png',
+            '/images/products/packtalkbold.png'
+        ],
         rating: 4.2,
         reviewsCount: 2,
         features: ['Kết nối Bluetooth', 'Chống ồn chủ động', 'Pin 20 giờ'],
@@ -14,13 +18,13 @@ export const products: Product[] = [
         specs: { weight: '50g', battery: '20 giờ', connectivity: 'Bluetooth 5.0' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Bảo hành bao lâu?', a: '12 tháng kể từ ngày mua.' }],
-        videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 2,
         name: 'Cardo Packtalk Bold',
-        avatar: '/images/packtalkbold.jpg',
-        images: ['/images/packtalkbold1.jpg', '/images/packtalkbold2.jpg'],
+        avatar: '/images/products/packtalkbold.png',
+        images: ['/images/products/packtalkbold.png', '/images/products/packtalkbold.png'],
         rating: 4.5,
         reviewsCount: 5,
         features: ['Công nghệ DMC', 'Âm thanh JBL', 'Pin 13 giờ'],
@@ -29,7 +33,7 @@ export const products: Product[] = [
         specs: { weight: '60g', battery: '13 giờ', connectivity: 'Bluetooth 4.1' },
         boxItems: ['Tai nghe', 'Microphone', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Có hỗ trợ cập nhật firmware không?', a: 'Có, qua OTA.' }],
-        videoUrl: 'https://www.youtube.com/embed/xyz123'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 3,
@@ -46,7 +50,7 @@ export const products: Product[] = [
         faqs: [
             { q: 'Có thể kết nối với điện thoại không?', a: 'Có, hỗ trợ gọi điện và nghe nhạc.' }
         ],
-        videoUrl: 'https://www.youtube.com/embed/abc456'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 4,
@@ -61,7 +65,7 @@ export const products: Product[] = [
         specs: { weight: '52g', battery: '15 giờ', connectivity: 'Bluetooth 5.1' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Có chống nước không?', a: 'Có, chuẩn IP67.' }],
-        videoUrl: 'https://www.youtube.com/embed/def789'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 5,
@@ -75,7 +79,7 @@ export const products: Product[] = [
         specs: { weight: '45g', battery: '10 giờ', connectivity: 'Bluetooth 5.0' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Neo có chống ồn không?', a: 'Không, nhưng âm thanh trong trẻo.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample5'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 6,
@@ -89,7 +93,7 @@ export const products: Product[] = [
         specs: { weight: '56g', battery: '11 giờ', connectivity: 'Bluetooth 4.2' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Có điều khiển thoại không?', a: 'Có, trên thiết bị.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample6'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 7,
@@ -103,7 +107,7 @@ export const products: Product[] = [
         specs: { weight: '53g', battery: '16 giờ', connectivity: 'Bluetooth 5.1' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'HD có hỗ trợ FM không?', a: 'Không hỗ trợ.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample7'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 8,
@@ -117,7 +121,7 @@ export const products: Product[] = [
         specs: { weight: '51g', battery: '22 giờ', connectivity: 'Bluetooth 5.2' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Pro có đa kết nối?', a: 'Có thể kết nối 2 thiết bị.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample8'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 9,
@@ -131,7 +135,7 @@ export const products: Product[] = [
         specs: { weight: '61g', battery: '13 giờ', connectivity: 'Bluetooth 4.1' },
         boxItems: ['Tai nghe', 'Microphone', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: 'Có hỗ trợ Siri/Google Assistant?', a: 'Có hỗ trợ.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample9'
+        videoUrl: '/videos/demo.mp4'
     },
     {
         id: 10,
@@ -145,6 +149,6 @@ export const products: Product[] = [
         specs: { weight: '55g', battery: '10 giờ', connectivity: 'Bluetooth 4.2' },
         boxItems: ['Tai nghe', 'Dây sạc USB-C', 'Hướng dẫn sử dụng'],
         faqs: [{ q: '2S có hỗ trợ đàm thoại nhóm không?', a: 'Không, chỉ 2-user.' }],
-        videoUrl: 'https://www.youtube.com/embed/sample10'
+        videoUrl: '/videos/demo.mp4'
     }
 ];
