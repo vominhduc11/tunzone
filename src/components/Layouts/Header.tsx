@@ -39,7 +39,7 @@ export default function Header() {
 
   return (
     <header className="bg-gray-900 border-b border-gray-700 relative">
-      <div className="container mx-auto flex items-center justify-between h-16 px-4">
+      <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between h-16 px-4">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image src={logo} alt="SCS Logo" className="h-8 w-auto" />

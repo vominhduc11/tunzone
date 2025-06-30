@@ -40,7 +40,7 @@ export default function BlogPage() {
         <div className="min-h-screen bg-gray-900 text-white">
             {/* Hero + Search + Filter */}
             <section className="bg-gray-800 py-16">
-                <div className="container mx-auto text-center px-4">
+                <div className="w-full max-w-[1280px] mx-auto text-center px-4">
                     <h1 className="text-4xl font-bold text-white mb-4">Blog Công Nghệ</h1>
                     <p className="text-gray-300 mb-8">
                         Khám phá những bài viết hữu ích về laptop, công nghệ và mẹo sử dụng thiết bị
@@ -76,7 +76,7 @@ export default function BlogPage() {
             </section>
 
             {/* Posts Grid */}
-            <section className="container mx-auto px-4 py-12">
+            <section className="w-full max-w-[1280px] mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pagedPosts.map((post) => (
                         <Link

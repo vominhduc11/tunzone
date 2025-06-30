@@ -14,7 +14,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     if (!product) {
         return (
             <div className="bg-gray-900 text-white py-16">
-                <div className="container mx-auto px-4">
+                <div className="w-full max-w-[1280px] mx-auto px-4">
                     <h1 className="text-3xl font-bold mb-4">Sản phẩm không tồn tại</h1>
                     <p className="text-gray-400">Không tìm thấy thông tin sản phẩm.</p>
                 </div>
@@ -24,12 +24,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
     return (
         <div className="bg-gray-900 text-white py-16">
-            <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="w-full max-w-[1280px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <ProductGallery images={product.images ?? []} avatar={product.avatar} />
                 <ProductOverview product={product} />
             </div>
 
-            <div className="container mx-auto px-4">
+            <div className="w-full max-w-[1280px] mx-auto px-4">
                 <ProductTabs
                     description={product.description}
                     specs={product.specs}

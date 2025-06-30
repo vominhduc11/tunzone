@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import SharedModal from '@/components/shared/SharedModal';
+import { useRouter } from 'next/navigation';
 
 export default function WarrantyCheckingPage() {
   const [serial, setSerial] = useState('');
@@ -14,6 +16,28 @@ export default function WarrantyCheckingPage() {
     details?: string;
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loadingLogin, setLoadingLogin] = useState(false);
+  const router = useRouter();
+
+  // Demo login
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+    setLoadingLogin(true);
+    setTimeout(() => {
+      if (username === 'user' && password === 'demo123') {
+        setShowLogin(false);
+        router.push('/account/warranty');
+      } else {
+        setLoginError('Tài khoản hoặc mật khẩu không đúng. Dùng user/demo123 để demo.');
+      }
+      setLoadingLogin(false);
+    }, 800);
+  };
 
   /**
    * Handle warranty check with example logic
@@ -27,9 +51,9 @@ export default function WarrantyCheckingPage() {
     if (serial === 'ABC123456') {
       setResult({
         status: 'Còn hạn',
-        purchaseDate: '2023-01-15',
-        expiryDate: '2026-01-14',
-        details: 'Sản phẩm đang còn trong thời gian bảo hành.'
+        purchaseDate: '2025-04-01',
+        expiryDate: '2025-08-15', // dưới 60 ngày kể từ 2025-06-29
+        details: 'Sản phẩm còn hạn bảo hành, vui lòng gia hạn sớm.'
       });
       return;
     }
@@ -64,9 +88,73 @@ export default function WarrantyCheckingPage() {
     }
   };
 
+  /**
+   * Compute days until expiry
+   */
+  const daysUntilExpiry = (expiryDate?: string) => {
+    if (!expiryDate) return Infinity;
+    const today = new Date();
+    const expiry = new Date(expiryDate);
+    const diffMs = expiry.getTime() - today.getTime();
+    return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  };
+
   return (
     <section className="bg-[#181f2a] py-12">
-      <div className="container mx-auto px-4">
+      <div className="w-full max-w-[1280px] mx-auto px-4">
+        <div className="flex justify-end mb-4">
+          <button
+            className="px-4 py-2 rounded-full bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] font-semibold transition"
+            onClick={() => setShowLogin(true)}
+          >
+            Đăng nhập
+          </button>
+        </div>
+
+        <SharedModal
+          isOpen={showLogin}
+          onClose={() => setShowLogin(false)}
+          contentLabel="Đăng nhập"
+        >
+          <div className="bg-[#232c3b] rounded-2xl p-8 w-full max-w-md mx-auto">
+            <h2 className="text-2xl text-cyan-400 mb-4">Đăng nhập</h2>
+            <p className="text-gray-400 mb-4">Demo tài khoản: <b className="text-white">user</b> / <b className="text-white">demo123</b></p>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-gray-300 mb-1">Tài khoản</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2 rounded-lg bg-[#181f2a] text-white focus:ring-2 focus:ring-cyan-400"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  autoFocus
+                  required
+                  autoComplete="username"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-300 mb-1">Mật khẩu</label>
+                <input
+                  type="password"
+                  className="w-full px-4 py-2 rounded-lg bg-[#181f2a] text-white focus:ring-2 focus:ring-cyan-400"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
+                />
+              </div>
+              {loginError && <div className="text-red-400 text-sm py-1">{loginError}</div>}
+              <button
+                type="submit"
+                disabled={loadingLogin}
+                className="w-full bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] py-2 rounded-full font-semibold transition-transform hover:scale-105"
+              >
+                {loadingLogin ? "Đang đăng nhập..." : "Đăng nhập"}
+              </button>
+            </form>
+          </div>
+        </SharedModal>
+
         <h1 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-6">
           Tra Cứu Bảo Hành
         </h1>
@@ -138,6 +226,25 @@ export default function WarrantyCheckingPage() {
                   )}
                   {result.details && <li>{result.details}</li>}
                 </ul>
+
+                {/* Extension logic */}
+                {result.status === 'Còn hạn' && result.expiryDate && (
+                  (() => {
+                    const days = daysUntilExpiry(result.expiryDate);
+                    return days <= 60 ? (
+                      <button
+                        onClick={() => setShowLogin(true)}
+                        className="mt-4 inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-gray-900 rounded-full font-medium transition-transform hover:scale-105"
+                      >
+                        Gia hạn bảo hành
+                      </button>
+                    ) : (
+                      <p className="mt-4 text-yellow-300">
+                        Bạn có thể gia hạn trong vòng 60 ngày trước khi hết hạn.
+                      </p>
+                    );
+                  })()
+                )}
               </motion.div>
             ) : (
               <div className="h-full flex items-center justify-center text-gray-500">

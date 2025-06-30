@@ -46,7 +46,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
     return (
         <>
             <main className="min-h-screen bg-gray-900 text-gray-100 px-4 py-8">
-                <div className="container mx-auto space-y-6">
+                <div className="w-full max-w-[1280px] mx-auto space-y-6">
                     {/* Top bar: Back + Share */}
                     <div className="flex justify-between items-center mb-4">
                         <Link

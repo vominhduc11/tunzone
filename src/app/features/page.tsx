@@ -107,7 +107,7 @@ const ExplorePage: FC = () => {
 
             {/* Features Section */}
             <section id="features" className="py-16 px-4">
-                <div className="max-w-4xl mx-auto text-center mb-12">
+                <div className="w-full max-w-[1280px] mx-auto text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-4">
                         Tính Năng Nổi Bật
                     </h2>
@@ -115,7 +115,7 @@ const ExplorePage: FC = () => {
                         Được thiết kế để đáp ứng tối đa nhu cầu liên lạc trong mọi điều kiện.
                     </p>
                 </div>
-                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                     {features.map(({ icon: Icon, title, desc }) => (
                         <div
                             key={title}
@@ -131,7 +131,7 @@ const ExplorePage: FC = () => {
 
             {/* CTA Section */}
             <section className="bg-[#232c3b] py-12 px-4">
-                <div className="max-w-4xl mx-auto text-center">
+                <div className="w-full max-w-[1280px] mx-auto text-center">
                     <h2 className="text-3xl font-semibold text-cyan-400 mb-4">
                         Sẵn Sàng Trải Nghiệm?
                     </h2>

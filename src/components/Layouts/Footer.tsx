@@ -41,7 +41,7 @@ const additionalSites = [
 export default function Footer() {
     return (
         <footer className="bg-gray-900 text-gray-300 border-t border-gray-700">
-            <div className="container mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+            <div className="w-full max-w-[1280px] mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
                 {/* Company Column */}
                 <div>
                     <h3 className="text-white font-semibold uppercase mb-4">Entreprise</h3>
@@ -156,7 +156,7 @@ export default function Footer() {
 
             {/* Bottom selectors */}
             <div className="border-t border-gray-700 pt-6 pb-4">
-                <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="w-full max-w-[1280px] mx-auto px-4 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                     <select className="bg-gray-800 text-gray-300 py-2 px-4 rounded focus:outline-none">
                         <option>Việt Nam (USD $)</option>
                         <option>France (EUR €)</option>

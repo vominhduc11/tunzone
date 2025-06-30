@@ -14,7 +14,7 @@ export default function DealerPartnershipSection() {
             <div className="absolute inset-0 bg-black opacity-60" />
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center text-center px-6 space-y-6 max-w-2xl">
+            <div className="relative z-10 flex flex-col items-center text-center px-6 space-y-6 w-full max-w-[1280px]">
                 <h2 className="text-4xl md:text-5xl font-bold">Trở Thành Đại Lý Chính Thức</h2>
                 <p className="text-lg text-gray-200">
                     Chương trình đại lý hấp dẫn, hỗ trợ marketing và hậu mãi toàn cầu. Nhận ưu đãi

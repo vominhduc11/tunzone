@@ -9,7 +9,7 @@ export default function PolicyPage() {
     return (
         // BỔ SUNG: class scroll-smooth để cuộn mượt khi bấm mục lục
         <div className="scroll-smooth min-h-screen bg-[#181f2a] text-[#b0d0f9] font-sans py-12 px-4">
-            <div className="max-w-4xl mx-auto space-y-12">
+            <div className="w-full max-w-[1280px] mx-auto space-y-12">
                 {/* Page Title */}
                 <header>
                     <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2 text-center">

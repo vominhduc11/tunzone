@@ -26,7 +26,7 @@ export default function ReviewsPage() {
     return (
         <>
             <div className="min-h-screen bg-gray-900 text-gray-100 py-12">
-                <div className="container mx-auto px-4">
+                <div className="w-full max-w-[1280px] mx-auto px-4">
                     <button
                         onClick={() => router.back()}
                         className="mb-6 text-sm text-blue-400 hover:underline"
@@ -75,7 +75,7 @@ export default function ReviewsPage() {
             >
                 {review ? (
                     <div className="bg-gray-900 text-white py-8 px-4 md:px-8">
-                        <div className="max-w-3xl mx-auto">
+                        <div className="w-full max-w-[1280px] mx-auto">
                             <h2 className="text-xl font-bold mb-4">Chi tiết đánh giá</h2>
 
                             <div className="mb-2 text-lg font-semibold flex items-center gap-2">
@@ -131,7 +131,7 @@ export default function ReviewsPage() {
                     </div>
                 ) : (
                     <div className="bg-gray-900 text-white py-8 px-4 md:px-8">
-                        <div className="max-w-3xl mx-auto text-center text-gray-400">
+                        <div className="w-full max-w-[1280px] mx-auto text-center text-gray-400">
                             Loading...
                         </div>
                     </div>

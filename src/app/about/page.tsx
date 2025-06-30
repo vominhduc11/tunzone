@@ -71,7 +71,7 @@ export default function AboutUsPage() {
                     <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-blue-500 drop-shadow">
                         SCS Headphones – Đỉnh Cao Âm Thanh
                     </h1>
-                    <p className="text-blue-100 max-w-2xl mx-auto text-lg md:text-xl font-medium">
+                    <p className="text-blue-100 w-full max-w-[1280px] mx-auto text-lg md:text-xl font-medium">
                         Chúng tôi đam mê công nghệ âm thanh, cam kết mang đến những chiếc tai nghe
                         SCS chất lượng cao cho mọi trải nghiệm nghe nhạc, gaming và học tập.
                     </p>
@@ -79,7 +79,7 @@ export default function AboutUsPage() {
             </section>
 
             {/* Dynamic Story Section với fade + slide của cả text và image */}
-            <section className="container mx-auto px-4 py-16">
+            <section className="w-full max-w-[1280px] mx-auto px-4 py-16">
                 <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6 text-center">
                     Hành Trình SCS Headphones
                 </h2>
@@ -106,7 +106,7 @@ export default function AboutUsPage() {
 
             {/* Core Values Section */}
             <section className="bg-gray-800 py-16">
-                <div className="container mx-auto px-4 text-center">
+                <div className="w-full max-w-[1280px] mx-auto px-4 text-center">
                     <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-8">
                         Giá Trị Cốt Lõi
                     </h2>
@@ -155,7 +155,7 @@ export default function AboutUsPage() {
             </section>
 
             {/* Team Section */}
-            <section className="container mx-auto px-4 py-16">
+            <section className="w-full max-w-[1280px] mx-auto px-4 py-16">
                 <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-8 text-center">
                     Đội Ngũ Sáng Lập
                 </h2>
@@ -199,7 +199,7 @@ export default function AboutUsPage() {
 
             {/* Partners & Testimonials */}
             <section className="bg-gray-800 py-16">
-                <div className="container mx-auto px-4 text-center">
+                <div className="w-full max-w-[1280px] mx-auto px-4 text-center">
                     <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-8">
                         Đối Tác & Khách Hàng Nổi Bật
                     </h2>
@@ -246,7 +246,7 @@ export default function AboutUsPage() {
 
             {/* Stats Section */}
             <section className="bg-gray-900 py-16">
-                <div className="container mx-auto px-4 text-center">
+                <div className="w-full max-w-[1280px] mx-auto px-4 text-center">
                     <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-8">
                         Thành Tựu & Số Liệu
                     </h2>

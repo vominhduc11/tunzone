@@ -48,7 +48,7 @@ export default function UseCasesPage() {
                             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
                                 Bắt Đầu Hành Trình
                             </h1>
-                            <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
+                            <p className="text-lg md:text-xl text-gray-200 mb-8 w-full max-w-[1280px]">
                                 Khám phá cách sản phẩm của chúng tôi đồng hành cùng bạn trong mọi
                                 hành trình, từ đô thị sầm uất đến những cung đường mạo hiểm.
                             </p>
@@ -78,7 +78,7 @@ export default function UseCasesPage() {
 
             {/* Use Cases Grid */}
             <section className="py-16 px-4">
-                <div className="max-w-4xl mx-auto text-center mb-12">
+                <div className="w-full max-w-[1280px] mx-auto text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-4">
                         Ứng Dụng Đa Dạng
                     </h2>
@@ -87,7 +87,7 @@ export default function UseCasesPage() {
                         một vài ví dụ điển hình.
                     </p>
                 </div>
-                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="bg-[#232c3b] p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-transform duration-200 text-center">
                         <FiMap className="text-cyan-400 text-5xl mb-4 mx-auto" />
                         <h3 className="text-xl font-semibold mb-2 text-white">Du Lịch Khám Phá</h3>
@@ -117,7 +117,7 @@ export default function UseCasesPage() {
 
             {/* Back to Home */}
             <section className="bg-[#232c3b] py-8 px-4">
-                <div className="max-w-4xl mx-auto text-center">
+                <div className="w-full max-w-[1280px] mx-auto text-center">
                     <Link
                         href="/"
                         className="bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] font-semibold py-2 px-6 rounded-full transition"

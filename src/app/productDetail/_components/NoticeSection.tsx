@@ -51,7 +51,7 @@ export default function NoticeSection({ id }: { id: string }) {
 
     return (
         <section className="min-h-screen bg-gray-900 text-gray-100 py-12">
-            <div className="container mx-auto px-4">
+            <div className="w-full max-w-[1280px] mx-auto px-4">
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">NOTICE</h2>
 
                 {/* Review cards/carousel */}

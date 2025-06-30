@@ -1,33 +1,130 @@
+'use client';
+
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { features } from '@/data/features';
 
 export default function ChooseCardoSection() {
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, threshold: 0.2 });
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 60, scale: 0.8 },
+        visible: { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            transition: {
+                duration: 0.7,
+                ease: [0.25, 0.46, 0.45, 0.94]
+            }
+        }
+    };
+
+    const titleVariants = {
+        hidden: { opacity: 0, y: -40 },
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: [0.25, 0.46, 0.45, 0.94]
+            }
+        }
+    };
+
+    const subtitleVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: {
+                duration: 0.6,
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+            }
+        }
+    };
+
     return (
-        <section className="bg-gray-900 text-white py-16">
-            <div className="container mx-auto px-4">
+        <section ref={sectionRef} className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 overflow-hidden">
+            <div className="w-full max-w-[1280px] mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold">Tại Sao Chọn Cardo?</h2>
-                    <p className="mt-4 text-gray-300">
+                    <motion.h2 
+                        className="text-3xl md:text-4xl font-bold"
+                        variants={titleVariants}
+                        initial="hidden"
+                        animate={isInView ? "visible" : "hidden"}
+                    >
+                        Tại Sao Chọn Cardo?
+                    </motion.h2>
+                    <motion.p 
+                        className="mt-4 text-gray-300"
+                        variants={subtitleVariants}
+                        initial="hidden"
+                        animate={isInView ? "visible" : "hidden"}
+                    >
                         Chúng tôi không chỉ là về giao tiếp - chúng tôi tạo ra những kết nối làm cho
                         mỗi chuyến đi trở nên tốt đẹp hơn.
-                    </p>
+                    </motion.p>
                 </div>
 
                 {/* Feature grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {features.map(({ icon: Icon, title, description }) => (
-                        <div
+                <motion.div 
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                >
+                    {features.map(({ icon: Icon, title, description }, index) => (
+                        <motion.div
                             key={title}
-                            className="group flex flex-col items-center text-center p-6 bg-gray-800 rounded-2xl transform transition-shadow transition-transform duration-300 hover:shadow-xl hover:bg-gray-700 hover:-translate-y-2"
+                            variants={itemVariants}
+                            whileHover={{ 
+                                y: -10, 
+                                scale: 1.05,
+                                transition: { duration: 0.3 }
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex flex-col items-center text-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-cyan-400/50"
                         >
-                            <Icon className="w-12 h-12 text-blue-500 mb-4 group-hover:text-blue-400" />
-                            <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
+                            <motion.div
+                                whileHover={{ 
+                                    rotate: 360,
+                                    scale: 1.2,
+                                    transition: { duration: 0.6 }
+                                }}
+                            >
+                                <Icon className="w-12 h-12 text-cyan-400 mb-4 group-hover:text-cyan-300 transition-colors duration-300" />
+                            </motion.div>
+                            <motion.h3 
+                                className="text-xl font-semibold mb-2 text-white group-hover:text-cyan-400 transition-colors duration-300"
+                                whileHover={{ scale: 1.05 }}
+                            >
                                 {title}
-                            </h3>
-                            <p className="text-gray-400 group-hover:text-gray-200">{description}</p>
-                        </div>
+                            </motion.h3>
+                            <motion.p 
+                                className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300"
+                                initial={{ opacity: 0.8 }}
+                                whileHover={{ opacity: 1 }}
+                            >
+                                {description}
+                            </motion.p>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

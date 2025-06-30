@@ -89,7 +89,7 @@ const DealerSystemPage: FC = () => {
         <div className="min-h-screen bg-[#181f2a] text-[#b0d0f9] flex flex-col font-sans">
             {/* Bộ lọc tìm kiếm */}
             <section className="w-full px-4 pb-4 bg-[#232c3b]">
-                <div className="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
+                <div className="mx-auto w-full max-w-[1280px] grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
                     {/* Chọn tỉnh */}
                     <div>
                         <Select
@@ -164,7 +164,7 @@ const DealerSystemPage: FC = () => {
             </section>
 
             {/* Danh sách + Bản đồ */}
-            <main className="container mx-auto flex flex-col md:flex-row flex-1 overflow-hidden py-6 px-4 space-y-4 md:space-y-0 md:space-x-6">
+            <main className="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row flex-1 overflow-hidden py-6 px-4 space-y-4 md:space-y-0 md:space-x-6">
                 <aside className="w-full md:w-1/3 bg-[#232c3b] border border-[#1cb6ff44] rounded-2xl overflow-y-auto p-4 shadow-[0_8px_32px_0_rgba(28,182,255,0.18)]">
                     {filteredDealers.length > 0 ? (
                         filteredDealers.map((d) => (

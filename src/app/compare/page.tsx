@@ -35,7 +35,7 @@ function CompareContent() {
 
     return (
         <div className="min-h-screen bg-gray-900 text-white py-12 px-4">
-            <div className="max-w-7xl mx-auto">
+            <div className="w-full max-w-[1280px] mx-auto">
                 <h1 className="text-4xl font-bold text-center mb-8">So sánh sản phẩm</h1>
                 <div className="overflow-auto">
                     <table className="w-full table-auto border-collapse border border-gray-700">
