@@ -4,18 +4,17 @@ import { SiTiktok } from 'react-icons/si';
 import Link from 'next/link';
 
 const companyLinks = [
-  { label: 'Về Cardo', href: '/about' },
-  { label: 'Hành trình Cardo Systems', href: '/journey' },
+  { label: 'Về Hitech', href: '/about' },
+  { label: 'Hành trình Hitech', href: '/journey' },
   { label: 'Phát triển bền vững', href: '/sustainability' },
   { label: 'Gia nhập đội ngũ', href: '/careers' },
-  { label: 'Báo chí', href: '/press' },
   { label: 'Điều khoản & Chính sách', href: '/policy' },
 ];
 
 const infoLinks = [
   { label: 'Dịch vụ khách hàng', href: '/customer-service' },
   { label: 'Cập nhật thiết bị của bạn', href: '/device-update' },
-  { label: 'Cardo Connect', href: '/cardo-connect' },
+  { label: 'Hitech Connect', href: '/hitech-connect' },
   { label: 'Tìm đại lý', href: '/dealers' },
   { label: 'Blog', href: '/blogs' },
   { label: 'Tra cứu bảo hành', href: '/warrantyChecking' },
@@ -57,7 +56,7 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold uppercase mb-4">Mạng xã hội</h3>
           <p className="mb-4">
-            Tham gia <span className="font-semibold text-white">#CardoFam</span> ngay hôm nay!
+            Tham gia <span className="font-semibold text-white">#HitechFam</span> ngay hôm nay!
           </p>
           <div className="flex space-x-4">
             <a
