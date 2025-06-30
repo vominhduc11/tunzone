@@ -72,10 +72,7 @@ const ContactUsPage: React.FC = () => {
     };
 
     const faqItems = [
-        {
-            q: 'Thời gian giao hàng?',
-            a: 'Giao trong 1-2 ngày làm việc tại TP.HCM, 2-3 ngày với tỉnh thành khác.'
-        },
+        { q: 'Thời gian giao hàng?', a: 'Giao trong 1-2 ngày làm việc tại TP.HCM, 2-3 ngày với tỉnh thành khác.'},
         { q: 'Chính sách bảo hành?', a: 'Bảo hành 12-36 tháng tùy model.' },
         { q: 'Hỗ trợ kỹ thuật?', a: 'Hỗ trợ 24/7 qua hotline và email.' },
         { q: 'Phương thức thanh toán?', a: 'Chấp nhận thẻ, chuyển khoản và COD.' }

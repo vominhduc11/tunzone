@@ -6,55 +6,8 @@ import 'react-tabs/style/react-tabs.css';
 import { motion } from 'framer-motion';
 import SharedModal from '@/components/shared/SharedModal';
 import { panelVariants } from './_config/config';
-
-// Dữ liệu mẫu các sản phẩm và đơn bảo hành
-const demoProducts = [
-    {
-        serial: 'ABC123456',
-        name: 'SCS Studio Pro',
-        purchaseDate: '2025-04-01',
-        expiryDate: '2025-08-15',
-        status: 'Còn hạn',
-        canRenew: true
-    },
-    {
-        serial: 'DEF654321',
-        name: 'SCS Gaming Elite',
-        purchaseDate: '2020-05-10',
-        expiryDate: '2023-05-09',
-        status: 'Hết hạn',
-        canRenew: false
-    },
-    {
-        serial: 'UVW333111',
-        name: 'SCS Wireless ANC',
-        purchaseDate: '2022-07-10',
-        expiryDate: '2025-07-25',
-        status: 'Còn hạn',
-        canRenew: false
-    }
-];
-
-const demoOrders = [
-    {
-        id: 1,
-        serial: 'ABC123456',
-        type: 'Gia hạn',
-        date: '2025-07-01',
-        duration: '12 tháng',
-        price: '800.000đ',
-        status: 'Hoàn tất'
-    },
-    {
-        id: 2,
-        serial: 'DEF654321',
-        type: 'Bảo hành',
-        date: '2023-04-11',
-        duration: '12 tháng',
-        price: 'Miễn phí',
-        status: 'Đã xử lý'
-    }
-];
+import { demoProducts } from '@/data/demoProducts';
+import { demoOrders } from '@/data/demoOrders';
 
 export default function WarrantyDashboard() {
     const [renewOpen, setRenewOpen] = useState(false);
