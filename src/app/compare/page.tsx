@@ -101,10 +101,11 @@ function CompareContent() {
                                             {Array.from({ length: 5 }).map((_, i) => (
                                                 <FiStar
                                                     key={i}
-                                                    className={`w-5 h-5 ${i < Math.round(p.rating)
+                                                    className={`w-5 h-5 ${
+                                                        i < Math.round(p.rating)
                                                             ? 'text-yellow-400'
                                                             : 'text-gray-600'
-                                                        }`}
+                                                    }`}
                                                 />
                                             ))}
                                         </div>

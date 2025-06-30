@@ -9,7 +9,7 @@ const CompareContent = dynamic(() => import('./CompareContent'), {
                 <p>Đang tải...</p>
             </div>
         </div>
-    ),
+    )
 });
 
 export default function ComparePage() {

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
 import { FiArrowRight, FiCalendar, FiUser } from 'react-icons/fi';
 import { blogs as bl } from '@/data/api/blogs';
@@ -12,7 +12,7 @@ export default function BlogSection() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
 
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -23,7 +23,7 @@ export default function BlogSection() {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 50, scale: 0.9 },
         visible: {
             opacity: 1,
@@ -36,7 +36,7 @@ export default function BlogSection() {
         }
     };
 
-    const titleVariants = {
+    const titleVariants: Variants = {
         hidden: { opacity: 0, y: -30 },
         visible: {
             opacity: 1,
@@ -49,13 +49,16 @@ export default function BlogSection() {
     };
 
     return (
-        <section ref={sectionRef} className="bg-gradient-to-br from-gray-900 to-gray-800 py-16 overflow-hidden">
+        <section
+            ref={sectionRef}
+            className="bg-gradient-to-br from-gray-900 to-gray-800 py-16 overflow-hidden"
+        >
             <div className="w-full max-w-[1280px] mx-auto px-4">
                 <motion.h2
                     className="text-3xl font-bold text-white text-center mb-8"
                     variants={titleVariants}
                     initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
+                    animate={isInView ? 'visible' : 'hidden'}
                 >
                     Tin Tức & Cập Nhật
                 </motion.h2>
@@ -63,11 +66,11 @@ export default function BlogSection() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     variants={containerVariants}
                     initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
+                    animate={isInView ? 'visible' : 'hidden'}
                 >
                     {blogs.map((blog, index) => (
                         <motion.div
-                            key={blog.id}
+                            key={index}
                             variants={itemVariants}
                             whileHover={{
                                 y: -10,
@@ -107,10 +110,7 @@ export default function BlogSection() {
                                     {blog.title}
                                 </motion.h3>
                                 <p className="text-gray-400 mb-4 line-clamp-3">{blog.excerpt}</p>
-                                <motion.div
-                                    whileHover={{ x: 5 }}
-                                    transition={{ duration: 0.2 }}
-                                >
+                                <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                                     <Link
                                         href={`/blog/${blog.id}`}
                                         className="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-300 group"

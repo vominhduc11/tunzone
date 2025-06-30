@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
 import { FiHeadphones, FiBattery, FiCloudRain } from 'react-icons/fi';
 import image1 from '@/assets/images/feature2.png';
@@ -10,13 +10,13 @@ import image2 from '@/assets/images/feature3.png';
 export default function HeroSections() {
     const section1Ref = useRef(null);
     const section2Ref = useRef(null);
-    const section3Ref = useRef(null);
+    // const section3Ref = useRef(null);
 
-    const section1InView = useInView(section1Ref, { once: true, threshold: 0.3 });
-    const section2InView = useInView(section2Ref, { once: true, threshold: 0.3 });
-    const section3InView = useInView(section3Ref, { once: true, threshold: 0.3 });
+    const section1InView = useInView(section1Ref, { once: true });
+    const section2InView = useInView(section2Ref, { once: true });
+    // const section3InView = useInView(section3Ref, { once: true });
 
-    const fadeInUp = {
+    const fadeInUp: Variants = {
         hidden: { opacity: 0, y: 60 },
         visible: {
             opacity: 1,
@@ -28,7 +28,7 @@ export default function HeroSections() {
         }
     };
 
-    const staggerContainer = {
+    const staggerContainer: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -39,7 +39,7 @@ export default function HeroSections() {
         }
     };
 
-    const slideInLeft = {
+    const slideInLeft: Variants = {
         hidden: { opacity: 0, x: -60 },
         visible: {
             opacity: 1,
@@ -51,7 +51,7 @@ export default function HeroSections() {
         }
     };
 
-    const slideInRight = {
+    const slideInRight: Variants = {
         hidden: { opacity: 0, x: 60 },
         visible: {
             opacity: 1,
@@ -63,7 +63,7 @@ export default function HeroSections() {
         }
     };
 
-    const scaleIn = {
+    const scaleIn: Variants = {
         hidden: { opacity: 0, scale: 0.8 },
         visible: {
             opacity: 1,
@@ -90,18 +90,12 @@ export default function HeroSections() {
                     className="relative z-10 flex flex-col items-center text-center px-6 space-y-6"
                     variants={staggerContainer}
                     initial="hidden"
-                    animate={section1InView ? "visible" : "hidden"}
+                    animate={section1InView ? 'visible' : 'hidden'}
                 >
-                    <motion.h1
-                        className="text-5xl font-bold"
-                        variants={fadeInUp}
-                    >
+                    <motion.h1 className="text-5xl font-bold" variants={fadeInUp}>
                         Khám Phá Giải Pháp Liên Lạc Thế Hệ Mới
                     </motion.h1>
-                    <motion.p
-                        className="text-lg w-full max-w-[1280px]"
-                        variants={fadeInUp}
-                    >
+                    <motion.p className="text-lg w-full max-w-[1280px]" variants={fadeInUp}>
                         Hệ thống mạng lưới độc quyền, đảm bảo kết nối xuyên suốt, an toàn và tiện
                         nghi cho mọi chuyến đi.
                     </motion.p>
@@ -113,10 +107,7 @@ export default function HeroSections() {
                             Khám Phá Ngay
                         </Link>
                     </motion.div>
-                    <motion.p
-                        className="text-sm text-gray-300"
-                        variants={fadeInUp}
-                    >
+                    <motion.p className="text-sm text-gray-300" variants={fadeInUp}>
                         Bảo hành 2 năm | Hỗ trợ 24/7
                     </motion.p>
                 </motion.div>
@@ -135,18 +126,12 @@ export default function HeroSections() {
                     className="relative z-10 flex flex-col items-center text-center px-6 space-y-6"
                     variants={staggerContainer}
                     initial="hidden"
-                    animate={section2InView ? "visible" : "hidden"}
+                    animate={section2InView ? 'visible' : 'hidden'}
                 >
-                    <motion.h2
-                        className="text-4xl font-semibold"
-                        variants={fadeInUp}
-                    >
+                    <motion.h2 className="text-4xl font-semibold" variants={fadeInUp}>
                         Ứng Dụng Đa Năng Cho Mọi Hành Trình
                     </motion.h2>
-                    <motion.p
-                        className="text-md w-full max-w-[1280px]"
-                        variants={fadeInUp}
-                    >
+                    <motion.p className="text-md w-full max-w-[1280px]" variants={fadeInUp}>
                         Từ thành phố đến địa hình đồi núi, một thiết bị – vô số tính năng: âm thanh
                         chất lượng, pin lâu dài, kháng nước IP67.
                     </motion.p>
@@ -162,24 +147,15 @@ export default function HeroSections() {
                         className="mt-6 flex flex-wrap justify-center gap-8 text-gray-200"
                         variants={fadeInUp}
                     >
-                        <motion.div
-                            className="flex items-center space-x-2"
-                            variants={slideInLeft}
-                        >
+                        <motion.div className="flex items-center space-x-2" variants={slideInLeft}>
                             <FiHeadphones className="w-5 h-5 transition-transform duration-300 hover:scale-110" />
                             <span>Chất lượng âm thanh</span>
                         </motion.div>
-                        <motion.div
-                            className="flex items-center space-x-2"
-                            variants={fadeInUp}
-                        >
+                        <motion.div className="flex items-center space-x-2" variants={fadeInUp}>
                             <FiBattery className="w-5 h-5 transition-transform duration-300 hover:scale-110" />
                             <span>Pin 13h</span>
                         </motion.div>
-                        <motion.div
-                            className="flex items-center space-x-2"
-                            variants={slideInRight}
-                        >
+                        <motion.div className="flex items-center space-x-2" variants={slideInRight}>
                             <FiCloudRain className="w-5 h-5 transition-transform duration-300 hover:scale-110" />
                             <span>Kháng nước IP67</span>
                         </motion.div>

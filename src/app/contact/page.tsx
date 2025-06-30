@@ -4,7 +4,16 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiPhone, FiMail, FiClock, FiMapPin, FiChevronDown, FiSend, FiUser, FiMessageSquare } from 'react-icons/fi';
+import {
+    FiPhone,
+    FiMail,
+    FiClock,
+    FiMapPin,
+    FiChevronDown,
+    FiSend,
+    FiUser,
+    FiMessageSquare
+} from 'react-icons/fi';
 
 interface FormFields {
     name: string;
@@ -39,12 +48,14 @@ const ContactUsPage: React.FC = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleChange = (field: keyof FormFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm(prev => ({ ...prev, [field]: e.target.value }));
-        if (errors[field]) {
-            setErrors(prev => ({ ...prev, [field]: '' }));
-        }
-    };
+    const handleChange =
+        (field: keyof FormFields) =>
+        (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            setForm((prev) => ({ ...prev, [field]: e.target.value }));
+            if (errors[field]) {
+                setErrors((prev) => ({ ...prev, [field]: '' }));
+            }
+        };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -73,7 +84,7 @@ const ContactUsPage: React.FC = () => {
         <div className="bg-[#181f2a] text-gray-100 min-h-screen py-12">
             <div className="w-full max-w-[1280px] mx-auto px-4">
                 {/* Header Section */}
-                <motion.div 
+                <motion.div
                     className="text-center mb-12"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -83,7 +94,8 @@ const ContactUsPage: React.FC = () => {
                         Liên hệ với chúng tôi
                     </h1>
                     <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                        Chúng tôi luôn sẵn sàng hỗ trợ bạn. Hãy liên hệ với chúng tôi qua các kênh dưới đây.
+                        Chúng tôi luôn sẵn sàng hỗ trợ bạn. Hãy liên hệ với chúng tôi qua các kênh
+                        dưới đây.
                     </p>
                 </motion.div>
 
@@ -99,18 +111,28 @@ const ContactUsPage: React.FC = () => {
                                 <FiMessageSquare className="w-6 h-6" />
                                 Gửi tin nhắn
                             </h2>
-                            
+
                             <form onSubmit={handleSubmit} noValidate className="space-y-6">
                                 {feedback && (
-                                    <motion.div 
+                                    <motion.div
                                         className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-4 rounded-lg shadow-lg"
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.3 }}
                                     >
                                         <div className="flex items-center gap-2">
-                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            <svg
+                                                className="w-5 h-5"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M5 13l4 4L19 7"
+                                                />
                                             </svg>
                                             {feedback}
                                         </div>
@@ -123,7 +145,9 @@ const ContactUsPage: React.FC = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.1 }}
                                     >
-                                        <label className="block text-gray-300 mb-2 font-medium">Họ và tên *</label>
+                                        <label className="block text-gray-300 mb-2 font-medium">
+                                            Họ và tên *
+                                        </label>
                                         <div className="relative">
                                             <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                                             <input
@@ -135,25 +159,37 @@ const ContactUsPage: React.FC = () => {
                                             />
                                         </div>
                                         {errors.name && (
-                                            <motion.p 
+                                            <motion.p
                                                 className="text-red-400 text-sm mt-2 flex items-center gap-1"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                             >
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                <svg
+                                                    className="w-4 h-4"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                    />
                                                 </svg>
                                                 {errors.name}
                                             </motion.p>
                                         )}
                                     </motion.div>
-                                    
+
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.2 }}
                                     >
-                                        <label className="block text-gray-300 mb-2 font-medium">Số điện thoại</label>
+                                        <label className="block text-gray-300 mb-2 font-medium">
+                                            Số điện thoại
+                                        </label>
                                         <div className="relative">
                                             <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                                             <input
@@ -172,7 +208,9 @@ const ContactUsPage: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.3 }}
                                 >
-                                    <label className="block text-gray-300 mb-2 font-medium">Email *</label>
+                                    <label className="block text-gray-300 mb-2 font-medium">
+                                        Email *
+                                    </label>
                                     <div className="relative">
                                         <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                                         <input
@@ -184,13 +222,23 @@ const ContactUsPage: React.FC = () => {
                                         />
                                     </div>
                                     {errors.email && (
-                                        <motion.p 
+                                        <motion.p
                                             className="text-red-400 text-sm mt-2 flex items-center gap-1"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                         >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <svg
+                                                className="w-4 h-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
                                             </svg>
                                             {errors.email}
                                         </motion.p>
@@ -202,7 +250,9 @@ const ContactUsPage: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
                                 >
-                                    <label className="block text-gray-300 mb-2 font-medium">Chủ đề *</label>
+                                    <label className="block text-gray-300 mb-2 font-medium">
+                                        Chủ đề *
+                                    </label>
                                     <input
                                         type="text"
                                         placeholder="Nhập chủ đề tin nhắn"
@@ -211,13 +261,23 @@ const ContactUsPage: React.FC = () => {
                                         className={`w-full bg-[#181f2a] border border-[#2b3445] px-4 py-3 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 ${errors.subject ? 'border-red-500 error' : ''}`}
                                     />
                                     {errors.subject && (
-                                        <motion.p 
+                                        <motion.p
                                             className="text-red-400 text-sm mt-2 flex items-center gap-1"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                         >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <svg
+                                                className="w-4 h-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
                                             </svg>
                                             {errors.subject}
                                         </motion.p>
@@ -229,7 +289,9 @@ const ContactUsPage: React.FC = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.5 }}
                                 >
-                                    <label className="block text-gray-300 mb-2 font-medium">Nội dung *</label>
+                                    <label className="block text-gray-300 mb-2 font-medium">
+                                        Nội dung *
+                                    </label>
                                     <textarea
                                         rows={5}
                                         placeholder="Nhập nội dung tin nhắn..."
@@ -238,13 +300,23 @@ const ContactUsPage: React.FC = () => {
                                         className={`w-full bg-[#181f2a] border border-[#2b3445] px-4 py-3 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 resize-none ${errors.message ? 'border-red-500 error' : ''}`}
                                     />
                                     {errors.message && (
-                                        <motion.p 
+                                        <motion.p
                                             className="text-red-400 text-sm mt-2 flex items-center gap-1"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                         >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            <svg
+                                                className="w-4 h-4"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
                                             </svg>
                                             {errors.message}
                                         </motion.p>
@@ -280,7 +352,7 @@ const ContactUsPage: React.FC = () => {
                                 <FiMapPin className="w-6 h-6" />
                                 Thông tin liên hệ
                             </h2>
-                            
+
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
                                     <div className="bg-cyan-500/20 p-3 rounded-lg">
@@ -288,20 +360,24 @@ const ContactUsPage: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-white mb-1">Địa chỉ</h3>
-                                        <p className="text-gray-300">123 Đường ABC, Quận 1, TP.HCM</p>
+                                        <p className="text-gray-300">
+                                            123 Đường ABC, Quận 1, TP.HCM
+                                        </p>
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex items-start gap-4">
                                     <div className="bg-cyan-500/20 p-3 rounded-lg">
                                         <FiPhone className="w-5 h-5 text-cyan-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-white mb-1">Điện thoại</h3>
+                                        <h3 className="font-semibold text-white mb-1">
+                                            Điện thoại
+                                        </h3>
                                         <p className="text-gray-300">+84 123 456 789</p>
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex items-start gap-4">
                                     <div className="bg-cyan-500/20 p-3 rounded-lg">
                                         <FiMail className="w-5 h-5 text-cyan-400" />
@@ -311,13 +387,15 @@ const ContactUsPage: React.FC = () => {
                                         <p className="text-gray-300">contact@scs.com</p>
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex items-start gap-4">
                                     <div className="bg-cyan-500/20 p-3 rounded-lg">
                                         <FiClock className="w-5 h-5 text-cyan-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-white mb-1">Giờ làm việc</h3>
+                                        <h3 className="font-semibold text-white mb-1">
+                                            Giờ làm việc
+                                        </h3>
                                         <p className="text-gray-300">Thứ 2 - Thứ 6: 8:00 - 18:00</p>
                                         <p className="text-gray-300">Thứ 7 - CN: 9:00 - 17:00</p>
                                     </div>
@@ -327,13 +405,20 @@ const ContactUsPage: React.FC = () => {
 
                         {/* FAQ Section */}
                         <div className="bg-gradient-to-br from-[#232c3b] to-[#1e2530] p-8 rounded-xl border border-[#2b3445] shadow-2xl">
-                            <h2 className="text-2xl font-semibold text-cyan-400 mb-6">Câu hỏi thường gặp</h2>
-                            
+                            <h2 className="text-2xl font-semibold text-cyan-400 mb-6">
+                                Câu hỏi thường gặp
+                            </h2>
+
                             <div className="space-y-4">
                                 {faqItems.map((item, index) => (
-                                    <div key={index} className="border border-[#2b3445] rounded-lg overflow-hidden">
+                                    <div
+                                        key={index}
+                                        className="border border-[#2b3445] rounded-lg overflow-hidden"
+                                    >
                                         <button
-                                            onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                                            onClick={() =>
+                                                setOpenFaq(openFaq === index ? null : index)
+                                            }
                                             className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-[#2a3441] transition-colors duration-200"
                                         >
                                             <span className="font-medium text-white">{item.q}</span>
