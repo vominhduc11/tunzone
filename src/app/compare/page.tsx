@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiStar } from 'react-icons/fi';
 import { products } from '@/data/api/products';
+import { Suspense } from 'react';
 
-export function CompareContent() {
+function CompareContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -153,3 +154,20 @@ export function CompareContent() {
         </div>
     );
 }
+
+function ComparePage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+                    <p>Đang tải...</p>
+                </div>
+            </div>
+        }>
+            <CompareContent />
+        </Suspense>
+    );
+}
+
+export default ComparePage;

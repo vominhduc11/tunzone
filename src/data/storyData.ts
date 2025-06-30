@@ -1,6 +1,6 @@
 export const storyData = [
     {
-        img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+        img: 'https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
         p1: 'Bắt đầu từ niềm tin rằng "ai cũng xứng đáng tận hưởng âm thanh chuẩn studio", SCS Headphones ra đời với sứ mệnh đưa công nghệ âm thanh tiên tiến đến gần hơn với mọi người dùng Việt Nam.',
         p2: 'Sản phẩm đầu tiên của chúng tôi đã được các audiophile đón nhận nồng nhiệt, tạo động lực để chúng tôi tiếp tục phát triển và hoàn thiện.'
     },

@@ -9,7 +9,7 @@ export const blogs: Blog[] = [
         author: 'SCS Việt Nam',
         date: '01/07/2025',
         category: 'Audio',
-        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2018/09/17/14/27/headphones-3683983_1280.jpg',
         views: 875,
         content: [
             'Tai nghe SCS Việt Nam mang đến trải nghiệm âm thanh chất lượng cao với driver 40mm và độ nhạy 98dB.',
@@ -29,7 +29,7 @@ export const blogs: Blog[] = [
         author: 'Đội ngũ SCS Việt Nam',
         date: '15/07/2025',
         category: 'Features',
-        image: 'https://images.unsplash.com/photo-1512499617640-c2f99984e2d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2017/08/10/08/47/laptop-2619463_1280.jpg',
         views: 540,
         content: [
             'Chế độ chống ồn chủ động (ANC) loại bỏ tạp âm môi trường lên đến 30 dB.',
@@ -47,7 +47,7 @@ export const blogs: Blog[] = [
         author: 'Phòng Sản phẩm SCS',
         date: '28/07/2025',
         category: 'News',
-        image: 'https://images.unsplash.com/photo-1512496015851-35a8f71d07ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_1280.png',
         views: 320,
         content: [
             'Cập nhật Pin Management tối ưu, kéo dài thời lượng nghe thêm 2 giờ.',
@@ -63,7 +63,7 @@ export const blogs: Blog[] = [
         author: 'Team Hỗ trợ SCS',
         date: '05/08/2025',
         category: 'Guide',
-        image: 'https://images.unsplash.com/photo-1580894894518-5459f0e6f918?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2017/05/13/12/40/fashion-2309519_1280.jpg',
         views: 210,
         content: [
             'Bật chế độ Bluetooth trên tai nghe bằng cách giữ nút nguồn 3 giây.',
@@ -80,7 +80,7 @@ export const blogs: Blog[] = [
         author: 'Nguyễn Minh Đức',
         date: '12/08/2025',
         category: 'Comparison',
-        image: 'https://images.unsplash.com/photo-1533670808694-567e9f79e0da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2018/01/11/21/27/headphones-3076533_1280.jpg',
         views: 185,
         content: [
             'Driver: SCS Pro Series dùng driver 50mm so với 40mm của bản tiêu chuẩn.',
@@ -96,7 +96,7 @@ export const blogs: Blog[] = [
         author: 'Chuyên gia bảo trì SCS',
         date: '20/08/2025',
         category: 'Maintenance',
-        image: 'https://images.unsplash.com/photo-1564865880931-f9f0577d73d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2016/11/29/06/15/audio-1867121_1280.jpg',
         views: 95,
         content: [
             'Vệ sinh đệm tai và headband bằng khăn mềm ẩm.',
@@ -112,7 +112,7 @@ export const blogs: Blog[] = [
         author: 'Mobile Dev Team',
         date: '28/08/2025',
         category: 'App',
-        image: 'https://images.unsplash.com/photo-1580894908361-1eebc546927d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2016/12/09/11/33/smartphone-1894723_1280.jpg',
         views: 260,
         content: [
             'Tìm kiếm “SCS Companion” trên App Store hoặc Google Play.',
@@ -128,7 +128,7 @@ export const blogs: Blog[] = [
         author: 'Marketing SCS',
         date: '05/09/2025',
         category: 'Review',
-        image: 'https://images.unsplash.com/photo-1580894908361-2aad8e29e4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_1280.jpg',
         views: 430,
         content: [
             'Link review của TechZone: chất âm bass bùng nổ.',
@@ -143,7 +143,7 @@ export const blogs: Blog[] = [
         author: 'Phòng Kinh doanh SCS',
         date: '10/09/2025',
         category: 'Promotion',
-        image: 'https://images.unsplash.com/photo-1600180758896-8faeef3a20a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2017/11/27/21/31/computer-2982270_1280.jpg',
         views: 150,
         content: [
             'Giảm 15% cho đơn hàng đầu tiên khi đặt online.',
@@ -159,7 +159,7 @@ export const blogs: Blog[] = [
         author: 'Bộ phận R&D SCS',
         date: '20/09/2025',
         category: 'Trends',
-        image: 'https://images.unsplash.com/photo-1558727148-8b5708f7d338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        image: 'https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_1280.jpg',
         views: 75,
         content: [
             'ANC 3.0 với khả năng khử ồn theo ngữ cảnh môi trường.',
