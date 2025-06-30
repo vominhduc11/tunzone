@@ -2,51 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiArrowRight, FiCalendar, FiUser } from 'react-icons/fi';
 import { blogs as bl } from '@/data/api/blogs';
+import { containerVariants, itemVariants, titleVariants } from './BlogSection.config';
 
 export default function BlogSection() {
     const blogs = bl.slice(0, 3);
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
-
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 50, scale: 0.9 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                duration: 0.6,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
-
-    const titleVariants: Variants = {
-        hidden: { opacity: 0, y: -30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.42, 0, 0.58, 1] // cubic-bezier for easeInOut
-            }
-        }
-    };
 
     return (
         <section

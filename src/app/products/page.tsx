@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import ReactPaginate from 'react-paginate';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import 'swiper/css';
 
 import { products } from '@/data/api/products';
 import { Transition } from '@headlessui/react';
+import { getCompareListTransition } from './_configs/config';
 
 const ProductsPage: React.FC = () => {
     const [search, setSearch] = useState('');
@@ -157,14 +158,7 @@ const ProductsPage: React.FC = () => {
 
             {/* BOTTOM BAR for Comparison */}
             <Transition
-                as={Fragment}
-                show={compareList.length > 0}
-                enter="transition ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                {...getCompareListTransition(compareList)}
             >
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 bg-opacity-90 backdrop-blur-md shadow-2xl rounded-xl p-3 max-w-3xl w-[calc(100%-2rem)]">
                     <div className="flex items-center space-x-4">

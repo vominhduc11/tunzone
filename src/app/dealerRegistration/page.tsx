@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { buttonMotion, fieldVariants, formWrapper, titleMotion } from './_configs/config';
 
 export default function DealerRegistrationPage() {
     const router = useRouter();
@@ -36,25 +37,16 @@ export default function DealerRegistrationPage() {
         }
     };
 
-    const fieldVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.1 } })
-    };
-
     return (
         <div className="min-h-screen bg-[#181f2a] flex items-center justify-center p-4">
             <motion.form
                 onSubmit={handleSubmit}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                {...formWrapper}
                 className="bg-[#232c3b] p-8 rounded-2xl shadow-lg max-w-lg w-full text-[#b0d0f9]"
             >
                 <motion.h1
                     className="text-2xl font-semibold mb-6 text-cyan-400 text-center"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.4 }}
+                    {...titleMotion}
                 >
                     Đăng Ký Làm Đại Lý
                 </motion.h1>
@@ -109,6 +101,7 @@ export default function DealerRegistrationPage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="mt-6 w-full bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] font-semibold py-3 rounded-full transition"
+                    {...buttonMotion}
                 >
                     {submitting ? 'Đang gửi...' : 'Đăng ký ngay'}
                 </motion.button>

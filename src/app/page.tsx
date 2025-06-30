@@ -1,12 +1,12 @@
-import ChooseCardoSection from './_components/ChooseCardoSection';
-import RevolutionTechSection from './_components/RevolutionTechSection';
-import HeroSections from './_components/HeroSections';
-import DealerPartnershipSection from './_components/DealerPartnershipSection';
-import TestimonialsStatsSection from './_components/TestimonialsStatsSection';
-import BlogSection from './_components/BlogSection';
-import TeamPartnersSection from './_components/TeamPartnersSection';
-import WeRecommendSection from './_components/WeRecommendSection';
-import BannerSwiper from './_components/BannerSwiper';
+import ChooseCardoSection from '@/app/_components/ChooseCardoSection/ChooseCardoSection';
+import RevolutionTechSection from '@/app/_components/RevolutionTechSection';
+import HeroSections from '@/app/_components/HeroSections/HeroSections';
+import DealerPartnershipSection from '@/app/_components/DealerPartnershipSection';
+import TestimonialsStatsSection from '@/app/_components/TestimonialsStatsSection/TestimonialsStatsSection';
+import BlogSection from '@/app/_components/BlogSection/BlogSection';
+import TeamPartnersSection from '@/app/_components/TeamPartnersSection';
+import WeRecommendSection from '@/app/_components/WeRecommendSection/WeRecommendSection';
+import BannerSwiper from '@/app/_components/BannerSwiper';
 
 function Home() {
     return (

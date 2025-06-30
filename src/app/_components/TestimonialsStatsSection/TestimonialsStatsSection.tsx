@@ -1,38 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiStar } from 'react-icons/fi';
 import { stats } from '@/data/stats';
 import { testimonials } from '@/data/testimonials';
+import { containerVariants, itemVariants } from './TestimonialsStatsSection.config';
 
 export default function TestimonialsStatsSection() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
-
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
 
     return (
         <section ref={sectionRef} className="bg-gradient-to-br from-gray-900 to-gray-800 py-16">

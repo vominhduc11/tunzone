@@ -14,6 +14,7 @@ import {
     FiUser,
     FiMessageSquare
 } from 'react-icons/fi';
+import { faqContentMotion, faqToggleMotion, feedbackMotion, fieldMotion, formContainerMotion, headerMotion, infoColumnMotion, submitButtonMotion } from './_configs/config';
 
 interface FormFields {
     name: string;
@@ -86,9 +87,7 @@ const ContactUsPage: React.FC = () => {
                 {/* Header Section */}
                 <motion.div
                     className="text-center mb-12"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    {...headerMotion}
                 >
                     <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">
                         Liên hệ với chúng tôi
@@ -102,9 +101,7 @@ const ContactUsPage: React.FC = () => {
                 <div className="grid lg:grid-cols-2 gap-12">
                     {/* Contact Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
+                        {...formContainerMotion}
                     >
                         <div className="bg-gradient-to-br from-[#232c3b] to-[#1e2530] p-8 rounded-xl border border-[#2b3445] shadow-2xl">
                             <h2 className="text-2xl font-semibold text-cyan-400 mb-6 flex items-center gap-2">
@@ -116,9 +113,7 @@ const ContactUsPage: React.FC = () => {
                                 {feedback && (
                                     <motion.div
                                         className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-4 rounded-lg shadow-lg"
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.3 }}
+                                        {...feedbackMotion}
                                     >
                                         <div className="flex items-center gap-2">
                                             <svg
@@ -141,9 +136,7 @@ const ContactUsPage: React.FC = () => {
 
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.1 }}
+                                        {...fieldMotion(0.1)}
                                     >
                                         <label className="block text-gray-300 mb-2 font-medium">
                                             Họ và tên *
@@ -183,9 +176,7 @@ const ContactUsPage: React.FC = () => {
                                     </motion.div>
 
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.2 }}
+                                        {...fieldMotion(0.2)}
                                     >
                                         <label className="block text-gray-300 mb-2 font-medium">
                                             Số điện thoại
@@ -204,9 +195,7 @@ const ContactUsPage: React.FC = () => {
                                 </div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.3 }}
+                                    {...fieldMotion(0.3)}
                                 >
                                     <label className="block text-gray-300 mb-2 font-medium">
                                         Email *
@@ -246,9 +235,7 @@ const ContactUsPage: React.FC = () => {
                                 </motion.div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.4 }}
+                                    {...fieldMotion(0.4)}
                                 >
                                     <label className="block text-gray-300 mb-2 font-medium">
                                         Chủ đề *
@@ -285,9 +272,7 @@ const ContactUsPage: React.FC = () => {
                                 </motion.div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
+                                    {...fieldMotion(0.5)}
                                 >
                                     <label className="block text-gray-300 mb-2 font-medium">
                                         Nội dung *
@@ -326,11 +311,7 @@ const ContactUsPage: React.FC = () => {
                                 <motion.button
                                     type="submit"
                                     className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/25 flex items-center justify-center gap-2"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.6 }}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
+                                    {...submitButtonMotion}
                                 >
                                     <FiSend className="w-4 h-4" />
                                     Gửi tin nhắn
@@ -341,10 +322,8 @@ const ContactUsPage: React.FC = () => {
 
                     {/* Contact Info & FAQ */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
                         className="space-y-8"
+                        {...infoColumnMotion}
                     >
                         {/* Contact Information */}
                         <div className="bg-gradient-to-br from-[#232c3b] to-[#1e2530] p-8 rounded-xl border border-[#2b3445] shadow-2xl">
@@ -423,8 +402,8 @@ const ContactUsPage: React.FC = () => {
                                         >
                                             <span className="font-medium text-white">{item.q}</span>
                                             <motion.div
-                                                animate={{ rotate: openFaq === index ? 180 : 0 }}
-                                                transition={{ duration: 0.2 }}
+                                                custom={openFaq === index}
+                                                {...faqToggleMotion}
                                             >
                                                 <FiChevronDown className="w-5 h-5 text-cyan-400" />
                                             </motion.div>
@@ -432,10 +411,7 @@ const ContactUsPage: React.FC = () => {
                                         <AnimatePresence>
                                             {openFaq === index && (
                                                 <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: 'auto', opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    transition={{ duration: 0.3 }}
+                                                    {...faqContentMotion}
                                                     className="overflow-hidden"
                                                 >
                                                     <div className="px-6 pb-4 text-gray-300 bg-[#1e2530]">

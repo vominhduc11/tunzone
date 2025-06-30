@@ -5,6 +5,7 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { motion } from 'framer-motion';
 import SharedModal from '@/components/shared/SharedModal';
+import { panelVariants } from './_config/config';
 
 // Dữ liệu mẫu các sản phẩm và đơn bảo hành
 const demoProducts = [
@@ -63,25 +64,6 @@ export default function WarrantyDashboard() {
     const handleRenew = (serial: string) => {
         setSelectedSerial(serial);
         setRenewOpen(true);
-    };
-
-    // Animation cho panel
-    const panelVariants = {
-        hidden: {
-            opacity: 0,
-            y: 20,
-            scale: 0.98
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1
-        },
-        exit: {
-            opacity: 0,
-            y: -10,
-            scale: 0.98
-        }
     };
 
     return (

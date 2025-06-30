@@ -35,9 +35,6 @@ export default function ProductGallery({ images, avatar, mainImageIndex = 0 }: G
                 navigation
                 pagination={{ clickable: true }}
                 className="py-4"
-                // onSlideChange={(swiper) => {
-                //   // Optionally handle slide change
-                // }}
             >
                 {images.map((src, idx) => (
                     <SwiperSlide key={idx} className="flex justify-center">

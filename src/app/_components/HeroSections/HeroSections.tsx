@@ -1,79 +1,25 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiHeadphones, FiBattery, FiCloudRain } from 'react-icons/fi';
 import image1 from '@/assets/images/feature2.png';
 import image2 from '@/assets/images/feature3.png';
+import {
+    fadeInUp,
+    scaleIn,
+    slideInLeft,
+    slideInRight,
+    staggerContainer
+} from './HeroSections.config';
 
 export default function HeroSections() {
     const section1Ref = useRef(null);
     const section2Ref = useRef(null);
-    // const section3Ref = useRef(null);
 
     const section1InView = useInView(section1Ref, { once: true });
     const section2InView = useInView(section2Ref, { once: true });
-    // const section3InView = useInView(section3Ref, { once: true });
-
-    const fadeInUp: Variants = {
-        hidden: { opacity: 0, y: 60 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
-
-    const staggerContainer: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const slideInLeft: Variants = {
-        hidden: { opacity: 0, x: -60 },
-        visible: {
-            opacity: 1,
-            x: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
-
-    const slideInRight: Variants = {
-        hidden: { opacity: 0, x: 60 },
-        visible: {
-            opacity: 1,
-            x: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
-
-    const scaleIn: Variants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            transition: {
-                duration: 0.6,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            }
-        }
-    };
 
     return (
         <>

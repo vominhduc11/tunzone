@@ -3,46 +3,16 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { features } from '@/data/features';
+import {
+    containerVariants,
+    itemVariants,
+    subtitleVariants,
+    titleVariants
+} from './ChooseCardoSection.config';
 
 export default function ChooseCardoSection() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 60, scale: 0.8 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1
-        }
-    };
-
-    const titleVariants = {
-        hidden: { opacity: 0, y: -40 },
-        visible: {
-            opacity: 1,
-            y: 0
-        }
-    };
-
-    const subtitleVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0
-        }
-    };
 
     return (
         <section
@@ -55,10 +25,6 @@ export default function ChooseCardoSection() {
                     <motion.h2
                         className="text-3xl md:text-4xl font-bold"
                         variants={titleVariants}
-                        transition={{
-                            duration: 0.8,
-                            ease: [0.25, 0.46, 0.45, 0.94]
-                        }}
                         initial="hidden"
                         animate={isInView ? 'visible' : 'hidden'}
                     >
@@ -67,11 +33,6 @@ export default function ChooseCardoSection() {
                     <motion.p
                         className="mt-4 text-gray-300"
                         variants={subtitleVariants}
-                        transition={{
-                            duration: 0.6,
-                            delay: 0.2,
-                            ease: [0.25, 0.46, 0.45, 0.94]
-                        }}
                         initial="hidden"
                         animate={isInView ? 'visible' : 'hidden'}
                     >

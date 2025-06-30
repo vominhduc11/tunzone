@@ -17,6 +17,7 @@ import { QRCodeCanvas } from 'qrcode.react'; // bạn cần cài đặt react QR
 import SharedModal from '@/components/shared/SharedModal';
 import { motion } from 'framer-motion';
 import { blogs } from '@/data/api/blogs';
+import { fadeSlideConfig } from './_configs/config';
 
 export default function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -107,10 +108,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                 contentLabel="Chia sẻ bài viết"
             >
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    {...fadeSlideConfig}
                     className="bg-gray-800 p-6 rounded-lg max-w-md w-full space-y-4 text-gray-100"
                 >
                     <div className="bg-gray-800 p-6 rounded-lg max-w-md w-full space-y-4 text-gray-100">
