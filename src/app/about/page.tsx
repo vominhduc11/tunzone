@@ -3,38 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { FiUsers, FiAward, FiHeart, FiTrendingUp, FiShield, FiHeadphones, FiStar, FiTarget } from 'react-icons/fi';
 
 // Animation variants
-const fadeInUp = {
+const fadeInUp : Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
         opacity: 1, 
         y: 0,
-        transition: { duration: 0.6, ease: "easeOut" }
+        transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
     }
 };
 
-const fadeInLeft = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { 
-        opacity: 1, 
-        x: 0,
-        transition: { duration: 0.6, ease: "easeOut" }
-    }
-};
-
-const fadeInRight = {
-    hidden: { opacity: 0, x: 30 },
-    visible: { 
-        opacity: 1, 
-        x: 0,
-        transition: { duration: 0.6, ease: "easeOut" }
-    }
-};
-
-const staggerContainer = {
+const staggerContainer : Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -244,7 +226,7 @@ export default function AboutUsPage() {
                                 title: 'Hỗ Trợ Toàn Diện',
                                 desc: 'Bảo hành chính hãng, hỗ trợ kỹ thuật 24/7 và dịch vụ khách hàng tận tâm.'
                             }
-                        ].map((value, index) => (
+                        ].map((value) => (
                             <motion.div
                                 key={value.title}
                                 variants={fadeInUp}
@@ -309,7 +291,7 @@ export default function AboutUsPage() {
                             role: 'CTO',
                             desc: 'Chuyên gia công nghệ và R&D'
                         }
-                    ].map((member, index) => (
+                    ].map((member) => (
                         <motion.div
                             key={member.name}
                             variants={fadeInUp}
@@ -476,7 +458,7 @@ export default function AboutUsPage() {
                             </div>
                             
                             <blockquote className="text-gray-300 leading-relaxed mb-6">
-                                "{testimonial.text}"
+                                &ldquo;{testimonial.text}&rdquo;
                             </blockquote>
                             
                             <div className="flex items-center gap-3">

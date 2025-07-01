@@ -54,7 +54,7 @@ export default function Breadcrumb() {
             currentPath += `/${segment}`;
             
             let label = pathNameMap[segment] || segment;
-            let href = currentPath;
+            const href = currentPath;
             
             // Handle special cases
             if (segment === 'productDetail' && i + 1 < pathSegments.length) {

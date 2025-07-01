@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Pagination, Thumbs } from 'swiper/modules';
 import { FiMaximize2, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import type { Swiper as SwiperClass } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -19,7 +20,7 @@ interface GalleryProps {
 export default function ProductGallery({ images, avatar }: GalleryProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [showLightbox, setShowLightbox] = useState(false);
-    const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
     
     const allImages = [avatar, ...images];
 

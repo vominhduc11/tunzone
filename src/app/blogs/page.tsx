@@ -38,7 +38,7 @@ export default function BlogPage() {
 
     // Get featured post (most views)
     const featuredPost = blogs.reduce((prev, current) => 
-        (prev.views > current.views) ? prev : current
+        ((prev.views || 0) > (current.views || 0)) ? prev : current
     );
 
     return (
@@ -141,7 +141,7 @@ export default function BlogPage() {
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <FiEye className="w-4 h-4" />
-                                            {featuredPost.views.toLocaleString()} lượt xem
+                                            {(featuredPost.views || 0).toLocaleString()} lượt xem
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@ export default function BlogPage() {
                                         </span>
                                         <div className="flex items-center gap-1 text-xs text-gray-400">
                                             <FiEye className="w-3 h-3" />
-                                            {post.views}
+                                            {post.views || 0}
                                         </div>
                                     </div>
                                     

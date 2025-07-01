@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FiStar, FiSearch, FiFilter, FiChevronDown } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 
@@ -11,7 +10,6 @@ import { reviews } from '@/data/api/reviews';
 import { Review } from '@/types/review';
 
 export default function ReviewsPage() {
-    const router = useRouter();
     const [open, setOpen] = useState<boolean>(false);
     const [review, setReview] = useState<Review | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');

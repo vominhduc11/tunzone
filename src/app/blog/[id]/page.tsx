@@ -9,7 +9,6 @@ import {
     FiCalendar,
     FiUser,
     FiEye,
-    FiClock,
     FiArrowLeft,
     FiBookmark,
     FiHeart,
@@ -154,7 +153,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <FiEye className="w-4 h-4" />
-                                    <span>{post.views.toLocaleString()} lượt xem</span>
+                                    <span>{(post.views || 0).toLocaleString()} lượt xem</span>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +244,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ id: strin
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 text-sm">Lượt xem</span>
-                                        <span className="text-white font-medium">{post.views.toLocaleString()}</span>
+                                        <span className="text-white font-medium">{(post.views || 0).toLocaleString()}</span>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 text-sm">Thời gian đọc</span>

@@ -2,7 +2,7 @@
 
 import { FC, useState, useMemo } from 'react';
 import { FiSearch, FiMapPin, FiPhone, FiClock, FiStar, FiUsers, FiTool, FiShield } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Select from 'react-select';
 import Link from 'next/link';
 
@@ -96,7 +96,7 @@ const dealers: Dealer[] = [
 
 const provinces = ['Tất cả', ...Array.from(new Set(dealers.map((d) => d.province)))];
 
-const fadeInUp = {
+const fadeInUp : Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { 
         opacity: 1, 
@@ -105,7 +105,7 @@ const fadeInUp = {
     }
 };
 
-const staggerContainer = {
+const staggerContainer : Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
