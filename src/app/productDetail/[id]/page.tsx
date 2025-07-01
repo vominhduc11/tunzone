@@ -1,6 +1,7 @@
 'use client';
 
 import { use } from 'react';
+import Link from 'next/link';
 import ProductGallery from '@/app/productDetail/_components/ProductGallery';
 import ProductTabs from '@/app/productDetail/_components/ProductTabsProps';
 import NoticeSection from '@/app/productDetail/_components/NoticeSection';
@@ -13,23 +14,32 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
     if (!product) {
         return (
-            <div className="bg-gray-900 text-white py-16">
-                <div className="w-full max-w-[1280px] mx-auto px-4">
+            <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+                <div className="text-center">
+                    <div className="text-6xl mb-4">🔍</div>
                     <h1 className="text-3xl font-bold mb-4">Sản phẩm không tồn tại</h1>
-                    <p className="text-gray-400">Không tìm thấy thông tin sản phẩm.</p>
+                    <p className="text-gray-400 mb-6">Không tìm thấy thông tin sản phẩm bạn đang tìm kiếm.</p>
+                    <Link 
+                        href="/products"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+                    >
+                        Quay lại danh sách sản phẩm
+                    </Link>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="bg-gray-900 text-white py-16">
-            <div className="w-full max-w-[1280px] mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <ProductGallery images={product.images ?? []} avatar={product.avatar} />
-                <ProductOverview product={product} />
-            </div>
+        <div className="min-h-screen bg-gray-900 text-white">
+            {/* Main Product Section */}
+            <div className="max-w-7xl mx-auto px-4 py-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <ProductGallery images={product.images ?? []} avatar={product.avatar} />
+                    <ProductOverview product={product} />
+                </div>
 
-            <div className="w-full max-w-[1280px] mx-auto px-4">
+                {/* Product Details Tabs */}
                 <ProductTabs
                     description={product.description}
                     specs={product.specs}
@@ -38,6 +48,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     videoUrl={product.videoUrl}
                 />
             </div>
+
+            {/* Reviews Section */}
             <NoticeSection id={id} />
         </div>
     );
