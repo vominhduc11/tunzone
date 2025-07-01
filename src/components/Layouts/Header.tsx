@@ -2,27 +2,20 @@
 
 import Image from 'next/image';
 import React, { useState, useRef } from 'react';
-import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
+import { FiSearch, FiMenu, FiX, FiHeadphones } from 'react-icons/fi';
 import { useRouter, usePathname } from 'next/navigation';
-import logo from '@/assets/images/logo.png';
 import Link from 'next/link';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
+import { products } from '@/data/api/products';
 
 const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
-    { name: 'Blogs', href: '/blogs' },
-    { name: 'Dealer system', href: '/dealers' },
-    { name: 'Dealer', href: 'https://localhost:3001' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact Us', href: '/contact' }
-];
-
-const demoProducts = [
-    { id: 1, name: 'SCS Studio Pro', img: '/images/products/cardog7plus.png' },
-    { id: 2, name: 'SCS Gaming Elite', img: '/images/products/cardog7plus.png' },
-    { id: 3, name: 'SCS Wireless ANC', img: '/images/products/cardog7plus.png' }
+    { name: 'Trang chủ', href: '/' },
+    { name: 'Sản phẩm', href: '/products' },
+    { name: 'Blog', href: '/blogs' },
+    { name: 'Hệ thống đại lý', href: '/dealers' },
+    { name: 'Về chúng tôi', href: '/about' },
+    { name: 'Liên hệ', href: '/contact' }
 ];
 
 export default function Header() {
@@ -33,10 +26,22 @@ export default function Header() {
     const router = useRouter();
     const pathname = usePathname();
 
+    // Filter products based on search query
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(query.toLowerCase())
+    ).slice(0, 5);
+
     const handleSearch = () => {
         if (!query.trim()) return;
         router.push(`/products?search=${encodeURIComponent(query)}`);
         setVisible(false);
+        setQuery('');
+    };
+
+    const handleProductClick = (productId: number) => {
+        setVisible(false);
+        setQuery('');
+        router.push(`/productDetail/${productId}`);
     };
 
     // Function to check if a nav item is active
@@ -52,30 +57,32 @@ export default function Header() {
     };
 
     return (
-        <header className="bg-gray-900 border-b border-gray-700 relative z-50">
+        <header className="bg-gray-900 border-b border-gray-700 relative z-50 sticky top-0 backdrop-blur-sm bg-gray-900/95">
             <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between h-16 px-4">
                 {/* Logo */}
-                <Link href="/" className="flex-shrink-0">
-                    <Image src={logo} alt="SCS Logo" className="h-8 w-auto" />
+                <Link href="/" className="flex-shrink-0 flex items-center gap-2 group">
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-2 rounded-xl group-hover:scale-105 transition-transform">
+                        <FiHeadphones className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        TuneZone
+                    </span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden lg:flex space-x-8">
+                <nav className="hidden lg:flex space-x-1">
                     {navItems.map((item) => {
                         const isActive = isActiveLink(item.href);
-                        const isExternal = item.href.startsWith('http');
                         
                         return (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                target={isExternal ? '_blank' : undefined}
-                                rel={isExternal ? 'noopener noreferrer' : undefined}
                                 className={`
-                                    relative font-medium transition-all duration-300 group px-3 py-2 rounded-lg
+                                    relative font-medium transition-all duration-300 group px-4 py-2 rounded-xl
                                     ${isActive 
-                                        ? 'text-cyan-400 bg-cyan-400/10' 
-                                        : 'text-white hover:text-cyan-300 hover:bg-white/5'
+                                        ? 'text-blue-400 bg-blue-500/10 shadow-lg shadow-blue-500/20' 
+                                        : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
                                     }
                                 `}
                             >
@@ -84,7 +91,7 @@ export default function Header() {
                                 {/* Active indicator */}
                                 <span 
                                     className={`
-                                        absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 
+                                        absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 
                                         transition-all duration-300 rounded-full
                                         ${isActive 
                                             ? 'w-8 opacity-100' 
@@ -103,46 +110,78 @@ export default function Header() {
                     <Tooltip
                         placement="bottom"
                         visible={visible}
-                        overlayClassName="bg-gray-800 text-white rounded-xl shadow-xl w-80 p-4 ring-1 ring-white/10"
+                        overlayClassName="bg-gray-800 text-white rounded-2xl shadow-2xl w-96 p-0 ring-1 ring-gray-700 overflow-hidden"
                         overlay={
-                            <div>
+                            <div className="p-6">
                                 <div className="flex mb-4">
                                     <input
                                         ref={inputRef}
                                         type="text"
                                         value={query}
                                         onChange={(e) => setQuery(e.target.value)}
-                                        placeholder="Tìm sản phẩm..."
+                                        placeholder="Tìm kiếm sản phẩm TuneZone..."
                                         onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                                        className="flex-1 bg-gray-700 px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                        className="flex-1 bg-gray-700 px-4 py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
                                     />
                                     <button
                                         onClick={handleSearch}
-                                        className="bg-cyan-500 px-4 rounded-r-lg hover:bg-cyan-400 transition-shadow shadow-md"
+                                        className="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-xl transition-colors"
                                     >
-                                        <FiSearch className="w-5 h-5 text-gray-900" />
+                                        <FiSearch className="w-5 h-5 text-white" />
                                     </button>
                                 </div>
-                                <h3 className="text-sm font-semibold mb-2">Kết quả tìm kiếm</h3>
-                                <ul className="grid grid-cols-1 gap-2">
-                                    {demoProducts.map((p) => (
-                                        <li key={p.id}>
-                                            <Link
-                                                href={`/productDetail/${p.id}`}
-                                                className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-700 transition"
-                                            >
-                                                <Image
-                                                    src={p.img}
-                                                    alt={p.name}
-                                                    width={40}
-                                                    height={40}
-                                                    className="rounded"
-                                                />
-                                                <p className="font-medium text-sm truncate">{p.name}</p>
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
+                                
+                                {query && (
+                                    <div>
+                                        <h3 className="text-sm font-semibold mb-3 text-gray-300">
+                                            Kết quả tìm kiếm ({filteredProducts.length})
+                                        </h3>
+                                        {filteredProducts.length > 0 ? (
+                                            <ul className="space-y-2 max-h-64 overflow-y-auto">
+                                                {filteredProducts.map((product) => (
+                                                    <li key={product.id}>
+                                                        <button
+                                                            onClick={() => handleProductClick(product.id)}
+                                                            className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-700 transition-colors text-left"
+                                                        >
+                                                            <Image
+                                                                src={product.avatar}
+                                                                alt={product.name}
+                                                                width={48}
+                                                                height={48}
+                                                                className="rounded-lg object-cover"
+                                                                onError={(e) => {
+                                                                    e.currentTarget.src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=48&h=48&fit=crop';
+                                                                }}
+                                                            />
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="font-medium text-white truncate">{product.name}</p>
+                                                                <p className="text-sm text-gray-400 truncate">{product.description}</p>
+                                                                <p className="text-sm text-blue-400 font-medium">
+                                                                    {product.price?.toLocaleString()}₫
+                                                                </p>
+                                                            </div>
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <div className="text-center py-8 text-gray-400">
+                                                <FiSearch className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                                                <p>Không tìm thấy sản phẩm nào</p>
+                                                <p className="text-sm">Thử từ khóa khác</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                                
+                                {!query && (
+                                    <div className="text-center py-8 text-gray-400">
+                                        <FiHeadphones className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                                        <p>Nhập từ khóa để tìm kiếm</p>
+                                        <p className="text-sm">VD: tai nghe, bluetooth, gaming...</p>
+                                    </div>
+                                )}
                             </div>
                         }
                         trigger="click"
@@ -153,8 +192,8 @@ export default function Header() {
                         }}
                     >
                         <button
-                            className="text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-lg hover:bg-white/5"
-                            aria-label="Search"
+                            className="text-gray-300 hover:text-white focus:outline-none transition-all duration-300 p-2 rounded-xl hover:bg-gray-800/50 hover:scale-105"
+                            aria-label="Tìm kiếm"
                         >
                             <FiSearch className="h-5 w-5" />
                         </button>
@@ -163,8 +202,8 @@ export default function Header() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden text-gray-300 hover:text-white focus:outline-none transition-colors duration-300 p-2 rounded-lg hover:bg-white/5"
-                        aria-label="Toggle mobile menu"
+                        className="lg:hidden text-gray-300 hover:text-white focus:outline-none transition-all duration-300 p-2 rounded-xl hover:bg-gray-800/50"
+                        aria-label="Menu"
                     >
                         {mobileMenuOpen ? (
                             <FiX className="h-6 w-6" />
@@ -177,43 +216,60 @@ export default function Header() {
 
             {/* Mobile Navigation */}
             <div className={`
-                lg:hidden absolute top-full left-0 right-0 bg-gray-900 border-b border-gray-700 shadow-xl
+                lg:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 shadow-2xl
                 transition-all duration-300 ease-in-out
                 ${mobileMenuOpen 
                     ? 'opacity-100 visible transform translate-y-0' 
                     : 'opacity-0 invisible transform -translate-y-2'
                 }
             `}>
-                <nav className="px-4 py-4">
+                <nav className="px-4 py-6">
                     <div className="space-y-2">
                         {navItems.map((item) => {
                             const isActive = isActiveLink(item.href);
-                            const isExternal = item.href.startsWith('http');
                             
                             return (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    target={isExternal ? '_blank' : undefined}
-                                    rel={isExternal ? 'noopener noreferrer' : undefined}
                                     onClick={closeMobileMenu}
                                     className={`
-                                        block px-4 py-3 rounded-lg font-medium transition-all duration-300
+                                        block px-4 py-3 rounded-xl font-medium transition-all duration-300
                                         ${isActive 
-                                            ? 'text-cyan-400 bg-cyan-400/10 border-l-4 border-cyan-400' 
-                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                            ? 'text-blue-400 bg-blue-500/10 border-l-4 border-blue-400 shadow-lg shadow-blue-500/20' 
+                                            : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
                                         }
                                     `}
                                 >
                                     <div className="flex items-center justify-between">
                                         {item.name}
                                         {isActive && (
-                                            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+                                            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                                         )}
                                     </div>
                                 </Link>
                             );
                         })}
+                    </div>
+                    
+                    {/* Mobile Search */}
+                    <div className="mt-6 pt-6 border-t border-gray-700">
+                        <div className="flex">
+                            <input
+                                type="text"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                placeholder="Tìm kiếm sản phẩm..."
+                                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                                className="flex-1 bg-gray-800 px-4 py-3 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+                            />
+                            <button
+                                onClick={handleSearch}
+                                className="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-xl transition-colors"
+                            >
+                                <FiSearch className="w-5 h-5 text-white" />
+                            </button>
+                        </div>
                     </div>
                 </nav>
             </div>
