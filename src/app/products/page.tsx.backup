@@ -18,26 +18,27 @@ const ProductsPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [compareList, setCompareList] = useState<number[]>([]);
     const [showFilters, setShowFilters] = useState(false);
-
     const itemsPerPage = 9;
 
+    // Toggle so sánh, chỉ cho phép tối đa 5 sản phẩm
     const toggleCompare = (id: number) => {
-        setCompareList(prev => 
-            prev.includes(id) 
-                ? prev.filter(item => item !== id)
-                : prev.length < 5 
-                    ? [...prev, id]
-                    : prev
-        );
+        setCompareList((prev) => {
+            const included = prev.includes(id);
+            if (included) {
+                // Bỏ so sánh
+                return prev.filter((item) => item !== id);
+            }
+            // Nếu chưa bao gồm và đã đủ 5, không thêm
+            if (prev.length >= 5) {
+                return prev;
+            }
+            // Thêm vào danh sách
+            return [...prev, id];
+        });
     };
 
-    // Lọc và sắp xếp sản phẩm
-    const filtered = products.filter(p => 
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.description?.toLowerCase().includes(search.toLowerCase())
-    );
-
-    const sorted = filtered.sort((a, b) => {
+    const filtered = products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
+    const sorted = [...filtered].sort((a, b) => {
         switch (sortOption) {
             case 'az':
                 return a.name.localeCompare(b.name);
@@ -50,7 +51,6 @@ const ProductsPage: React.FC = () => {
         }
     });
 
-    // Phân trang
     const pageCount = Math.ceil(sorted.length / itemsPerPage);
     const displayed = sorted.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const handlePageClick = ({ selected }: { selected: number }) => setCurrentPage(selected + 1);
@@ -60,11 +60,11 @@ const ProductsPage: React.FC = () => {
         .filter(Boolean) as typeof products;
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white">
-            {/* Header Section with Animation */}
-            <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-16 animate-fadeIn">
+        <div className="min-h-screen bg-gray-900 text-white animate-fadeIn">
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-blue-900 to-purple-900 py-16 animate-slideDown">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="text-center">
+                    <div className="text-center animate-fadeInUp">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slideInLeft">
                             Sản phẩm TuneZone
                         </h1>
@@ -76,12 +76,12 @@ const ProductsPage: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="max-w-7xl mx-auto px-4 py-12 animate-fadeInUp">
                 {/* Mobile Filter Toggle */}
-                <div className="lg:hidden mb-6">
+                <div className="lg:hidden mb-6 animate-scaleIn">
                     <button
                         onClick={() => setShowFilters(!showFilters)}
-                        className="flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition-all duration-300"
+                        className="flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition-smooth"
                     >
                         <FiFilter />
                         Bộ lọc & Tìm kiếm
@@ -90,32 +90,43 @@ const ProductsPage: React.FC = () => {
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Sidebar Filters */}
-                    <aside className={`w-full lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-                        <div className="bg-gray-800 p-6 rounded-xl shadow-lg sticky top-4">
-                            <h3 className="text-lg font-semibold mb-6 text-blue-400">Tìm kiếm & Lọc</h3>
+                    <aside className={`w-full lg:w-80 ${showFilters ? 'block animate-slideInLeft' : 'hidden lg:block animate-slideInLeft'}`}>
+                        <div className="bg-gray-800 p-6 rounded-xl shadow-lg sticky top-4 animate-scaleIn">
+                            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                                <FiFilter className="text-blue-400" />
+                                Bộ lọc sản phẩm
+                            </h2>
                             
                             {/* Search */}
                             <div className="mb-6">
-                                <label className="block text-sm font-medium mb-2">Tìm kiếm sản phẩm</label>
+                                <label className="block text-sm font-medium mb-3 text-gray-300">
+                                    Tìm kiếm sản phẩm
+                                </label>
                                 <div className="relative">
-                                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                     <input
                                         type="text"
+                                        className="w-full bg-gray-700 border border-gray-600 pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:border-blue-500 transition"
+                                        placeholder="Nhập tên sản phẩm..."
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
-                                        placeholder="Nhập tên sản phẩm..."
-                                        className="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     />
                                 </div>
                             </div>
 
                             {/* Sort Options */}
                             <div className="mb-6">
-                                <label className="block text-sm font-medium mb-2">Sắp xếp theo</label>
+                                <label className="block text-sm font-medium mb-3 text-gray-300">
+                                    Sắp xếp theo
+                                </label>
                                 <select
+                                    className="w-full bg-gray-700 border border-gray-600 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition"
                                     value={sortOption}
-                                    onChange={(e) => setSortOption(e.target.value as typeof sortOption)}
-                                    className="w-full bg-gray-700 border border-gray-600 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    onChange={(e) =>
+                                        setSortOption(
+                                            e.target.value as 'az' | 'za' | 'priceAsc' | 'priceDesc'
+                                        )
+                                    }
                                 >
                                     <option value="az">Tên A-Z</option>
                                     <option value="za">Tên Z-A</option>
@@ -139,9 +150,9 @@ const ProductsPage: React.FC = () => {
                     </aside>
 
                     {/* Products Grid */}
-                    <div className="flex-1">
+                    <div className="flex-1 animate-fadeInUp animate-stagger-2">
                         {/* Results Info */}
-                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 animate-slideInRight">
                             <p className="text-gray-300">
                                 Hiển thị <span className="font-semibold text-white">{displayed.length}</span> trên{' '}
                                 <span className="font-semibold text-white">{sorted.length}</span> sản phẩm
@@ -160,8 +171,7 @@ const ProductsPage: React.FC = () => {
                                     return (
                                         <div
                                             key={p.id}
-                                            className="group bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.03] border border-gray-700 hover:border-blue-500/50 relative animate-fadeInUp"
-                                            style={{ animationDelay: `${index * 0.1}s` }}
+                                            className={`group bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500/50 relative hover-lift transition-smooth animate-fadeInUp animate-stagger-${Math.min(index + 1, 5)}`}
                                         >
                                             {/* Product Image */}
                                             <div className="relative overflow-hidden">
@@ -172,26 +182,51 @@ const ProductsPage: React.FC = () => {
                                                     height={240}
                                                     className="h-60 w-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                 
-                                                {/* Category Badge */}
-                                                <div className="absolute top-4 left-4">
-                                                    <span className="bg-blue-600/90 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
-                                                        {'Audio'}
-                                                    </span>
+                                                {/* Overlay with quick actions */}
+                                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <Link
+                                                        href={`/productDetail/${p.id}`}
+                                                        className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-200 transform hover:scale-110"
+                                                        title="Xem chi tiết sản phẩm"
+                                                    >
+                                                        <FiEye className="w-6 h-6" />
+                                                    </Link>
+                                                </div>
+
+                                                {/* Status badges */}
+                                                <div className="absolute top-4 right-4 flex flex-col gap-2">
+                                                    {isCompared && (
+                                                        <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 shadow-lg">
+                                                            <FiCheck className="w-3 h-3" />
+                                                            Đã chọn
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
 
                                             {/* Product Info */}
                                             <div className="p-6">
-                                                <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-400 transition-colors">
+                                                <h3 className="font-bold text-xl mb-3 text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                                                     {p.name}
                                                 </h3>
                                                 
-                                                <p className="text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">
-                                                    {p.description}
-                                                </p>
+                                                {/* Features */}
+                                                <ul className="text-sm text-gray-300 mb-4 space-y-2">
+                                                    {p.features.slice(0, 3).map((f, i) => (
+                                                        <li key={i} className="flex items-start gap-2">
+                                                            <span className="text-blue-400 mt-1 text-xs">●</span>
+                                                            <span className="leading-relaxed">{f}</span>
+                                                        </li>
+                                                    ))}
+                                                    {p.features.length > 3 && (
+                                                        <li className="text-gray-400 text-xs italic">
+                                                            và {p.features.length - 3} tính năng khác...
+                                                        </li>
+                                                    )}
+                                                </ul>
 
+                                                {/* Price */}
                                                 {p.price && (
                                                     <div className="mb-6">
                                                         <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -257,7 +292,7 @@ const ProductsPage: React.FC = () => {
                                         setSortOption('az');
                                         setCurrentPage(1);
                                     }}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300"
+                                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
                                 >
                                     Xóa bộ lọc
                                 </button>
@@ -266,7 +301,10 @@ const ProductsPage: React.FC = () => {
 
                         {/* Pagination */}
                         {pageCount > 1 && (
-                            <div className="flex justify-center">
+                            <motion.div 
+                                className="flex justify-center"
+                                variants={paginationVariants}
+                            >
                                 <ReactPaginate
                                     previousLabel="‹ Trước"
                                     nextLabel="Sau ›"
@@ -279,16 +317,23 @@ const ProductsPage: React.FC = () => {
                                     nextLinkClassName="px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg hover:bg-gray-700 hover:border-gray-500 transition text-sm"
                                     disabledLinkClassName="opacity-50 cursor-not-allowed hover:bg-gray-800 hover:border-gray-600"
                                 />
-                            </div>
+                            </motion.div>
                         )}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
             {/* Comparison Bottom Bar */}
-            <Transition {...getCompareListTransition(compareList)}>
-                <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-                    <div className="bg-gray-800 bg-opacity-95 backdrop-blur-lg shadow-2xl rounded-2xl p-4 max-w-4xl w-[calc(100vw-2rem)] border border-gray-600">
+            <AnimatePresence>
+                {compareList.length > 0 && (
+                    <motion.div 
+                        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50"
+                        variants={compareButtonVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                    >
+                        <div className="bg-gray-800 bg-opacity-95 backdrop-blur-lg shadow-2xl rounded-2xl p-4 max-w-4xl w-[calc(100vw-2rem)] border border-gray-600">
                         <div className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-4">
                                 <div className="text-sm">
@@ -300,24 +345,26 @@ const ProductsPage: React.FC = () => {
                                 {/* Product Thumbnails */}
                                 <div className="flex items-center gap-2">
                                     <Swiper 
-                                        slidesPerView="auto"
-                                        spaceBetween={8}
-                                        className="w-full max-w-md"
+                                        spaceBetween={8} 
+                                        slidesPerView={'auto'} 
+                                        className="max-w-xs"
                                     >
-                                        {comparedProducts.map((product) => (
-                                            <SwiperSlide key={product.id} className="!w-auto">
+                                        {comparedProducts.map((p) => (
+                                            <SwiperSlide key={p.id} style={{ width: '60px' }}>
                                                 <div className="relative group">
-                                                    <Image
-                                                        src={product.images?.[0] ?? '/placeholder.png'}
-                                                        alt={product.name}
-                                                        width={48}
-                                                        height={48}
-                                                        className="w-12 h-12 object-cover rounded-lg border-2 border-blue-500"
-                                                    />
+                                                    <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-gray-600 group-hover:border-gray-400 transition">
+                                                        <Image
+                                                            src={p.images?.[0] ?? '/placeholder.png'}
+                                                            alt={p.name}
+                                                            width={56}
+                                                            height={56}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
                                                     <button
-                                                        onClick={() => toggleCompare(product.id)}
-                                                        className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
-                                                        title="Xóa khỏi so sánh"
+                                                        onClick={() => toggleCompare(p.id)}
+                                                        className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-400 text-white w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold transition shadow-lg"
+                                                        title={`Bỏ ${p.name} khỏi danh sách so sánh`}
                                                     >
                                                         ×
                                                     </button>
@@ -345,7 +392,7 @@ const ProductsPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </Transition>
         </div>
     );

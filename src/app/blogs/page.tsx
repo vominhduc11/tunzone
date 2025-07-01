@@ -42,29 +42,29 @@ export default function BlogPage() {
     );
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white">
+        <div className="min-h-screen bg-gray-900 text-white animate-fadeIn">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 py-20">
+            <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 py-20 animate-slideDown">
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="relative max-w-7xl mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <div className="flex items-center justify-center gap-2 mb-4">
+                    <div className="text-center mb-12 animate-fadeInUp">
+                        <div className="flex items-center justify-center gap-2 mb-4 animate-bounceIn">
                             <FiBookOpen className="w-8 h-8 text-blue-400" />
                             <span className="text-blue-400 font-semibold">TuneZone Blog</span>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent animate-slideInLeft">
                             Khám phá thế giới âm thanh
                         </h1>
-                        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-slideInRight">
                             Cập nhật những xu hướng mới nhất, đánh giá sản phẩm và hướng dẫn sử dụng 
                             từ các chuyên gia âm thanh hàng đầu
                         </p>
                     </div>
 
                     {/* Search & Filter */}
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-4xl mx-auto animate-scaleIn">
                         {/* Search Bar */}
-                        <div className="relative mb-8">
+                        <div className="relative mb-8 animate-fadeInUp animate-stagger-1">
                             <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
                                 type="text"
@@ -76,12 +76,12 @@ export default function BlogPage() {
                         </div>
 
                         {/* Category Filter */}
-                        <div className="flex flex-wrap justify-center gap-3">
-                            {categories.map((cat) => (
+                        <div className="flex flex-wrap justify-center gap-3 animate-fadeInUp animate-stagger-2">
+                            {categories.map((cat, index) => (
                                 <button
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
-                                    className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                                    className={`px-6 py-3 rounded-full text-sm font-medium transition-smooth hover-scale animate-fadeInUp animate-stagger-${Math.min(index + 1, 5)} ${
                                         activeCategory === cat
                                             ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25'
                                             : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/20'
@@ -97,21 +97,22 @@ export default function BlogPage() {
 
             {/* Featured Post */}
             {activeCategory === 'Tất cả' && !search && (
-                <section className="max-w-7xl mx-auto px-4 py-12">
-                    <div className="flex items-center gap-2 mb-8">
+                <section className="max-w-7xl mx-auto px-4 py-12 animate-fadeInUp animate-stagger-3">
+                    <div className="flex items-center gap-2 mb-8 animate-slideInLeft">
                         <FiTrendingUp className="w-6 h-6 text-yellow-400" />
                         <h2 className="text-2xl font-bold">Bài viết nổi bật</h2>
                     </div>
                     
-                    <Link href={`/blog/${featuredPost.id}`} className="group block">
-                        <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-2xl overflow-hidden border border-gray-600 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                                <div className="relative h-64 lg:h-80">
-                                    <Image
-                                        src={featuredPost.image}
-                                        alt={featuredPost.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    <div className="hover-lift animate-scaleIn">
+                        <Link href={`/blog/${featuredPost.id}`} className="group block">
+                            <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-2xl overflow-hidden border border-gray-600 hover:border-blue-500 transition-smooth hover:shadow-2xl hover:shadow-blue-500/10">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                                    <div className="relative h-64 lg:h-80">
+                                        <Image
+                                            src={featuredPost.image}
+                                            alt={featuredPost.title}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
                                     <div className="absolute top-4 left-4">
                                         <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
@@ -148,13 +149,14 @@ export default function BlogPage() {
                             </div>
                         </div>
                     </Link>
+                    </div>
                 </section>
             )}
 
             {/* Posts Grid */}
-            <section className="max-w-7xl mx-auto px-4 py-12">
+            <section className="max-w-7xl mx-auto px-4 py-12 animate-fadeInUp animate-stagger-4">
                 {/* Results Info */}
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-8 animate-slideInLeft">
                     <h2 className="text-2xl font-bold">
                         {search || activeCategory !== 'Tất cả' ? 'Kết quả tìm kiếm' : 'Tất cả bài viết'}
                     </h2>
@@ -166,12 +168,15 @@ export default function BlogPage() {
                 {/* Posts Grid */}
                 {pagedPosts.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                        {pagedPosts.map((post) => (
-                            <Link
-                                href={`/blog/${post.id}`}
+                        {pagedPosts.map((post, index) => (
+                            <div
                                 key={post.id}
-                                className="group block bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2"
+                                className={`hover-lift animate-fadeInUp animate-stagger-${Math.min(index + 1, 5)}`}
                             >
+                                <Link
+                                    href={`/blog/${post.id}`}
+                                    className="group block bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-smooth hover:shadow-xl hover:shadow-blue-500/10"
+                                >
                                 <div className="relative h-48 overflow-hidden">
                                     <Image
                                         src={post.image}
@@ -213,6 +218,7 @@ export default function BlogPage() {
                                     </div>
                                 </div>
                             </Link>
+                            </div>
                         ))}
                     </div>
                 ) : (
@@ -238,7 +244,7 @@ export default function BlogPage() {
 
                 {/* Pagination */}
                 {pageCount > 1 && (
-                    <div className="flex justify-center">
+                    <div className="flex justify-center animate-fadeInUp animate-stagger-5">
                         <ReactPaginate
                             previousLabel="‹ Trước"
                             nextLabel="Sau ›"

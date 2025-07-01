@@ -45,10 +45,10 @@ export default function WeRecommendSection() {
                         >
                             <Link
                                 href={`/productDetail/${product.id}`}
-                                className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl p-4 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-cyan-400/50 block h-full"
+                                className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl p-4 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-blue-400/50 block h-full"
                             >
                                 <motion.h3
-                                    className="text-xl font-semibold text-white mb-4 transition-colors duration-300 hover:text-cyan-400"
+                                    className="text-xl font-semibold text-white mb-4 transition-colors duration-300 hover:text-blue-400"
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     {product.name}
@@ -69,7 +69,7 @@ export default function WeRecommendSection() {
                                     />
                                 </motion.div>
                                 <motion.button
-                                    className="mt-auto bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-white font-medium px-4 py-2 rounded-md shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                                    className="mt-auto bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-4 py-2 rounded-md shadow-lg hover:shadow-blue-500/25 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >

@@ -1,4 +1,4 @@
-import { Variants } from 'motion';
+import { Variants } from 'framer-motion';
 
 export const panelVariants: Variants = {
     hidden: {

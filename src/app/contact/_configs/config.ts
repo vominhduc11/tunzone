@@ -1,4 +1,4 @@
-import { Variants } from "motion";
+import { Variants } from "framer-motion";
 
 // src/config/motionConfig.ts
 export const headerMotion : Variants = {

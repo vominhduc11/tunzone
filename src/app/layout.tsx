@@ -7,6 +7,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import { ThemeProvider } from '@/context/themeContext';
 
 import '@/styles/globals.css';
+import '@/styles/theme.css';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',

@@ -33,7 +33,7 @@ export default function TestimonialsStatsSection() {
                                 whileHover={{ rotate: 360, scale: 1.2 }}
                                 transition={{ duration: 0.6 }}
                             >
-                                <Icon className="w-12 h-12 text-cyan-400 mb-2 group-hover:text-cyan-300 transition-colors duration-300" />
+                                <Icon className="w-12 h-12 text-blue-400 mb-2 group-hover:text-blue-300 transition-colors duration-300" />
                             </motion.div>
                             <span className="text-3xl font-bold text-white">{value}</span>
                             <span className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
@@ -55,7 +55,7 @@ export default function TestimonialsStatsSection() {
                             key={name}
                             variants={itemVariants}
                             whileHover={{ y: -10, scale: 1.02 }}
-                            className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-cyan-400/50"
+                            className="bg-gradient-to-br from-gray-800 to-gray-700 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-blue-400/50"
                         >
                             <div className="flex items-center mb-4">
                                 <motion.div
@@ -72,7 +72,7 @@ export default function TestimonialsStatsSection() {
                                 </motion.div>
                                 <div>
                                     <motion.h4
-                                        className="font-semibold text-white hover:text-cyan-400 transition-colors duration-300"
+                                        className="font-semibold text-white hover:text-blue-400 transition-colors duration-300"
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         {name}

@@ -152,7 +152,7 @@ export default function BannerSwiper() {
                                                     variants={fadeInUp}
                                                     className="inline-block"
                                                 >
-                                                    <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                                    <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                                                         {banner.badge}
                                                     </span>
                                                 </motion.div>
@@ -195,7 +195,7 @@ export default function BannerSwiper() {
                                                 variants={fadeInLeft}
                                                 className="flex items-center gap-4"
                                             >
-                                                <span className="text-3xl md:text-4xl font-bold text-cyan-400">
+                                                <span className="text-3xl md:text-4xl font-bold text-blue-400">
                                                     {banner.price}
                                                 </span>
                                                 {banner.originalPrice && (
@@ -209,7 +209,7 @@ export default function BannerSwiper() {
                                             <motion.div variants={fadeInLeft}>
                                                 <Link 
                                                     href={`/productDetail/${banner.productId}`}
-                                                    className="group inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl animate-glow"
+                                                    className="group inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl animate-glow"
                                                 >
                                                     {banner.buttonText}
                                                     <svg 
@@ -233,7 +233,7 @@ export default function BannerSwiper() {
                                         >
                                             <div className="relative">
                                                 {/* Glow Effect */}
-                                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl scale-150"></div>
+                                                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-500/20 rounded-full blur-3xl scale-150"></div>
                                                 
                                                 {/* Product Image */}
                                                 <motion.div
@@ -256,7 +256,7 @@ export default function BannerSwiper() {
 
                                                 {/* Floating Elements */}
                                                 <motion.div
-                                                    className="absolute top-10 right-10 w-4 h-4 bg-cyan-400 rounded-full opacity-60"
+                                                    className="absolute top-10 right-10 w-4 h-4 bg-blue-400 rounded-full opacity-60"
                                                     animate={{
                                                         y: [0, -20, 0],
                                                         opacity: [0.6, 1, 0.6]

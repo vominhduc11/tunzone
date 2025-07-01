@@ -62,7 +62,7 @@ export default function ChooseCardoSection() {
                                 transition: { duration: 0.3 }
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="group flex flex-col items-center text-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-cyan-400/50"
+                            className="group flex flex-col items-center text-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-blue-400/50"
                         >
                             <motion.div
                                 whileHover={{
@@ -71,10 +71,10 @@ export default function ChooseCardoSection() {
                                     transition: { duration: 0.6 }
                                 }}
                             >
-                                <Icon className="w-12 h-12 text-cyan-400 mb-4 group-hover:text-cyan-300 transition-colors duration-300" />
+                                <Icon className="w-12 h-12 text-blue-400 mb-4 group-hover:text-blue-300 transition-colors duration-300" />
                             </motion.div>
                             <motion.h3
-                                className="text-xl font-semibold mb-2 text-white group-hover:text-cyan-400 transition-colors duration-300"
+                                className="text-xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors duration-300"
                                 whileHover={{ scale: 1.05 }}
                             >
                                 {title}

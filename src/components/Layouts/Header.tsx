@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 import { products } from '@/data/api/products';
+import Logo from '@/components/shared/Logo';
 
 const navItems = [
     { name: 'Trang chủ', href: '/' },
@@ -60,14 +61,7 @@ export default function Header() {
         <header className="bg-gray-900 border-b border-gray-700 relative z-50 sticky top-0 backdrop-blur-sm bg-gray-900/95">
             <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between h-16 px-4">
                 {/* Logo */}
-                <Link href="/" className="flex-shrink-0 flex items-center gap-2 group">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-2 rounded-xl group-hover:scale-105 transition-transform">
-                        <FiHeadphones className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                        TuneZone
-                    </span>
-                </Link>
+                <Logo size="md" showText={true} href="/" />
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex space-x-1">

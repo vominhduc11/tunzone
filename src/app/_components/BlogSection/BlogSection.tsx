@@ -42,7 +42,7 @@ export default function BlogSection() {
                                 scale: 1.02,
                                 transition: { duration: 0.3 }
                             }}
-                            className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-cyan-400/50"
+                            className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-600 hover:border-blue-400/50"
                         >
                             <motion.div
                                 className="relative h-60 overflow-hidden"
@@ -69,7 +69,7 @@ export default function BlogSection() {
                                     </div>
                                 </div>
                                 <motion.h3
-                                    className="text-xl font-semibold text-white mb-2 hover:text-cyan-400 transition-colors duration-300"
+                                    className="text-xl font-semibold text-white mb-2 hover:text-blue-400 transition-colors duration-300"
                                     whileHover={{ scale: 1.02 }}
                                 >
                                     {blog.title}
@@ -78,7 +78,7 @@ export default function BlogSection() {
                                 <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                                     <Link
                                         href={`/blog/${blog.id}`}
-                                        className="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-300 group"
+                                        className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors duration-300 group"
                                     >
                                         Đọc Thêm
                                         <FiArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />

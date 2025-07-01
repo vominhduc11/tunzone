@@ -1,6 +1,7 @@
 import { FaFacebookF, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
-import { FiHeadphones, FiMail, FiPhone, FiMapPin, FiHeart } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiHeart } from 'react-icons/fi';
 import Link from 'next/link';
+import Logo from '@/components/shared/Logo';
 
 const companyLinks = [
   { label: 'Về TuneZone', href: '/about' },
@@ -63,16 +64,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-3 rounded-xl">
-                <FiHeadphones className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  TuneZone
-                </h3>
-                <p className="text-sm text-gray-400">Đỉnh cao âm thanh</p>
-              </div>
+            <div className="mb-6">
+              <Logo size="lg" showText={true} href="/" />
+              <p className="text-sm text-gray-400 mt-2 ml-16">Đỉnh cao âm thanh</p>
             </div>
             
             <p className="text-gray-300 mb-6 leading-relaxed">

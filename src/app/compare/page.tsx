@@ -26,7 +26,7 @@ function CompareContent() {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
                 <h1 className="text-3xl font-bold mb-4">Chưa có sản phẩm để so sánh</h1>
-                <Link href="/products" className="text-cyan-400 hover:underline">
+                <Link href="/products" className="text-blue-400 hover:underline">
                     Quay lại trang sản phẩm
                 </Link>
             </div>
@@ -140,7 +140,7 @@ function CompareContent() {
                                     >
                                         <Link
                                             href={`/productDetail/${p.id}`}
-                                            className="inline-block bg-cyan-500 hover:bg-cyan-400 text-gray-900 px-4 py-2 rounded-full transition"
+                                            className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-full transition-all duration-300"
                                         >
                                             Xem chi tiết
                                         </Link>
@@ -160,7 +160,7 @@ function ComparePage() {
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
                     <p>Đang tải...</p>
                 </div>
             </div>

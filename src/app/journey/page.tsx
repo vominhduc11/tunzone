@@ -54,7 +54,7 @@ export default function UseCasesPage() {
                             </p>
                             <Link
                                 href="/contact"
-                                className="inline-block bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] font-semibold py-3 px-8 rounded-full transition"
+                                className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300"
                             >
                                 Liên hệ ngay
                             </Link>
@@ -79,7 +79,7 @@ export default function UseCasesPage() {
             {/* Use Cases Grid */}
             <section className="py-16 px-4">
                 <div className="w-full max-w-[1280px] mx-auto text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-4">
+                    <h2 className="text-3xl md:text-4xl font-semibold text-blue-400 mb-4">
                         Ứng Dụng Đa Dạng
                     </h2>
                     <p className="text-gray-300 leading-relaxed">
@@ -89,14 +89,14 @@ export default function UseCasesPage() {
                 </div>
                 <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="bg-[#232c3b] p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-transform duration-200 text-center">
-                        <FiMap className="text-cyan-400 text-5xl mb-4 mx-auto" />
+                        <FiMap className="text-blue-400 text-5xl mb-4 mx-auto" />
                         <h3 className="text-xl font-semibold mb-2 text-white">Du Lịch Khám Phá</h3>
                         <p className="text-gray-300">
                             Kết nối liền mạch mọi lúc mọi nơi, dù bạn ở rừng núi hay sa mạc.
                         </p>
                     </div>
                     <div className="bg-[#232c3b] p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-transform duration-200 text-center">
-                        <FiMusic className="text-cyan-400 text-5xl mb-4 mx-auto" />
+                        <FiMusic className="text-blue-400 text-5xl mb-4 mx-auto" />
                         <h3 className="text-xl font-semibold mb-2 text-white">
                             Giải Trí Nghe Nhạc
                         </h3>
@@ -106,7 +106,7 @@ export default function UseCasesPage() {
                         </p>
                     </div>
                     <div className="bg-[#232c3b] p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-transform duration-200 text-center">
-                        <FiBattery className="text-cyan-400 text-5xl mb-4 mx-auto" />
+                        <FiBattery className="text-blue-400 text-5xl mb-4 mx-auto" />
                         <h3 className="text-xl font-semibold mb-2 text-white">Sử Dụng Dài Lâu</h3>
                         <p className="text-gray-300">
                             Pin 13h liên tục, không lo gián đoạn giữa chặng đường.
@@ -120,7 +120,7 @@ export default function UseCasesPage() {
                 <div className="w-full max-w-[1280px] mx-auto text-center">
                     <Link
                         href="/"
-                        className="bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] font-semibold py-2 px-6 rounded-full transition"
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
                     >
                         Quay về trang chủ
                     </Link>

@@ -83,7 +83,7 @@ const ExplorePage: FC = () => {
                             </p>
                             <button
                                 onClick={scrollToFeatures}
-                                className="bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] py-3 px-8 rounded-full transition"
+                                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-8 rounded-full transition-all duration-300"
                             >
                                 Tìm hiểu thêm
                             </button>
@@ -108,7 +108,7 @@ const ExplorePage: FC = () => {
             {/* Features Section */}
             <section id="features" className="py-16 px-4">
                 <div className="w-full max-w-[1280px] mx-auto text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-4">
+                    <h2 className="text-3xl md:text-4xl font-semibold text-blue-400 mb-4">
                         Tính Năng Nổi Bật
                     </h2>
                     <p className="text-gray-300 leading-relaxed">
@@ -121,7 +121,7 @@ const ExplorePage: FC = () => {
                             key={title}
                             className="bg-[#232c3b] p-6 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-transform duration-200"
                         >
-                            <Icon className="text-cyan-400 text-4xl mb-4" />
+                            <Icon className="text-blue-400 text-4xl mb-4" />
                             <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
                             <p className="text-gray-300 leading-relaxed">{desc}</p>
                         </div>
@@ -132,12 +132,12 @@ const ExplorePage: FC = () => {
             {/* CTA Section */}
             <section className="bg-[#232c3b] py-12 px-4">
                 <div className="w-full max-w-[1280px] mx-auto text-center">
-                    <h2 className="text-3xl font-semibold text-cyan-400 mb-4">
+                    <h2 className="text-3xl font-semibold text-blue-400 mb-4">
                         Sẵn Sàng Trải Nghiệm?
                     </h2>
                     <Link
                         href="/contact"
-                        className="bg-cyan-400 hover:bg-cyan-300 text-[#181f2a] py-3 px-8 rounded-full transition-colors"
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-8 rounded-full transition-all duration-300"
                     >
                         Liên Hệ Ngay
                     </Link>
