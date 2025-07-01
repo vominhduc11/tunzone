@@ -4,549 +4,527 @@ import { useState } from 'react';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { motion } from 'framer-motion';
+import { FiShield, FiClock, FiCheck, FiX, FiPlus, FiFileText, FiAlertTriangle, FiRefreshCw, FiUser, FiMail, FiPhone } from 'react-icons/fi';
 import SharedModal from '@/components/shared/SharedModal';
-import { panelVariants } from './_config/config';
-import { demoProducts } from '@/data/demoProducts';
-import { demoOrders } from '@/data/demoOrders';
+
+interface Product {
+    serial: string;
+    name: string;
+    purchaseDate: string;
+    expiryDate: string;
+    status: 'active' | 'expired' | 'expiring';
+    canRenew: boolean;
+    warrantyType: string;
+    remainingDays?: number;
+}
+
+interface WarrantyRequest {
+    id: string;
+    serial: string;
+    productName: string;
+    issueType: string;
+    description: string;
+    status: 'pending' | 'processing' | 'completed' | 'rejected';
+    createdDate: string;
+    updatedDate: string;
+}
+
+const demoProducts: Product[] = [
+    {
+        serial: 'TZ123456789',
+        name: 'TuneZone Pro X1',
+        purchaseDate: '2024-01-15',
+        expiryDate: '2026-01-15',
+        status: 'active',
+        canRenew: false,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 365
+    },
+    {
+        serial: 'TZ987654321',
+        name: 'TuneZone Studio Pro',
+        purchaseDate: '2023-08-10',
+        expiryDate: '2025-08-10',
+        status: 'expiring',
+        canRenew: true,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 45
+    },
+    {
+        serial: 'TZ000000000',
+        name: 'TuneZone Classic',
+        purchaseDate: '2021-05-20',
+        expiryDate: '2023-05-20',
+        status: 'expired',
+        canRenew: false,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 0
+    }
+];
+
+const demoRequests: WarrantyRequest[] = [
+    {
+        id: 'WR001',
+        serial: 'TZ123456789',
+        productName: 'TuneZone Pro X1',
+        issueType: 'Lỗi âm thanh',
+        description: 'Tai nghe bên trái không có tiếng',
+        status: 'processing',
+        createdDate: '2025-06-15',
+        updatedDate: '2025-06-20'
+    },
+    {
+        id: 'WR002',
+        serial: 'TZ987654321',
+        productName: 'TuneZone Studio Pro',
+        issueType: 'Lỗi kết nối',
+        description: 'Bluetooth không kết nối được',
+        status: 'completed',
+        createdDate: '2025-05-10',
+        updatedDate: '2025-05-25'
+    }
+];
 
 export default function WarrantyDashboard() {
     const [renewOpen, setRenewOpen] = useState(false);
+    // const [requestOpen, setRequestOpen] = useState(false);
     const [selectedSerial, setSelectedSerial] = useState<string | null>(null);
+    const [newRequest, setNewRequest] = useState({
+        serial: '',
+        issueType: '',
+        description: '',
+        customerName: '',
+        email: '',
+        phone: ''
+    });
 
-    // Gia hạn bảo hành (giả lập): chọn serial rồi mở modal chọn thời gian
     const handleRenew = (serial: string) => {
         setSelectedSerial(serial);
         setRenewOpen(true);
     };
 
-    return (
-        <section className="bg-[#181f2a] min-h-[80vh] py-12">
-            <div className="w-full max-w-[1280px] mx-auto px-4">
-                <h1 className="text-3xl md:text-4xl font-semibold text-cyan-400 mb-8">
-                    Quản lý bảo hành
-                </h1>
+    const handleSubmitRequest = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Handle warranty request submission
+        console.log('Warranty request:', newRequest);
+        // setRequestOpen(false);
+        setNewRequest({
+            serial: '',
+            issueType: '',
+            description: '',
+            customerName: '',
+            email: '',
+            phone: ''
+        });
+    };
 
+    const getStatusColor = (status: string) => {
+        switch (status) {
+            case 'active': return 'text-green-400';
+            case 'expiring': return 'text-yellow-400';
+            case 'expired': return 'text-red-400';
+            case 'pending': return 'text-yellow-400';
+            case 'processing': return 'text-blue-400';
+            case 'completed': return 'text-green-400';
+            case 'rejected': return 'text-red-400';
+            default: return 'text-gray-400';
+        }
+    };
+
+    const getStatusIcon = (status: string) => {
+        switch (status) {
+            case 'active': return <FiCheck className="w-4 h-4" />;
+            case 'expiring': return <FiAlertTriangle className="w-4 h-4" />;
+            case 'expired': return <FiX className="w-4 h-4" />;
+            case 'pending': return <FiClock className="w-4 h-4" />;
+            case 'processing': return <FiRefreshCw className="w-4 h-4" />;
+            case 'completed': return <FiCheck className="w-4 h-4" />;
+            case 'rejected': return <FiX className="w-4 h-4" />;
+            default: return <FiShield className="w-4 h-4" />;
+        }
+    };
+
+    const getStatusText = (status: string) => {
+        switch (status) {
+            case 'active': return 'Còn hiệu lực';
+            case 'expiring': return 'Sắp hết hạn';
+            case 'expired': return 'Đã hết hạn';
+            case 'pending': return 'Chờ xử lý';
+            case 'processing': return 'Đang xử lý';
+            case 'completed': return 'Hoàn thành';
+            case 'rejected': return 'Từ chối';
+            default: return 'Không xác định';
+        }
+    };
+
+    return (
+        <div className="bg-gray-900 text-white min-h-screen py-12">
+            <div className="w-full max-w-[1280px] mx-auto px-4">
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-8"
+                >
+                    <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Quản lý bảo hành
+                    </h1>
+                    <p className="text-gray-300">
+                        Theo dõi và quản lý bảo hành cho tất cả sản phẩm TuneZone của bạn
+                    </p>
+                </motion.div>
+
+                {/* Tabs */}
                 <Tabs>
-                    <TabList className="flex gap-2 mb-8 p-1 bg-[#232c3b] rounded-xl border border-[#2b3445]">
-                        <Tab className="flex-1 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-gray-200 hover:bg-[#2a3441] data-[selected]:bg-gradient-to-r data-[selected]:from-cyan-500 data-[selected]:to-blue-500 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-cyan-500/25 data-[selected]:transform data-[selected]:scale-[1.02]">
+                    <TabList className="flex gap-2 mb-8 p-1 bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700">
+                        <Tab className="flex-1 px-6 py-4 text-sm font-medium rounded-xl transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-white hover:bg-gray-700/50 data-[selected]:bg-gradient-to-r data-[selected]:from-blue-600 data-[selected]:to-purple-600 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-blue-500/25">
                             <span className="flex items-center justify-center gap-2">
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    />
-                                </svg>
+                                <FiShield className="w-4 h-4" />
                                 Thiết bị của tôi
                             </span>
                         </Tab>
-                        <Tab className="flex-1 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-gray-200 hover:bg-[#2a3441] data-[selected]:bg-gradient-to-r data-[selected]:from-cyan-500 data-[selected]:to-blue-500 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-cyan-500/25 data-[selected]:transform data-[selected]:scale-[1.02]">
+                        <Tab className="flex-1 px-6 py-4 text-sm font-medium rounded-xl transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-white hover:bg-gray-700/50 data-[selected]:bg-gradient-to-r data-[selected]:from-blue-600 data-[selected]:to-purple-600 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-blue-500/25">
                             <span className="flex items-center justify-center gap-2">
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                    />
-                                </svg>
-                                Lịch sử đơn bảo hành
+                                <FiFileText className="w-4 h-4" />
+                                Yêu cầu bảo hành
                             </span>
                         </Tab>
-                        <Tab className="flex-1 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-gray-200 hover:bg-[#2a3441] data-[selected]:bg-gradient-to-r data-[selected]:from-cyan-500 data-[selected]:to-blue-500 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-cyan-500/25 data-[selected]:transform data-[selected]:scale-[1.02]">
+                        <Tab className="flex-1 px-6 py-4 text-sm font-medium rounded-xl transition-all duration-300 cursor-pointer focus:outline-none text-gray-400 hover:text-white hover:bg-gray-700/50 data-[selected]:bg-gradient-to-r data-[selected]:from-blue-600 data-[selected]:to-purple-600 data-[selected]:text-white data-[selected]:shadow-lg data-[selected]:shadow-blue-500/25">
                             <span className="flex items-center justify-center gap-2">
-                                <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
-                                Gửi yêu cầu bảo hành
+                                <FiPlus className="w-4 h-4" />
+                                Gửi yêu cầu mới
                             </span>
                         </Tab>
                     </TabList>
 
-                    {/* TabPanel 1: Thiết bị của tôi */}
+                    {/* Tab 1: My Devices */}
                     <TabPanel>
                         <motion.div
-                            variants={panelVariants}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                            className="relative"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="space-y-6"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-xl"></div>
-                            <div className="relative overflow-x-auto rounded-xl shadow-2xl bg-[#232c3b] border border-[#2b3445]">
-                                <div className="bg-gradient-to-r from-[#202837] to-[#232c3b] px-6 py-4 border-b border-[#2b3445]">
-                                    <h2 className="text-xl font-semibold text-cyan-400 flex items-center gap-2">
-                                        <svg
-                                            className="w-5 h-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                            />
-                                        </svg>
-                                        Danh sách thiết bị
-                                    </h2>
-                                </div>
-                                <table className="min-w-full text-sm">
-                                    <thead>
-                                        <tr className="text-gray-300 bg-[#1e2530]">
-                                            <th className="p-4 text-left font-semibold">
-                                                Sản phẩm
-                                            </th>
-                                            <th className="p-4 text-left font-semibold">Serial</th>
-                                            <th className="p-4 text-left font-semibold">
-                                                Ngày mua
-                                            </th>
-                                            <th className="p-4 text-left font-semibold">Hết hạn</th>
-                                            <th className="p-4 text-left font-semibold">
-                                                Trạng thái
-                                            </th>
-                                            <th className="p-4 text-left font-semibold">Tác vụ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {demoProducts.map((p, index) => (
-                                            <motion.tr
-                                                key={p.serial}
-                                                className="border-b border-[#303850] last:border-0 hover:bg-[#2a3441] transition-all duration-200"
-                                                initial={{ opacity: 0, x: -20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: index * 0.1 }}
-                                            >
-                                                <td className="p-4 font-medium text-white">
-                                                    {p.name}
-                                                </td>
-                                                <td className="p-4">
-                                                    <span className="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded-md font-mono text-xs">
-                                                        {p.serial}
-                                                    </span>
-                                                </td>
-                                                <td className="p-4 text-gray-300">
-                                                    {p.purchaseDate}
-                                                </td>
-                                                <td className="p-4 text-gray-300">
-                                                    {p.expiryDate}
-                                                </td>
-                                                <td className="p-4">
-                                                    <span
-                                                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                                                            p.status === 'Còn hạn'
-                                                                ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                                                                : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                                                        }`}
-                                                    >
-                                                        {p.status}
-                                                    </span>
-                                                </td>
-                                                <td className="p-4">
-                                                    {p.canRenew ? (
-                                                        <button
-                                                            onClick={() => handleRenew(p.serial)}
-                                                            className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-lg font-medium text-gray-900 hover:from-yellow-300 hover:to-orange-300 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-yellow-400/25"
-                                                        >
-                                                            Gia hạn
-                                                        </button>
-                                                    ) : p.status === 'Còn hạn' ? (
-                                                        <span className="text-gray-400 text-xs">
-                                                            Chưa đến thời gian gia hạn
-                                                        </span>
-                                                    ) : (
-                                                        <span className="text-gray-500 text-xs">
-                                                            Không thể gia hạn
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            </motion.tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl font-bold">Thiết bị đã đăng ký</h2>
+                                <span className="text-gray-400">{demoProducts.length} thiết bị</span>
                             </div>
-                        </motion.div>
-                    </TabPanel>
 
-                    {/* TabPanel 2: Lịch sử đơn bảo hành */}
-                    <TabPanel>
-                        <motion.div
-                            variants={panelVariants}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                            className="relative"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-xl"></div>
-                            <div className="relative rounded-xl shadow-2xl bg-[#232c3b] border border-[#2b3445] overflow-hidden">
-                                <div className="bg-gradient-to-r from-[#202837] to-[#232c3b] px-6 py-4 border-b border-[#2b3445]">
-                                    <h2 className="text-xl font-semibold text-cyan-400 flex items-center gap-2">
-                                        <svg
-                                            className="w-5 h-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                            />
-                                        </svg>
-                                        Lịch sử gia hạn/bảo hành
-                                    </h2>
-                                </div>
-                                <div className="p-6">
-                                    <table className="min-w-full text-sm">
-                                        <thead>
-                                            <tr className="text-gray-300 bg-[#1e2530] rounded-lg">
-                                                <th className="p-4 text-left font-semibold rounded-l-lg">
-                                                    Mã đơn
-                                                </th>
-                                                <th className="p-4 text-left font-semibold">
-                                                    Serial
-                                                </th>
-                                                <th className="p-4 text-left font-semibold">
-                                                    Loại
-                                                </th>
-                                                <th className="p-4 text-left font-semibold">
-                                                    Thời gian
-                                                </th>
-                                                <th className="p-4 text-left font-semibold">
-                                                    Thời hạn
-                                                </th>
-                                                <th className="p-4 text-left font-semibold">Giá</th>
-                                                <th className="p-4 text-left font-semibold rounded-r-lg">
-                                                    Trạng thái
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="space-y-2">
-                                            {demoOrders.map((o, index) => (
-                                                <motion.tr
-                                                    key={o.id}
-                                                    className="border-b border-[#303850] last:border-0 hover:bg-[#2a3441] transition-all duration-200 rounded-lg"
-                                                    initial={{ opacity: 0, x: -20 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: index * 0.1 }}
-                                                >
-                                                    <td className="p-4">
-                                                        <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded-md font-mono text-xs">
-                                                            #{o.id}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span className="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded-md font-mono text-xs">
-                                                            {o.serial}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span
-                                                            className={`px-2 py-1 rounded-md text-xs font-medium ${
-                                                                o.type === 'Gia hạn'
-                                                                    ? 'bg-orange-500/20 text-orange-300'
-                                                                    : 'bg-green-500/20 text-green-300'
-                                                            }`}
-                                                        >
-                                                            {o.type}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4 text-gray-300">{o.date}</td>
-                                                    <td className="p-4 text-gray-300">
-                                                        {o.duration}
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span className="font-semibold text-yellow-400">
-                                                            {o.price}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span
-                                                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                                                                o.status === 'Hoàn tất'
-                                                                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                                                                    : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                                                            }`}
-                                                        >
-                                                            {o.status}
-                                                        </span>
-                                                    </td>
-                                                </motion.tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </TabPanel>
+                            <div className="grid gap-6">
+                                {demoProducts.map((product, index) => (
+                                    <motion.div
+                                        key={product.serial}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                                    >
+                                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                                            <div className="flex-1">
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div>
+                                                        <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
+                                                        <p className="text-gray-400 text-sm">Serial: {product.serial}</p>
+                                                    </div>
+                                                    <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                                                        product.status === 'active' ? 'bg-green-500/20 text-green-400' :
+                                                        product.status === 'expiring' ? 'bg-yellow-500/20 text-yellow-400' :
+                                                        'bg-red-500/20 text-red-400'
+                                                    }`}>
+                                                        {getStatusIcon(product.status)}
+                                                        {getStatusText(product.status)}
+                                                    </div>
+                                                </div>
 
-                    {/* TabPanel 3: Gửi yêu cầu bảo hành */}
-                    <TabPanel>
-                        <motion.div
-                            variants={panelVariants}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                            className="relative"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-xl"></div>
-                            <div className="relative rounded-xl shadow-2xl bg-[#232c3b] border border-[#2b3445] max-w-2xl mx-auto overflow-hidden">
-                                <div className="bg-gradient-to-r from-[#202837] to-[#232c3b] px-6 py-4 border-b border-[#2b3445]">
-                                    <h2 className="text-xl font-semibold text-cyan-400 flex items-center gap-2">
-                                        <svg
-                                            className="w-5 h-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        Gửi yêu cầu bảo hành
-                                    </h2>
-                                    <p className="text-gray-400 text-sm mt-1">
-                                        Điền thông tin chi tiết để được hỗ trợ nhanh nhất
-                                    </p>
-                                </div>
-                                <div className="p-6">
-                                    <form className="space-y-6">
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.1 }}
-                                        >
-                                            <label className="block text-gray-300 mb-2 font-medium">
-                                                Chọn thiết bị
-                                            </label>
-                                            <div className="relative">
-                                                <select className="w-full px-4 py-3 rounded-lg bg-[#181f2a] text-white border border-[#2b3445] focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 appearance-none">
-                                                    {demoProducts.map((p) => (
-                                                        <option key={p.serial} value={p.serial}>
-                                                            {p.name} ({p.serial})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                <svg
-                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M19 9l-7 7-7-7"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </motion.div>
-
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.2 }}
-                                        >
-                                            <label className="block text-gray-300 mb-2 font-medium">
-                                                Mô tả vấn đề
-                                            </label>
-                                            <textarea
-                                                rows={4}
-                                                className="w-full px-4 py-3 rounded-lg bg-[#181f2a] text-white border border-[#2b3445] focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 resize-none"
-                                                placeholder="Mô tả chi tiết vấn đề bạn gặp phải..."
-                                            ></textarea>
-                                        </motion.div>
-
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.3 }}
-                                        >
-                                            <label className="block text-gray-300 mb-2 font-medium">
-                                                Tải lên hình ảnh (tuỳ chọn)
-                                            </label>
-                                            <div className="relative border-2 border-dashed border-[#2b3445] rounded-lg p-6 hover:border-cyan-400 transition-colors duration-200">
-                                                <input
-                                                    type="file"
-                                                    multiple
-                                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                                />
-                                                <div className="text-center">
-                                                    <svg
-                                                        className="mx-auto h-12 w-12 text-gray-400"
-                                                        stroke="currentColor"
-                                                        fill="none"
-                                                        viewBox="0 0 48 48"
-                                                    >
-                                                        <path
-                                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                            strokeWidth={2}
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                    <p className="mt-2 text-sm text-gray-400">
-                                                        <span className="font-medium text-cyan-400">
-                                                            Nhấp để tải lên
-                                                        </span>{' '}
-                                                        hoặc kéo thả tệp vào đây
-                                                    </p>
-                                                    <p className="text-xs text-gray-500">
-                                                        PNG, JPG, GIF tối đa 10MB
-                                                    </p>
+                                                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                                    <div className="space-y-2">
+                                                        <div className="flex justify-between">
+                                                            <span className="text-gray-400">Ngày mua:</span>
+                                                            <span className="text-white">{product.purchaseDate}</span>
+                                                        </div>
+                                                        <div className="flex justify-between">
+                                                            <span className="text-gray-400">Hết hạn:</span>
+                                                            <span className="text-white">{product.expiryDate}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <div className="flex justify-between">
+                                                            <span className="text-gray-400">Loại bảo hành:</span>
+                                                            <span className="text-white text-right">{product.warrantyType}</span>
+                                                        </div>
+                                                        {product.remainingDays !== undefined && product.remainingDays > 0 && (
+                                                            <div className="flex justify-between">
+                                                                <span className="text-gray-400">Còn lại:</span>
+                                                                <span className="text-white">{product.remainingDays} ngày</span>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </motion.div>
 
-                                        <motion.button
-                                            type="submit"
-                                            className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/25"
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.4 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                        >
-                                            <span className="flex items-center justify-center gap-2">
-                                                <svg
-                                                    className="w-4 h-4"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
+                                            <div className="flex flex-col gap-3 lg:w-48">
+                                                {product.canRenew && (
+                                                    <button
+                                                        onClick={() => handleRenew(product.serial)}
+                                                        className="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
+                                                    >
+                                                        <FiRefreshCw className="w-4 h-4" />
+                                                        Gia hạn
+                                                    </button>
+                                                )}
+                                                <button
+                                                    // onClick={() => setRequestOpen(true)}
+                                                    className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
                                                 >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                                                    />
-                                                </svg>
-                                                Gửi yêu cầu
-                                            </span>
-                                        </motion.button>
-                                    </form>
-                                </div>
+                                                    <FiPlus className="w-4 h-4" />
+                                                    Yêu cầu bảo hành
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </TabPanel>
+
+                    {/* Tab 2: Warranty Requests */}
+                    <TabPanel>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="space-y-6"
+                        >
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl font-bold">Lịch sử yêu cầu bảo hành</h2>
+                                <span className="text-gray-400">{demoRequests.length} yêu cầu</span>
+                            </div>
+
+                            <div className="space-y-4">
+                                {demoRequests.map((request, index) => (
+                                    <motion.div
+                                        key={request.id}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700"
+                                    >
+                                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                                            <div className="flex-1">
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div>
+                                                        <h3 className="text-lg font-bold text-white mb-1">#{request.id}</h3>
+                                                        <p className="text-gray-400 text-sm">{request.productName} - {request.serial}</p>
+                                                    </div>
+                                                    <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(request.status).replace('text-', 'text-')} ${
+                                                        request.status === 'completed' ? 'bg-green-500/20' :
+                                                        request.status === 'processing' ? 'bg-blue-500/20' :
+                                                        request.status === 'pending' ? 'bg-yellow-500/20' :
+                                                        'bg-red-500/20'
+                                                    }`}>
+                                                        {getStatusIcon(request.status)}
+                                                        {getStatusText(request.status)}
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                                    <div>
+                                                        <p className="text-gray-400 mb-1">Vấn đề:</p>
+                                                        <p className="text-white font-medium">{request.issueType}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-gray-400 mb-1">Ngày tạo:</p>
+                                                        <p className="text-white">{request.createdDate}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="mt-3">
+                                                    <p className="text-gray-400 text-sm mb-1">Mô tả:</p>
+                                                    <p className="text-gray-300 text-sm">{request.description}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </TabPanel>
+
+                    {/* Tab 3: New Request */}
+                    <TabPanel>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="max-w-2xl mx-auto"
+                        >
+                            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+                                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                                    <div className="bg-blue-500/20 p-2 rounded-lg">
+                                        <FiPlus className="w-6 h-6 text-blue-400" />
+                                    </div>
+                                    Gửi yêu cầu bảo hành mới
+                                </h2>
+
+                                <form onSubmit={handleSubmitRequest} className="space-y-6">
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-gray-300 mb-3 font-medium">Họ và tên *</label>
+                                            <div className="relative">
+                                                <FiUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={newRequest.customerName}
+                                                    onChange={(e) => setNewRequest({...newRequest, customerName: e.target.value})}
+                                                    className="w-full bg-gray-700/50 border border-gray-600 pl-12 pr-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                                    placeholder="Nhập họ và tên"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-gray-300 mb-3 font-medium">Email *</label>
+                                            <div className="relative">
+                                                <FiMail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                                <input
+                                                    type="email"
+                                                    required
+                                                    value={newRequest.email}
+                                                    onChange={(e) => setNewRequest({...newRequest, email: e.target.value})}
+                                                    className="w-full bg-gray-700/50 border border-gray-600 pl-12 pr-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                                    placeholder="Nhập địa chỉ email"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-gray-300 mb-3 font-medium">Số điện thoại</label>
+                                            <div className="relative">
+                                                <FiPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                                <input
+                                                    type="tel"
+                                                    value={newRequest.phone}
+                                                    onChange={(e) => setNewRequest({...newRequest, phone: e.target.value})}
+                                                    className="w-full bg-gray-700/50 border border-gray-600 pl-12 pr-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                                    placeholder="Nhập số điện thoại"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-gray-300 mb-3 font-medium">Mã Serial *</label>
+                                            <div className="relative">
+                                                <FiShield className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={newRequest.serial}
+                                                    onChange={(e) => setNewRequest({...newRequest, serial: e.target.value})}
+                                                    className="w-full bg-gray-700/50 border border-gray-600 pl-12 pr-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                                    placeholder="VD: TZ123456789"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-gray-300 mb-3 font-medium">Loại vấn đề *</label>
+                                        <select
+                                            required
+                                            value={newRequest.issueType}
+                                            onChange={(e) => setNewRequest({...newRequest, issueType: e.target.value})}
+                                            className="w-full bg-gray-700/50 border border-gray-600 px-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                        >
+                                            <option value="">Chọn loại vấn đề</option>
+                                            <option value="Lỗi âm thanh">Lỗi âm thanh</option>
+                                            <option value="Lỗi kết nối">Lỗi kết nối</option>
+                                            <option value="Lỗi phần cứng">Lỗi phần cứng</option>
+                                            <option value="Lỗi pin">Lỗi pin</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-gray-300 mb-3 font-medium">Mô tả chi tiết *</label>
+                                        <textarea
+                                            required
+                                            rows={4}
+                                            value={newRequest.description}
+                                            onChange={(e) => setNewRequest({...newRequest, description: e.target.value})}
+                                            className="w-full bg-gray-700/50 border border-gray-600 px-4 py-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                            placeholder="Mô tả chi tiết vấn đề bạn gặp phải..."
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+                                    >
+                                        <FiPlus className="w-5 h-5" />
+                                        Gửi yêu cầu bảo hành
+                                    </button>
+                                </form>
                             </div>
                         </motion.div>
                     </TabPanel>
                 </Tabs>
 
-                {/* Modal gia hạn bảo hành */}
+                {/* Renew Modal */}
                 <SharedModal
                     isOpen={renewOpen}
                     onClose={() => setRenewOpen(false)}
                     contentLabel="Gia hạn bảo hành"
                 >
                     <motion.div
-                        className="bg-gradient-to-br from-[#232c3b] to-[#1e2530] rounded-2xl p-8 w-full max-w-md mx-auto border border-[#2b3445] shadow-2xl"
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-gray-800 rounded-2xl p-8 w-full max-w-md mx-auto border border-gray-700"
                     >
-                        <div className="text-center mb-6">
-                            <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg
-                                    className="w-8 h-8 text-gray-900"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                </svg>
+                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <div className="bg-yellow-500/20 p-2 rounded-lg">
+                                <FiRefreshCw className="w-6 h-6 text-yellow-400" />
                             </div>
-                            <h2 className="text-2xl font-bold text-cyan-400 mb-2">
-                                Gia hạn bảo hành
-                            </h2>
+                            Gia hạn bảo hành
+                        </h2>
+                        
+                        <div className="space-y-4 mb-6">
                             <p className="text-gray-300">
-                                Vui lòng chọn thời gian gia hạn cho thiết bị
+                                Bạn muốn gia hạn bảo hành cho sản phẩm có serial: <strong className="text-white">{selectedSerial}</strong>
                             </p>
-                            <div className="mt-2 px-3 py-1 bg-yellow-400/20 text-yellow-300 rounded-full text-sm font-mono inline-block">
-                                {selectedSerial}
+                            
+                            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                                <h4 className="font-semibold text-white mb-2">Gói gia hạn có sẵn:</h4>
+                                <ul className="space-y-2 text-sm text-gray-300">
+                                    <li>• Gia hạn 12 tháng: 500.000₫</li>
+                                    <li>• Gia hạn 24 tháng: 900.000₫</li>
+                                    <li>• Bảo hành mở rộng: 1.200.000₫</li>
+                                </ul>
                             </div>
                         </div>
-
-                        <form className="space-y-6">
-                            <div>
-                                <label className="block text-gray-300 mb-2 font-medium">
-                                    Thời gian gia hạn
-                                </label>
-                                <div className="relative">
-                                    <select className="w-full px-4 py-3 rounded-lg bg-[#181f2a] text-white border border-[#2b3445] focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 appearance-none">
-                                        <option value="12">12 tháng - 800.000đ</option>
-                                        <option value="24">24 tháng - 1.500.000đ</option>
-                                        <option value="36">36 tháng - 2.100.000đ</option>
-                                    </select>
-                                    <svg
-                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M19 9l-7 7-7-7"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div className="flex gap-3">
-                                <button
-                                    type="button"
-                                    onClick={() => setRenewOpen(false)}
-                                    className="flex-1 px-4 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-medium transition-all duration-200"
-                                >
-                                    Hủy
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setRenewOpen(false);
-                                        alert('Gửi yêu cầu gia hạn thành công!');
-                                    }}
-                                    className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/25"
-                                >
-                                    Xác nhận
-                                </button>
-                            </div>
-                        </form>
+                        
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setRenewOpen(false)}
+                                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors"
+                            >
+                                Hủy
+                            </button>
+                            <button
+                                onClick={() => {
+                                    // Handle renewal
+                                    setRenewOpen(false);
+                                }}
+                                className="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white py-3 rounded-xl font-medium transition-colors"
+                            >
+                                Tiếp tục
+                            </button>
+                        </div>
                     </motion.div>
                 </SharedModal>
             </div>
-        </section>
+        </div>
     );
 }

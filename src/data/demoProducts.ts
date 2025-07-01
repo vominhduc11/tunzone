@@ -1,26 +1,32 @@
 export const demoProducts = [
     {
-        serial: 'ABC123456',
-        name: 'SCS Studio Pro',
-        purchaseDate: '2025-04-01',
-        expiryDate: '2025-08-15',
+        serial: 'TZ123456789',
+        name: 'TuneZone Pro X1',
+        purchaseDate: '2024-01-15',
+        expiryDate: '2026-01-15',
         status: 'Còn hạn',
-        canRenew: true
+        canRenew: false,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 365
     },
     {
-        serial: 'DEF654321',
-        name: 'SCS Gaming Elite',
-        purchaseDate: '2020-05-10',
-        expiryDate: '2023-05-09',
+        serial: 'TZ987654321',
+        name: 'TuneZone Studio Pro',
+        purchaseDate: '2023-08-10',
+        expiryDate: '2025-08-10',
+        status: 'Sắp hết hạn',
+        canRenew: true,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 45
+    },
+    {
+        serial: 'TZ000000000',
+        name: 'TuneZone Classic',
+        purchaseDate: '2021-05-20',
+        expiryDate: '2023-05-20',
         status: 'Hết hạn',
-        canRenew: false
-    },
-    {
-        serial: 'UVW333111',
-        name: 'SCS Wireless ANC',
-        purchaseDate: '2022-07-10',
-        expiryDate: '2025-07-25',
-        status: 'Còn hạn',
-        canRenew: false
+        canRenew: false,
+        warrantyType: 'Bảo hành chính hãng 24 tháng',
+        remainingDays: 0
     }
 ];
