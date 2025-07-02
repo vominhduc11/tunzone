@@ -5,7 +5,7 @@ import Logo from '@/components/shared/Logo';
 
 const companyLinks = [
   { label: 'Về TuneZone', href: '/about' },
-  { label: 'Tuyển dụng', href: '/careers' },
+  // { label: 'Tuyển dụng', href: '/careers' },
   { label: 'Tin tức', href: '/blogs' },
   { label: 'Điều khoản & Chính sách', href: '/policy' },
   { label: 'Chính sách bảo mật', href: '/policy#privacy' },

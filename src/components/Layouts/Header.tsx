@@ -62,6 +62,7 @@ export default function Header() {
             <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between h-16 px-4">
                 {/* Logo */}
                 <Logo size="md" showText={true} href="/" />
+                {/* <Image src="/logo.png" alt="Logo" width={100} height={40} /> */}
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex space-x-1">
