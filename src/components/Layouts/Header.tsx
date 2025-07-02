@@ -15,6 +15,7 @@ const navItems = [
     { name: 'Sản phẩm', href: '/products' },
     { name: 'Blog', href: '/blogs' },
     { name: 'Hệ thống đại lý', href: '/dealers' },
+    { name: 'Đại lý', href: 'https://tunzone-dealer.vercel.app/' },
     { name: 'Về chúng tôi', href: '/about' },
     { name: 'Liên hệ', href: '/contact' }
 ];
