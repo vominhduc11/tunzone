@@ -20,8 +20,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'SCS Headphones - Âm thanh đỉnh cao',
-    description: 'Tai nghe SCS chất lượng cao với công nghệ âm thanh tiên tiến'
+    title: 'TuneZone - Đỉnh cao âm thanh',
+    description: 'TuneZone - Thương hiệu âm thanh hàng đầu Việt Nam, chuyên cung cấp tai nghe chất lượng cao với công nghệ tiên tiến và thiết kế đẳng cấp.',
+    keywords: 'TuneZone, tai nghe, âm thanh, headphones, audio, bluetooth, gaming, studio',
+    authors: [{ name: 'TuneZone Team' }],
+    creator: 'TuneZone',
+    publisher: 'TuneZone',
+    icons: {
+        icon: '/images/logo-4t.png',
+        shortcut: '/images/logo-4t.png',
+        apple: '/images/logo-4t.png',
+    }
 };
 
 export default function RootLayout({

@@ -61,9 +61,7 @@ export default function Header() {
     return (
         <header className="bg-gray-900 border-b border-gray-700 relative z-50 sticky top-0 backdrop-blur-sm bg-gray-900/95">
             <div className="w-full max-w-[1280px] mx-auto flex items-center justify-between h-16 px-4">
-                {/* Logo */}
-                <Logo size="md" showText={true} href="/" />
-                {/* <Image src="/logo.png" alt="Logo" width={100} height={40} /> */}
+                <Logo size="lg" showText={true} href="/" />
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex space-x-1">

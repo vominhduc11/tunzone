@@ -97,7 +97,7 @@ export const theme = {
 
   // Logo path
   logo: {
-    main: '/images/logo-transparent.svg',
+    main: '/images/logo-4t.png',
     fallback: '/images/logo.png',
     alt: 'TuneZone Logo',
   }
