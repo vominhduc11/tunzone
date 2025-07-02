@@ -1,127 +1,163 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface UseScrollAnimationOptions {
-    threshold?: number;
-    rootMargin?: string;
-    triggerOnce?: boolean;
+  threshold?: number;
+  rootMargin?: string;
+  triggerOnce?: boolean;
 }
 
-export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
-    const {
-        threshold = 0.1,
-        rootMargin = '0px',
-        triggerOnce = true
-    } = options;
+export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
+  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
 
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef<HTMLElement>(null);
-
-    useEffect(() => {
-        const currentRef = ref.current; // Store ref value to avoid stale closure
-        
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    if (triggerOnce && currentRef) {
-                        observer.unobserve(currentRef);
-                    }
-                } else if (!triggerOnce) {
-                    setIsVisible(false);
-                }
-            },
-            {
-                threshold,
-                rootMargin
-            }
-        );
-
-        if (currentRef) {
-            observer.observe(currentRef);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce && elementRef.current) {
+            observer.unobserve(elementRef.current);
+          }
+        } else if (!triggerOnce) {
+          setIsVisible(false);
         }
+      },
+      {
+        threshold,
+        rootMargin,
+      }
+    );
 
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, [threshold, rootMargin, triggerOnce]);
+    const currentElement = elementRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
+    }
 
-    return [ref, isVisible] as const;
-}
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
+    };
+  }, [threshold, rootMargin, triggerOnce]);
 
-export function useStaggeredAnimation(itemCount: number, delay: number = 100) {
-    const [visibleItems, setVisibleItems] = useState<number[]>([]);
-    const [isTriggered, setIsTriggered] = useState(false);
+  return { elementRef, isVisible };
+};
 
-    const triggerAnimation = () => {
-        if (isTriggered) return;
-        setIsTriggered(true);
-        
-        for (let i = 0; i < itemCount; i++) {
+export const useStaggeredAnimation = (itemCount: number, delay: number = 100) => {
+  const [visibleItems, setVisibleItems] = useState<boolean[]>(new Array(itemCount).fill(false));
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Stagger the animation of items
+          for (let i = 0; i < itemCount; i++) {
             setTimeout(() => {
-                setVisibleItems(prev => [...prev, i]);
+              setVisibleItems(prev => {
+                const newState = [...prev];
+                newState[i] = true;
+                return newState;
+              });
             }, i * delay);
+          }
+          
+          if (containerRef.current) {
+            observer.unobserve(containerRef.current);
+          }
         }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px',
+      }
+    );
+
+    const currentContainer = containerRef.current;
+    if (currentContainer) {
+      observer.observe(currentContainer);
+    }
+
+    return () => {
+      if (currentContainer) {
+        observer.unobserve(currentContainer);
+      }
+    };
+  }, [itemCount, delay]);
+
+  return { containerRef, visibleItems };
+};
+
+export const useParallaxEffect = (speed: number = 0.5) => {
+  const [offset, setOffset] = useState(0);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (elementRef.current) {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * speed;
+        setOffset(rate);
+      }
     };
 
-    const resetAnimation = () => {
-        setVisibleItems([]);
-        setIsTriggered(false);
-    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [speed]);
 
-    return {
-        visibleItems,
-        triggerAnimation,
-        resetAnimation,
-        isItemVisible: (index: number) => visibleItems.includes(index)
-    };
-}
+  return { elementRef, offset };
+};
 
-export function useCountUp(
-    end: number,
-    duration: number = 2000,
-    start: number = 0
-) {
-    const [count, setCount] = useState(start);
-    const [isAnimating, setIsAnimating] = useState(false);
+export const useCountUp = (end: number, duration: number = 2000, start: number = 0) => {
+  const [count, setCount] = useState(start);
+  const [isActive, setIsActive] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
 
-    const startAnimation = () => {
-        if (isAnimating) return;
-        
-        setIsAnimating(true);
-        const startTime = Date.now();
-        const range = end - start;
-
-        const updateCount = () => {
-            const elapsed = Date.now() - startTime;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isActive) {
+          setIsActive(true);
+          
+          const startTime = Date.now();
+          const startValue = start;
+          const endValue = end;
+          
+          const animate = () => {
+            const now = Date.now();
+            const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Easing function for smooth animation
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const currentCount = Math.floor(start + range * easeOutQuart);
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(startValue + (endValue - startValue) * easeOut);
             
-            setCount(currentCount);
-
+            setCount(currentValue);
+            
             if (progress < 1) {
-                requestAnimationFrame(updateCount);
-            } else {
-                setIsAnimating(false);
+              requestAnimationFrame(animate);
             }
-        };
+          };
+          
+          requestAnimationFrame(animate);
+          observer.unobserve(elementRef.current!);
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-        requestAnimationFrame(updateCount);
-    };
+    const currentElement = elementRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
+    }
 
-    const resetCount = () => {
-        setCount(start);
-        setIsAnimating(false);
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
     };
+  }, [end, duration, start, isActive]);
 
-    return {
-        count,
-        startAnimation,
-        resetCount,
-        isAnimating
-    };
-}
+  return { elementRef, count };
+};
